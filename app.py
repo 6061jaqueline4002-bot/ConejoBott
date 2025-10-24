@@ -25,66 +25,138 @@ Solo escribe algo como:
 indicaciones = {
     "Departamento de Inglés": {
         "cursos de inglés": """📘 **Cursos de Inglés**
-            "1.-Percatarse de los flayers de convocatorias sobre los cursos\npublicadas en paginas oficiales del ITTG. Se indican 2 fechas que\ncorresponden al PRE-REGISTRO y REGISTRO(INSCRIPCIÓN).\n\n2.-Accesar al código QR de estos y llenar el formulario de pre-registro.\n\n3.-En este llenado seleccionar el horario de tu preferencia y el nivel al\nque ingresarás (importante realizar previamente el examen de ubicación).\n\n4.-Después de enviar el formulario, esperar el correo de confirmación\nde los grupos que seran abiertos.\n\n5.-En este correo se anexara un pdf con las indicaciones a seguir para\nhacer correctamente el procedimiento por medio de otro link (formulario).\n\n6.-Once hecho esto, dirígete a solicitar tu referencia bancaria al SII\ndesde la pestaña “ Documentos oficiales” seguido de “Solicitar”.\n\n7.-Seleccionas aquí tu nivel registrado en el formulario y presionas el\nbotón de generar referencia.\n\n8.-Con la información de tu referencia realiza el pago en la fecha limite\nestablecida en este.\n\n9.-Ingresar al link de REGISTRO Y posterior a esto envía tu comprobante\nde pago y la referencia antes generada.\n\n10.-Espera a ser contactado por tu docente para ser agregado correctamente\na las plataformas (no olvides poner todos tus datos correctamente).",.""",
+🔹Percatarse de los flayers de convocatorias sobre los cursos publicadas en páginas oficiales del ITTG. Se indican 2 fechas que corresponden al PRE-REGISTRO y REGISTRO (INSCRIPCIÓN).
+🔹Accesar al código QR de estos y llenar el formulario de pre-registro.
+🔹En este llenado seleccionar el horario de tu preferencia y el nivel al que ingresarás.
+🔹Después de enviar el formulario, esperar el correo de confirmación de los grupos que serán abiertos.
+🔹En este correo se anexará un PDF con las indicaciones a seguir para hacer correctamente el procedimiento por medio de otro link (formulario).
+🔹Una vez hecho esto, dirígete a solicitar tu referencia bancaria al SII desde la pestaña “Documentos oficiales” seguido de “Solicitar”.
+🔹Seleccionas aquí tu nivel registrado en el formulario y presionas el botón de generar referencia.
+🔹Con la información de tu referencia realiza el pago en la fecha límite establecida en este.
+🔹Ingresar al enlace de REGISTRO Y posterior a esto envía tu comprobante de pago y la referencia antes generada en un solo archivo de PDF.
+🔹Espera a ser contactado por tu docente para ser agregado correctamente a las plataformas (no olvides poner todos tus datos correctamente).""",
 
         "examen de colocación": """📝 **Examen de colocación**
-El examen de ubicación se realiza al inicio de cada semestre. 
-            "2": "Para presentar el examen de ubicación, el estudiante deberá:\n1.- Estar atento a las convocatorias publicadas en las redes oficiales del TECNM.\n2.- Realizar el registro correspondiente.\n3.- Efectuar el pago indicado en la convocatoria.\nNota: La aplicación del examen de ubicación se realiza únicamente al inicio de cada semestre.""",
+Para presentar el examen de ubicación, el estudiante deberá:
+✅Estar atento a las convocatorias publicadas en las redes oficiales del TECNM.
+✅Realizar el registro correspondiente.
+✅Efectuar el pago indicado en la convocatoria.💵💳
+Nota: La aplicación del examen de ubicación se realiza únicamente al inicio de cada semestre.🗓️""",
 
         "certificaciones": """🎓 **Certificaciones**
-            "1.-Para solicitar la convalidación de un certificado de inglés, es necesario entregar:\n- Solicitud de liberación.\n- Número de control.\n- Nombre completo.\n- Periodo del último curso cursado.\n- Certificado de Inglés expedido por Institución validada por la SEP\n\nVigencia de los certificados:\n- TOEFL: 2 años.\n- Cambridge: 10 años.",  
+Para solicitar la convalidación de un certificado de inglés, es necesario entregar:
+✔️Solicitud de liberación.
+✔️Número de control.
+✔️Nombre completo.
+✔️Periodo del último curso cursado.
+✔️Certificado de Inglés expedido por Institución validada por la SEP
 📅 TOEFL tiene una vigencia de 2 años.  
 📅 Cambridge tiene una vigencia de 10 años.""",
 
         "toefl": """📘 **TOEFL**
 El examen TOEFL se aplica 4 veces al año.  
-            "Los estudiantes interesados deberán:\n1.- Estar atentos a las convocatorias publicadas en las páginas oficiales del TECNM.\n2.- Haber cursado previamente los niveles correspondientes de inglés.\n3.- Realizar el registro y el pago correspondiente.\nNota: Se llevan a cabo cuatro aplicaciones del examen TOEFL al año""",
+Los estudiantes interesados deberán:
+1️⃣Estar atentos a las convocatorias publicadas en las páginas oficiales del TECNM.
+2️⃣Haber cursado previamente los niveles correspondientes de inglés.
+3️⃣Realizar el registro y el pago correspondiente.""",
 
         "duración de los cursos": """⏰ **Duración de los cursos**
-                        ""- Se imparten dos cursos por semestre, con una duración aproximada de 5 semanas por curso.\n- Cursos Superintensivos:Duración total de 120 horas por semestre, distribuidas en 4 cursos, con una duración aproximada de 12 semanas.",
--Cursos básicos e intermedios: 45 horas cada uno.  
-- Cursos superintensivos: 120 horas por semestre.""",
+⏳Cursos básicos e intermedios: 45 horas cada uno.  
+⏳Cursos superintensivos: 120 horas por semestre.""",
 
         "contacto": """📞 **Contacto del Departamento de Inglés**
-Teléfono: 961 615 0461 ext. 327  
-Correo: leng_tgutierrez@tecnm.mx  
-Ubicación: Edificio G"""
+☎️Teléfono: 961 615 0461 ext. 327  
+📧Correo: leng_tgutierrez@tecnm.mx  
+🏣Ubicación: Edificio G"""
     },
 
     "Servicios Escolares": {
         "credencial": """🪪 **Credencial digital**
-Ingresa a 👉 [http://credenciales.tuxtla.tecnm.mx/](http://credenciales.tuxtla.tecnm.mx/)  
-Usa tu correo institucional y contraseña del mismo para generar tu credencial digital.
-            .-Una vez dentro de la sesión verifica que tus datos personales y\nescolares sean correctos.\n\n4.-Da click al botón TOMAR FOTOGRAFÍA\na)Toma una fotografía al instante, la plataforma no permitirá cargar archivos desde tu galería de fotos.\nb)Debes utilizar camisa o playera blanca.\nc)El fondo de la fotografía debe ser de un color uniforme\n(puede ser color gris o colores claros), en una pared lisa sin logotipos.\nd)Procura que la iluminación sea la adecuada para que tu rostro pueda ser visible.\ne)La toma debe ser totalmente de frente, enfocando unicamente tu rostro\ny hombros (no tomar fotos de cuerpo completo).\nf)En el caso de utilizar lentes y/o piercings retirarlos para la fotografía.\ng)No usar gorras ni sombreros.\nh)MUJERES:cabello recogido o suelto sin tapar el rostro acompañado de un maquillaje discreto \ny aretes pequeños.\ni)HOMBRES:Sin barba, sin bigote, con la frente despejada\nsi tienes cabello largo deberás sujetarlo para mejor visibilidad del rostro.\nNota:Si la fotografía no cumple con los requisitos será RECHAZADA y\ndeberás tomarla nuevamente hasta que sea validada por el departamento de Servicios Escolares.\n\n5.-Ingresa tu firma, procura que sea idéntica a la de tu INE o alguna\nidentificación vigente).\n\n6.-Espera a la validación de tus datos por el Departamento de\nServicios Escolares.\n\n7.-Cuando tu info. sea validada se activará la opción GENERAR\nCREDENCIAL DIGITAL y SOLICITAR CREDENCIAL FÍSICA.",""",
+🔸Ingresa a 👉 [http://credenciales.tuxtla.tecnm.mx/](http://credenciales.tuxtla.tecnm.mx/)  
+🔸Usa tu correo institucional para generar tu credencial digital.
+🔸Una vez dentro de la sesión verifica que tus datos personales y escolares sean correctos.
+🔸Da click al botón TOMAR FOTOGRAFÍA
+a) Toma una fotografía al instante, la plataforma no permitirá cargar archivos desde tu galería de fotos.
+b) Debes utilizar camisa o playera blanca.
+c) El fondo de la fotografía debe ser de un color uniforme (puede ser color gris o colores claros), en una pared lisa sin logotipos.
+d) Procura que la iluminación sea la adecuada para que tu rostro pueda ser visible.
+e) La toma debe ser totalmente de frente, enfocando únicamente tu rostro y hombros (no tomar fotos de cuerpo completo).
+f) En el caso de utilizar lentes y/o piercings retirarlos para la fotografía.
+g) No usar gorras ni sombreros.
+h) MUJERES: cabello recogido o suelto sin tapar el rostro acompañado de un maquillaje discreto y aretes pequeños.
+i)HOMBRES: Sin barba, sin bigote, con la frente despejada si tienes cabello largo deberás sujetarlo para mejor visibilidad del rostro.
+Nota: Si la fotografía no cumple con los requisitos será RECHAZADA y deberás tomarla nuevamente hasta que sea validada por el departamento de Servicios Escolares.
+🔸Ingresa tu firma, procura que sea idéntica a la de tu INE o alguna identificación vigente).
+🔸Espera a la validación de tus datos por el Departamento de Servicios Escolares.
+🔸Cuando tu info. sea validada se activará la opción GENERAR CREDENCIAL DIGITAL y SOLICITAR CREDENCIAL FÍSICA.""",
 
         "constancia": """📄 **Constancia**
-1️⃣ Genera la referencia bancaria en el SII.  
-2️⃣ Realiza el pago.  
-3️⃣ Envía el comprobante al correo ventanilla_escolares@tuxtla.tecnm.mx.""",
+1️⃣Generar referencia bancaria en la página del SII, en el apartado de documentos oficiales en la opción de Constancia de estudios.
+2️⃣Realizar el pago, se puede realizar de dos maneras, por medio de transferencia o en cajero automático de Santander.
+3️⃣Enviar el comprobante de pago junto al documento generado al correo de 👉 fichas@tuxtla.tecnm.mx
+4️⃣Esperar el comprobante oficial de pago.
+5️⃣Enviar el comprobante oficial de pago correo:👉 ventanilla_escolares@tuxtla.tecnm.mx
+6️⃣Esperar de 3 a 5 días hábiles para obtener la constancia.""",
 
         "boleta": """📊 **Boleta oficial**
-Solicita tu boleta al correo ventanilla_escolares@tuxtla.tecnm.mx.  
+Solicita tu boleta al correo 👉 ventanilla_escolares@tuxtla.tecnm.mx solicitando tu boleta oficial con sello y firma de la institución..  
 Tiempo estimado de entrega: 3 a 5 días hábiles.""",
 
         "kardex": """📑 **Kárdex**
-Genera la referencia bancaria desde el SII y envía tu comprobante de pago al correo ventanilla_escolares@tuxtla.tecnm.mx.""",
+1️⃣Generar referencia bancaria en la página del SII, en el apartado de documentos oficiales, dar click en la opción solicitar.
+2️⃣Elegir la opción de “Impresión de Kardex”.
+3️⃣Realizar el pago, se puede realizar de dos maneras, por medio de transferencia o en cajero automático de Santander. 
+4️⃣Enviar el comprobante de pago junto al documento generado del SII al correo de fichas@tuxtla.tecnm.mx
+5️⃣Esperar el comprobante oficial de pago.
+6️⃣Enviar el comprobante oficial de pago al correo:👉 ventanilla_escolares@tuxtla.tecnm.mx
+7️⃣Esperar de 3 a 5 días hábiles para obtener el Kardex oficial.""",
 
-        "acom": """🎓 **Actividades Complementarias (ACOM)**
-Requieres 5 créditos totales. Puedes obtenerlos en:  
-✅ Tutorías  
-✅ Extraescolares  
-✅ MOOC  
-✅ Eventos académicos."""
+        "Liberación de ingles": """📌 **Constancia de liberación de lengua extranjera**
+.- Generar referencia bancaria en la página del SII, en el apartado de documentos oficiales, dar click en la opción solicitar.
+2.- Elegir la opción de “Constancia de liberación de lengua extranjera”.
+3.- Realizar el pago, se puede realizar de dos maneras, por medio de transferencia o en cajero automático de Santander.
+4.- Enviar el comprobante de pago junto al documento generado del SII al correo de fichas@tuxtla.tecnm.mx.
+5.- Esperar el comprobante oficial de pago.
+6.- Enviar el comprobante oficial de pago al correo: ventanilla_escolares@tuxtla.tecnm.mx
+7.- Esperar de 3 a 5 días hábiles para obtener la constancia."""
+
+         "acom": """🎓 **Actividades Complementarias (ACOM)**
+1️⃣Para liberar las actividades complementarias (ACOM's) es necesario tener 5 créditos.
+2️⃣Tienes 3 créditos asegurados al cursar la materia Tutoría 1 y 2, y Extraescolares (OJO algunos créditos valen 0.5).
+3️⃣Para obtener los dos créditos restantes puedes participar en actividades referentes al Aniversario de la Carrera de Industrial.
+4️⃣Cursar 3 de 4 cursos MOOC (👉 https://mooc.tecnm.mx/portal/ ) y acreditar la actividad complementaria). ENVIAR al correo:👉 solicitud.extraescolares@tuxtla.tecnm.mx o 
+acudir al Departamento de Extraescolares (Edificio O frente a la chanca de futbol rápido)
+5️⃣OTRO medio es: llenar la hoja de firmas (En Biblioteca del ITTG lo consiguen) por acudir a Eventos culturales, cívicos o deportivos más acreditar la actividad complementaria.
+6️⃣Otra forma es: si Cursan 2 MOOC (👉 https://mooc.tecnm.mx/ ) y el diploma que reciben (si lo aprobaron), lo llevan a desarrollo académico (Edificio EaD, planta alta) para el ACOM 7.
+7️⃣Una vez que se reúne los 5 créditos, reportarán al Departamento de Servicios Escolares.
+NOTA: 
+ACOM 3 - Congresos o eventos académicos - Máximos 2 créditos.
+ACOM 7- Cursos o talleres - Máximos 2 créditos
+Ir a conferencias cualesquiera no siempre se obtienen créditos."""
     },
 
     "División de Estudios Profesionales": {
         "servicio social": """🛠 **Servicio Social**
-El servicio social tiene una duración de 500 horas.  
-Requisitos:  
-- Tener 70% de créditos  
-- Registrarte en el SII y elegir una dependencia aprobada  
-- Entregar los reportes mensuales y finales.  
-¿Quieres que te muestre los pasos completos del trámite?""",
+1️⃣Para comenzar el proceso identifica si el periodo de servicio comprenderá el periodo escolar de enero–junio o el de agosto-diciembre. 
+Las fechas serán publicadas en las convocatorias expedidas por el departamento correspondiente.
+2️⃣Dirígete al SII e ingresa al apartado de “Servicio social”. Verifica si el sistema reconoce el
+porcentaje mínimo de créditos para comenzar el servicio (70%).
+3️⃣Si no cumples con este porcentaje debes esperar a cumplirlo llegado el 7mo semestre o cubrirlo mediante el adelanto de materias.
+Y en caso de que, si cumpla, el sistema te permitirá acceder a la descarga de formatos requeridos.
+4️⃣Una vez descargados los formatos (carta de presentación), procede a llenarlos con tus datos personales y envíalos al correo indicado.
+5️⃣Deberás esperar a la asignación de plazas al lugar u organismo de tu elección y posterior a ello será abierto tu expediente se servicio social,
+el cual debe ser cubierto (terminado) en un lapso de 6 meses como mínimo y no mayor a 2 años con un total de 500 hrs.
+6️⃣Una vez que el organismo reciba tu información, este elaborará una carta de aceptación, la cual deberá ser entregada al departamento de
+gestión tecnológica y vinculación en conjunto con el plan de trabajo.
+7️⃣Cuando el departamento reciba y acepte la información, podrás comenzar con el desarrollo de actividades y la elaboración de los
+reportes solicitados bimestralmente.
+8️⃣Cuando envíes las actividades y los reportes pertinentes al departamento de gestión tecnológica y vinculación, se te asignará una
+calificación correspondiente a la evaluación final del servicio, la cual se verá reflejada en el kardex.
+9️⃣Por último, el departamento de gestión tecnológica y vinculación expedirá una carta de liberación y constancia de calificación del servicio social.
+🔟Las constancias de calificaciones son enviadas al departamento de servicios escolares para que ellos coloquen la calificación final en el kardex 
+(como se menciona en el paso 8).
+1️⃣1️⃣El proceso finalizará cuando recibas la carta de liberación del servicio social y a su vez visualices en tu kardex,
+la calificación obtenida en tu servicio social. """,
 
         "residencias": """🏢 **Residencias Profesionales**
 Consulta los requisitos en la División de Estudios Profesionales.  
@@ -94,20 +166,104 @@ Duración: 640 horas."""
 
     "Coordinación": {
         "traslado": """🚗 **Traslado**
-Requiere solicitud formal, kárdex actualizado y comunicación entre la institución de origen y la receptora. 
-Debe ser autorizado por la Dirección General del TecNM.""",
+1️⃣Antes de iniciar el trámite, identifica el periodo de reinscripción del Instituto receptor. El procedimiento debe comenzar
+previo a dichas fechas para garantizar la aceptación y registro oportuno.
+2️⃣Acude a la División de Estudios Profesionales del Instituto de origen y entrega:
+🔸Solicitud de Traslado (formato oficial, Anexo II), debidamente llenada y firmada.
+🔸Kárdex o constancia de calificaciones actualizada, que incluya: clave y nombre de todas las asignaturas cursadas, periodo en que se cursaron,
+calificación y oportunidad de acreditación.
+3️⃣La División de Estudios Profesionales del Instituto de origen:
+🔸Comprueba que el estudiante no tenga adeudos (material de laboratorio, libros, etc.).
+🔸Establece comunicación electrónica con la División de Estudios Profesionales del Instituto receptor para confirmar:
+a) Existencia del plan de estudios solicitado.
+b) Disponibilidad de asignaturas y capacidad.
+c) Fechas establecidas para el trámite.
+4.-Si el traslado es procedente:
+🔸La División de Estudios Profesionales del Instituto receptor emite el Oficio de Aceptación (Anexo III), con visto bueno del Departamento de Servicios Escolares del receptor, y lo envía electrónicamente (escaneado con firmas y sello).
+🔸Si el traslado no procede, se envía un correo electrónico notificando la improcedencia y el trámite concluye.
+5️⃣La División de Estudios Profesionales del Instituto de origen recibe el oficio de aceptación y lo turna al Departamento de Servicios Escolares del Instituto de origen para continuar el proceso.
+6️⃣El Departamento de Servicios Escolares del Instituto de origen:
+🔸Emite la Constancia de No Inconveniencia para Traslado (Anexo IV).
+🔸Prepara el kárdex o constancia de calificaciones actualizada.
+🔸Integra las constancias de actividades complementarias y servicio social acreditadas, cuando proceda.
+7️⃣El Departamento de Servicios Escolares del Instituto de origen envía al Departamento de Servicios Escolares del Instituto receptor, en sobre cerrado y sellado, únicamente:
+🔸Kárdex o constancia de calificaciones actualizada.
+🔸Constancia de No Inconveniencia (Anexo IV).
+🔸Constancias de actividades complementarias y servicio social (si aplican)
+🔸El expediente completo se integra en el Instituto receptor al momento de la inscripción, solicitando al estudiante los documentos faltantes.
+8️⃣El trámite de inscripción puede iniciar con documentación electrónica; sin embargo, el Instituto de origen debe enviar los documentos originales al Instituto receptor en un plazo máximo de 20 días hábiles después del inicio de clases.
+9️⃣Una vez recibida la documentación original y registrada la carga académica: 
+🔸El estudiante queda adscrito al Instituto receptor.
+🔸Se conserva el historial académico, pero se pierden los beneficios particulares del Instituto de origen.
+🔸En traslados entre Institutos Descentralizados o de Descentralizado a Federal, se recomienda adecuar el número de control; entre Institutos Federales se conserva el mismo número.""",
 
         "movilidad": """✈️ **Movilidad Estudiantil**
-Consulta las convocatorias oficiales de movilidad nacional o internacional en la página del ITTG. 
-Entrega tu solicitud con tu historial académico.""",
+1️⃣Consulta las convocatorias oficiales de movilidad estudiantil publicadas por la División de Estudios Profesionales del Instituto de origen.
+Estas convocatorias indican:
+✅Calendario del programa.
+✅Requisitos académicos y administrativos.
+✅Fechas límite para entrega de documentos.
+2️⃣Antes de solicitar la movilidad, asegúrate de cumplir con:
+🔸No tener más de una asignatura en curso de repetición (salvo quienes participen en cursos de verano).
+🔸No tener adeudos de material, libros o equipo con el Instituto.
+🔸Que el periodo de movilidad no exceda tres semestres (consecutivos o alternos)
+🔸Cumplir con los requisitos específicos de la convocatoria.
+3️⃣Entrega en la División de Estudios Profesionales del Instituto de origen:
+🔸Formato de Solicitud de Movilidad Estudiantil (Anexo IX).
+🔸Relación de asignaturas y programas correspondientes (si son de una IES extranjera, traducidos al español).
+🔸Información sobre la institución receptora y actividades académicas a realizar.
+4️⃣La División de Estudios Profesionales solicita al Departamento Académico y a la Academia realizar el análisis de compatibilidad de asignaturas.
+🔸Se elabora el Dictamen de Compatibilidad de Asignaturas.
+🔸Se turna copia al Departamento de Servicios Escolares para registro.
+5️⃣El Departamento de Servicios Escolares del Instituto de origen emite el Oficio de Solicitud de No Inconveniencia para Movilidad Estudiantil (Anexo XI)
+dirigido a la institución receptora, con base en el dictamen de compatibilidad.
+6️⃣La institución receptora envía el Oficio de No Inconveniencia para Movilidad Estudiantil o el documento equivalente que autoriza la
+participación del estudiante en el programa.
+7️⃣La División de Estudios Profesionales del Instituto receptor asigna la carga académica del estudiante en movilidad, conforme al documento
+recibido de la institución de origen. Si se trata de una IES extranjera, los documentos deben estar traducidos al español.
+8️⃣El estudiante cursa las asignaturas y actividades autorizadas en la institución receptora, manteniendo su inscripción vigente en el Instituto de origen.
+9️⃣Al concluir la movilidad:
+🔸La institución receptora envía el documento oficial que certifique la acreditación o no acreditación de las asignaturas y actividades realizadas
+(traducido al español si aplica).
+🔸El Departamento de Servicios Escolares del Instituto de origen registra los resultados en el historial académico del estudiante:
+🔸Si la movilidad fue en IES externas al TecNM, se asienta como AC (acreditada) o NA (no acreditada).
+🔸Si la movilidad fue dentro del TecNM, se asienta la calificación numérica obtenida.""",
 
         "convalidación": """📚 **Convalidación**
-Permite cambiar de plan de estudios o cursar una segunda carrera dentro del TecNM. 
-Debes presentar tu historial académico y las materias cursadas.""",
+📌La convalidación está caracterizada por los siguientes aspectos:
+✅Permite al estudiante cambiar de un plan de estudio a otro dentro de las Instituciones adscritas al TecNM. 
+✅Permite cursar una segunda carrera a nivel licenciatura, una vez que el egresado se ha titulado o ha aprobado su acto profesional de 
+la primera carrera cursada.
+✅Permite al estudiante, que causó baja definitiva habiendo acreditado el 50% de créditos o más, reinscribirse en un plan de estudios 
+diferente que le ofrezca el Instituto, con el propósito de que concluya una carrera profesional.
+📌Trámite para la convalidación de estudios:
+1️⃣El estudiante debe considerar que sólo tiene derecho a convalidar plan de estudios en una sola ocasión, bajo la condición que pueda
+concluir dicho plan de estudios dentro de los 12 semestres reglamentarios.
+2️⃣El interesado debe acudir a División de estudios profesionales del instituto de origen y entregar:
+🔸La solicitud de convalidación de estudios (formato oficial, anexo V) que lo puedes encontrar en página web👉 https://www.tuxtla.tecnm.mx/   
+en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.
+🔸Documentos probatorios (kárdex o certificado parcial con calificaciones). Al menos 30 días hábiles antes de iniciar el siguiente semestre.
+3️⃣Sólo son convalidadas las asignaturas que se encuentren acreditadas.
+4️⃣Para realizar la convalidación en el plan de estudios al que se pretende cambiar y el que cursa actualmente, deben existir asignaturas comunes o similares, 
+el contenido de los programas de estudio debe ser equiparable al menos en un 60 por ciento de las competencias específicas desarrolladas.
+5️⃣La División de Estudios Profesionales o su equivalente en los Institutos Tecnológicos Descentralizados, verifica los requisitos conforme al lineamiento. 
+Si cumple, pasar al siguiente numeral; si no cumple, se le da a conocer al solicitante en el mismo formato de la solicitud.
+6️⃣La autorización de la convalidación de estudios queda condicionada con la capacidad del Instituto para el plan de estudios solicitado.""",
 
         "equivalencia": """📘 **Equivalencia**
-Permite equiparar estudios realizados en otras instituciones. 
-Se requiere certificado parcial y programas de estudio validados."""
+📌Es el proceso mediante el cual se hacen equiparables entre sí los estudios realizados en Instituciones del Sistema Educativo Nacional diferentes 
+a las Instituciones adscritas al TecNM.\
+📄Requerimientos (documentos en original y copia)
+1️⃣Solicitud de Resolución de Equivalencia de estudios (Anexo XIII), que lo puedes encontrar en página web👉 https://www.tuxtla.tecnm.mx/   en el apartado
+de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.
+2️⃣Copia Certificada de acta de nacimiento (Los extranjeros, deberán presentar la documentación que acredite la calidad migratoria con que se encuentra 
+en territorio nacional de acuerdo con la legislación aplicable).
+3️⃣Antecedentes académicos que acrediten que el interesado concluyó el nivel inmediato anterior a los estudios que se pretendan equiparar, es decir, 
+certificado de nivel medio superior.
+4️⃣Certificado completo o incompleto de los estudios a equiparar.
+5️⃣Programas de estudios debidamente sellados por la Institución de procedencia.
+6️⃣Comprobante de pago de dictamen técnico.
+7️⃣Comprobante de pago de derechos de la resolución de equivalencia."""
     }
 }
 
