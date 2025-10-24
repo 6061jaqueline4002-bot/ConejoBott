@@ -1,61 +1,40 @@
-body {
-    background: #fafafa;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConejoBot 🐇</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Escribe algo...">
+            <button onclick="enviarMensaje()">Enviar</button>
+        </div>
+    </div>
 
-.chat-container {
-    width: 350px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
-}
+    <script>
+        async function enviarMensaje() {
+            const input = document.getElementById("user-input");
+            const mensaje = input.value.trim();
+            if (!mensaje) return;
 
-#chat-box {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #eee;
-    padding: 10px;
-    margin-bottom: 10px;
-}
+            const chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<div class='user-msg'>${mensaje}</div>`;
+            input.value = "";
 
-.user-msg {
-    text-align: right;
-    background: #cce5ff;
-    padding: 6px 10px;
-    border-radius: 10px;
-    margin: 4px 0;
-}
+            const res = await fetch("/enviar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mensaje })
+            });
 
-.bot-msg {
-    text-align: left;
-    background: #e2e2e2;
-    padding: 6px 10px;
-    border-radius: 10px;
-    margin: 4px 0;
-}
-
-.input-area {
-    display: flex;
-}
-
-input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-button {
-    margin-left: 5px;
-    padding: 8px 12px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
+            const data = await res.json();
+            chatBox.innerHTML += `<div class='bot-msg'>${data.respuesta}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
