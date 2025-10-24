@@ -3,36 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConejoBot 🐇</title>
+    <title>ConejoBot 🐇 | ITTG</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/30/Logo-TecNM.png">
 </head>
 <body>
     <div class="chat-container">
-        <div id="chat-box"></div>
+        <header class="chat-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="ConejoBot" class="bot-avatar">
+            <div>
+                <h1>ConejoBot_ITTG 🐇</h1>
+                <p>Asistente Virtual del Instituto Tecnológico de Tuxtla Gutiérrez</p>
+            </div>
+        </header>
+
+        <div id="chat-box" class="chat-box">
+            <div class="bot-message">
+                ¡Hola! Soy <b>ConejoBot_ITTG</b> 🐇, tu asistente virtual del ITTG.<br>
+                Puedo darte información sobre los siguientes departamentos:<br><br>
+                📘 Departamento de Inglés<br>
+                📗 Servicios Escolares<br>
+                📙 División de Estudios Profesionales<br>
+                📕 Coordinación<br><br>
+                Escribe algo como:<br>
+                <i>"Información sobre el servicio social"</i><br>
+                <i>"Requisitos del TOEFL"</i><br>
+                <i>"Cómo tramito mi credencial"</i>
+            </div>
+        </div>
+
         <div class="input-area">
-            <input type="text" id="user-input" placeholder="Escribe algo...">
-            <button onclick="enviarMensaje()">Enviar</button>
+            <input type="text" id="mensaje" placeholder="Escribe algo..." autocomplete="off">
+            <button id="enviar">Enviar</button>
         </div>
     </div>
 
     <script>
-        async function enviarMensaje() {
-            const input = document.getElementById("user-input");
-            const mensaje = input.value.trim();
+        const enviarBtn = document.getElementById("enviar");
+        const mensajeInput = document.getElementById("mensaje");
+        const chatBox = document.getElementById("chat-box");
+
+        // Enviar mensaje
+        enviarBtn.addEventListener("click", enviarMensaje);
+        mensajeInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") enviarMensaje();
+        });
+
+        function enviarMensaje() {
+            const mensaje = mensajeInput.value.trim();
             if (!mensaje) return;
 
-            const chatBox = document.getElementById("chat-box");
-            chatBox.innerHTML += `<div class='user-msg'>${mensaje}</div>`;
-            input.value = "";
+            agregarMensajeUsuario(mensaje);
+            mensajeInput.value = "";
 
-            const res = await fetch("/enviar", {
+            fetch("/enviar", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ mensaje })
-            });
+            })
+            .then(res => res.json())
+            .then(data => agregarMensajeBot(data.respuesta))
+            .catch(() => agregarMensajeBot("⚠️ Error al conectar con el servidor."));
+        }
 
-            const data = await res.json();
-            chatBox.innerHTML += `<div class='bot-msg'>${data.respuesta}</div>`;
+        function agregarMensajeUsuario(texto) {
+            const div = document.createElement("div");
+            div.classList.add("user-message");
+            div.innerHTML = texto;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function agregarMensajeBot(texto) {
+            const div = document.createElement("div");
+            div.classList.add("bot-message");
+            div.innerHTML = texto;
+            chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
