@@ -2,17 +2,17 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# --- Lógica del bot --- #
+# -- Logica del bot -- #
 def responder_usuario(mensaje):
     mensaje = mensaje.lower()
     if "hola" in mensaje:
-        return "¡Hola! Soy ConejoBot 🐇 ¿en qué puedo ayudarte hoy?"
+        return "¡Hola! Soy ConejoBot 😊 ¿en qué puedo ayudarte hoy?"
     elif "adiós" in mensaje or "gracias" in mensaje:
         return "¡Hasta luego! Espero haberte ayudado 😊"
     else:
-        return "No entiendo muy bien 😅, ¿podrías decirlo de otra forma?"
+        return "No entiendo muy bien 😊, ¿podrías decirlo de otra forma?"
 
-# --- Rutas --- #
+# -- Rutas -- #
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -20,7 +20,7 @@ def index():
 @app.route("/enviar", methods=["POST"])
 def enviar():
     data = request.get_json()
-    mensaje_usuario = data.get("mensaje", "")
+    mensaje_usuario = data.get("mensaje", "")  # ← Corregí esta línea
     respuesta = responder_usuario(mensaje_usuario)
     return jsonify({"respuesta": respuesta})
 
