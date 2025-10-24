@@ -118,9 +118,9 @@ Tiempo estimado de entrega: 3 a 5 días hábiles.""",
 4.- Enviar el comprobante de pago junto al documento generado del SII al correo de fichas@tuxtla.tecnm.mx.
 5.- Esperar el comprobante oficial de pago.
 6.- Enviar el comprobante oficial de pago al correo: ventanilla_escolares@tuxtla.tecnm.mx
-7.- Esperar de 3 a 5 días hábiles para obtener la constancia."""
+7.- Esperar de 3 a 5 días hábiles para obtener la constancia.""", 
 
-         "acom": """🎓 **Actividades Complementarias (ACOM)**
+        "acom": """🎓 **Actividades Complementarias (ACOM)**
 1️⃣Para liberar las actividades complementarias (ACOM's) es necesario tener 5 créditos.
 2️⃣Tienes 3 créditos asegurados al cursar la materia Tutoría 1 y 2, y Extraescolares (OJO algunos créditos valen 0.5).
 3️⃣Para obtener los dos créditos restantes puedes participar en actividades referentes al Aniversario de la Carrera de Industrial.
