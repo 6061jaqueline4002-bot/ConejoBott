@@ -21,15 +21,9 @@ Solo escribe algo como:
 - “Requisitos del TOEFL”  
 - “Cómo tramito mi credencial”  
 """
-
-# === Información completa (idéntica al código de consola) ===
-from flask import Flask, render_template, request, jsonify
-
-app = Flask(__name__)
-
 # --- BASE DE CONOCIMIENTO ACTUALIZADA ---
 
-respuestas = {
+departamentos = {
     "ingles": {
         "nombre": "📘 Departamento de Inglés",
         "keywords": ["inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
