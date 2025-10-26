@@ -3,84 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConejoBot 🐇 | ITTG</title>
+    <title>ConejoBot_ITTG 🐰</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/3/30/Logo-TecNM.png">
+    <style>
+        /* 💙 Estilo general del fondo */
+        body {
+            background: linear-gradient(180deg, #002E5D 0%, #004B8D 100%);
+            color: #fff;
+            font-family: "Segoe UI", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .chat-container {
+            width: 400px;
+            max-width: 90%;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-header {
+            background: #004B8D;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        /* 🐇 Emoji animado en el encabezado */
+        .chat-header::after {
+            content: "🐇";
+            position: absolute;
+            right: 15px;
+            animation: hop 2s infinite ease-in-out;
+        }
+
+        @keyframes hop {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .chat-box {
+            background: #f9f9f9;
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bot-message, .user-message {
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .bot-message {
+            background: #E3F2FD;
+            color: #004B8D;
+            align-self: flex-start;
+            box-shadow: 0 0 8px rgba(0, 75, 141, 0.2);
+        }
+
+        .user-message {
+            background: #004B8D;
+            color: white;
+            align-self: flex-end;
+            box-shadow: 0 0 8px rgba(0, 75, 141, 0.3);
+        }
+
+        .chat-form {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-form input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .chat-form button {
+            background: #004B8D;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .chat-form button:hover {
+            background: #003366;
+        }
+
+        /* 🐰 Animación "ConejoBot está escribiendo..." */
+        .typing {
+            font-style: italic;
+            color: #004B8D;
+        }
+
+        .typing .dot {
+            animation: blink 1.2s infinite;
+            font-weight: bold;
+        }
+
+        .typing .dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes blink {
+            0%, 20%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* 💬 Emoji flotante animado */
+        .floating-emoji {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 24px;
+            opacity: 0.7;
+            animation: floatUp 5s infinite ease-in-out;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-15px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+    </style>
 </head>
+
 <body>
     <div class="chat-container">
-        <header class="chat-header">
-            <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="ConejoBot" class="bot-avatar">
-            <div>
-                <h1>ConejoBot_ITTG 🐇</h1>
-                <p>Asistente Virtual del Instituto Tecnológico de Tuxtla Gutiérrez</p>
-            </div>
-        </header>
+        <div class="chat-header">
+            🐰 ConejoBot_ITTG — Asistente Virtual TECNM
+            <div class="floating-emoji">💬</div>
+        </div>
 
-        <div id="chat-box" class="chat-box">
+        <div class="chat-box" id="chat-box">
             <div class="bot-message">
-                ¡Hola! Soy <b>ConejoBot_ITTG</b> 🐇, tu asistente virtual del ITTG.<br>
-                Puedo darte información sobre los siguientes departamentos:<br><br>
-                📘 Departamento de Inglés<br>
-                📗 Servicios Escolares<br>
-                📙 División de Estudios Profesionales<br>
-                📕 Coordinación<br><br>
-                Escribe algo como:<br>
-                <i>"Información sobre el servicio social"</i><br>
-                <i>"Requisitos del TOEFL"</i><br>
-                <i>"Cómo tramito mi credencial"</i>
+                ¡Hola! Soy <b>ConejoBot_ITTG</b> 🐇, tu asistente virtual del <b>TECNM</b>.<br>
+                Puedo ayudarte con información sobre:
+                <ul>
+                    <li>📘 Departamento de Inglés</li>
+                    <li>📗 Servicios Escolares</li>
+                    <li>📙 División de Estudios Profesionales</li>
+                    <li>📕 Coordinación</li>
+                </ul>
+                Escribe tu duda y te orientaré con gusto. 💡
             </div>
         </div>
 
-        <div class="input-area">
-            <input type="text" id="mensaje" placeholder="Escribe algo..." autocomplete="off">
-            <button id="enviar">Enviar</button>
-        </div>
+        <form class="chat-form" id="chat-form">
+            <input type="text" id="user-input" placeholder="Escribe algo..." autocomplete="off" required>
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 
     <script>
-        const enviarBtn = document.getElementById("enviar");
-        const mensajeInput = document.getElementById("mensaje");
+        const form = document.getElementById("chat-form");
+        const input = document.getElementById("user-input");
         const chatBox = document.getElementById("chat-box");
 
-        // Enviar mensaje
-        enviarBtn.addEventListener("click", enviarMensaje);
-        mensajeInput.addEventListener("keypress", function(e) {
-            if (e.key === "Enter") enviarMensaje();
-        });
+        // Mostrar mensaje del usuario
+        function addUserMessage(text) {
+            const message = document.createElement("div");
+            message.classList.add("user-message");
+            message.textContent = text;
+            chatBox.appendChild(message);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
 
-        function enviarMensaje() {
-            const mensaje = mensajeInput.value.trim();
-            if (!mensaje) return;
+        // Mostrar indicador "ConejoBot está escribiendo..."
+        function showTypingIndicator() {
+            const typing = document.createElement("div");
+            typing.classList.add("bot-message", "typing");
+            typing.innerHTML = "ConejoBot_ITTG está escribiendo<span class='dot'>.</span><span class='dot'>.</span><span class='dot'>.</span>";
+            chatBox.appendChild(typing);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return typing;
+        }
 
-            agregarMensajeUsuario(mensaje);
-            mensajeInput.value = "";
+        // Mostrar respuesta del bot con animación
+        function typeBotMessage(text) {
+            const message = document.createElement("div");
+            message.classList.add("bot-message");
+            chatBox.appendChild(message);
+            let index = 0;
+            const speed = 20;
+            const interval = setInterval(() => {
+                message.innerHTML = text.substring(0, index++);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                if (index > text.length) clearInterval(interval);
+            }, speed);
+        }
 
-            fetch("/enviar", {
+        // Enviar mensaje al backend Flask
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            addUserMessage(userText);
+            input.value = "";
+
+            const typingIndicator = showTypingIndicator();
+
+            const response = await fetch("/enviar", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mensaje })
-            })
-            .then(res => res.json())
-            .then(data => agregarMensajeBot(data.respuesta))
-            .catch(() => agregarMensajeBot("⚠️ Error al conectar con el servidor."));
-        }
+                body: JSON.stringify({ mensaje: userText })
+            });
 
-        function agregarMensajeUsuario(texto) {
-            const div = document.createElement("div");
-            div.classList.add("user-message");
-            div.innerHTML = texto;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function agregarMensajeBot(texto) {
-            const div = document.createElement("div");
-            div.classList.add("bot-message");
-            div.innerHTML = texto;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
+            const data = await response.json();
+            chatBox.removeChild(typingIndicator);
+            typeBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
+        });
     </script>
 </body>
 </html>
