@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
-
+app.jinja_env.autoescape = False  # Permite HTML en las respuestas
 # ======================================================
 # INFORMACIÓN COMPLETA DEL CHATBOT CONEJOBOT_ITTG
 # ======================================================
@@ -29,7 +29,7 @@ departamentos = {
         "keywords": ["inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
         "temas": {
             "Cursos de inglés": [
-                "🔹Percatarse de los flayers de convocatorias sobre los cursos publicadas en páginas oficiales del ITTG. Se indican 2 fechas que corresponden al PRE-REGISTRO y REGISTRO (INSCRIPCIÓN).",
+                "🔹Percatarse de los flayers de convocatorias sobre los cursos publicadas en páginas oficiales del ITTG. Se indican 2 fechas que corresponden al pre-registro y registro 'inscripción'.",
                 "🔹Accesar al código QR de estos y llenar el formulario de pre-registro",
                 "🔹En este llenado seleccionar el horario de tu preferencia y el nivel al que ingresarás.",
                 "🔹Después de enviar el formulario, esperar el correo de confirmación de los grupos que serán abiertos.",
@@ -81,7 +81,7 @@ departamentos = {
         "keywords": ["servicios", "escolares", "credencial", "constancia", "boleta", "kardex", "liberación", "acom", "extraescolares"],
         "temas": {
             "Credencial digital": [
-                "🔸Ingresa a 👉 [http://credenciales.tuxtla.tecnm.mx/](http://credenciales.tuxtla.tecnm.mx/)  ",
+                "🔸Ingresa a 👉 <a href='http://credenciales.tuxtla.tecnm.mx/' target='_blank'>http://credenciales.tuxtla.tecnm.mx/</a> ",
                 "🔸Usa tu correo institucional para generar tu credencial digital.",
                 "🔸Una vez dentro de la sesión verifica que tus datos personales y escolares sean correctos.",
                 "🔸Da click al botón TOMAR FOTOGRAFÍA",
@@ -120,7 +120,7 @@ departamentos = {
                 "6️⃣Enviar el comprobante oficial de pago al correo:👉 ventanilla_escolares@tuxtla.tecnm.mx.",
                 "7️⃣Esperar de 3 a 5 días hábiles para obtener el Kardex oficial."
             ],
-            "Cosntancia de liberación de lengua extranjera": [
+            "Constancia de liberación de lengua extranjera": [
                 "1️⃣Generar referencia bancaria en la página del SII, en el apartado de documentos oficiales, dar click en la opción solicitar.",
                 "2️⃣Elegir la opción de “Constancia de liberación de lengua extranjera.",
                 "3️⃣Realizar el pago, se puede realizar de dos maneras, por medio de transferencia o en cajero automático de Santander.",
@@ -134,9 +134,9 @@ departamentos = {
                 "1️⃣Para liberar las actividades complementarias (ACOM's) es necesario tener 5 créditos.",
                 "2️⃣Tienes 3 créditos asegurados al cursar la materia Tutoría 1 y 2, y Extraescolares (OJO algunos créditos valen 0.5).",
                 "3️⃣Para obtener los dos créditos restantes puedes participar en actividades referentes al Aniversario de la Carrera de Industrial.",
-                "4️⃣Cursar 3 de 4 cursos MOOC (👉 https://mooc.tecnm.mx/portal/ ) y acreditar la actividad complementaria). ENVIAR al correo:👉 solicitud.extraescolares@tuxtla.tecnm.mx o acudir al Departamento de Extraescolares (Edificio O frente a la chanca de futbol rápido.",
+                "4️⃣Cursar 3 de 4 cursos MOOC 👉 (<a href='https://mooc.tecnm.mx/portal/' target='_blank'>https://mooc.tecnm.mx/portal/</a>)  y acreditar la actividad complementaria). ENVIAR al correo:👉 solicitud.extraescolares@tuxtla.tecnm.mx o acudir al Departamento de Extraescolares (Edificio O frente a la chanca de futbol rápido.",
                 "5️⃣OTRO medio es: llenar la hoja de firmas (En Biblioteca del ITTG lo consiguen) por acudir a Eventos culturales, cívicos o deportivos más acreditar la actividad complementaria.",
-                "6️⃣Otra forma es: si Cursan 2 MOOC (👉 https://mooc.tecnm.mx/ ) y el diploma que reciben (si lo aprobaron), lo llevan a desarrollo académico (Edificio EaD, planta alta) para el ACOM 7.",
+                "6️⃣Otra forma es: si Cursan 2 MOOC (👉 <a href='https://mooc.tecnm.mx/portal/' target='_blank' style='color: #0066cc; text-decoration: underline;'>Plataforma MOOC TECNM</a> ) y el diploma que reciben (si lo aprobaron), lo llevan a desarrollo académico (Edificio EaD, planta alta) para el ACOM 7.",
                 "7️⃣Una vez que se reúne los 5 créditos, reportarán al Departamento de Servicios Escolares.",
                 "NOTA:",
                 "ACOM 3 - Congresos o eventos académicos - Máximos 2 créditos.",
@@ -149,7 +149,7 @@ departamentos = {
         "nombre": "📙 División de Estudios Profesionales",
         "keywords": ["división", "division", "servicio social", "residencia", "residencias"],
         "temas": {
-            "servicio social": [
+            "Servicio social": [
                 "1️⃣Para comenzar el proceso identifica si el periodo de servicio comprenderá el periodo escolar de enero–junio o el de agosto-diciembre. Las fechas serán publicadas en las convocatorias expedidas por el departamento correspondiente.",
                 "2️⃣Dirígete al SII e ingresa al apartado de “Servicio social”. Verifica si el sistema reconoce el porcentaje mínimo de créditos para comenzar el servicio (70%).",
                 "3️⃣Si no cumples con este porcentaje debes esperar a cumplirlo llegado el 7mo semestre o cubrirlo mediante el adelanto de materias. Y en caso de que, si cumpla, el sistema te permitirá acceder a la descarga de formatos requeridos.",
@@ -162,7 +162,7 @@ departamentos = {
                 "🔟Las constancias de calificaciones son enviadas al departamento de servicios escolares para que ellos coloquen la calificación final en el kardex (como se menciona en el paso 8).",
                 "1️⃣1️⃣El proceso finalizará cuando recibas la carta de liberación del servicio social y a su vez visualices en tu kardex, la calificación obtenida en tu servicio social."
             ],
-            "residencias": [
+            "Residencias": [
                 "Consulta los requisitos en la División de Estudios Profesionales.",
                 "Debes entregar: carta de presentación, plan de trabajo y reportes parciales.",
                 "Duración: 640 horas."
@@ -170,7 +170,7 @@ departamentos = {
         }
     },
 
-    "coordinacion": {
+    "Coordinacion": {
         "nombre": "📕 Coordinación",
         "keywords": ["coordinación", "coordinacion", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
@@ -240,7 +240,7 @@ departamentos = {
                 "📌Trámite para la convalidación de estudios:",
                 "1️⃣El estudiante debe considerar que sólo tiene derecho a convalidar plan de estudios en una sola ocasión, bajo la condición que pueda concluir dicho plan de estudios dentro de los 12 semestres reglamentarios.",
                 "2️⃣El interesado debe acudir a División de estudios profesionales del instituto de origen y entregar:",
-                "🔸La solicitud de convalidación de estudios (formato oficial, anexo V) que lo puedes encontrar en página web👉 https://www.tuxtla.tecnm.mx/ en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
+                "🔸La solicitud de convalidación de estudios (formato oficial, anexo V) que lo puedes encontrar en página web👉<a href='https://www.tuxtla.tecnm.mx/' target='_blank'>https://www.tuxtla.tecnm.mx/</a>", en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
                 "🔸Documentos probatorios (kárdex o certificado parcial con calificaciones). Al menos 30 días hábiles antes de iniciar el siguiente semestre.",
                 "3️⃣Sólo son convalidadas las asignaturas que se encuentren acreditadas.",
                 "4️⃣Para realizar la convalidación en el plan de estudios al que se pretende cambiar y el que cursa actualmente, deben existir asignaturas comunes o similares, el contenido de los programas de estudio debe ser equiparable al menos en un 60 por ciento de las competencias específicas desarrolladas.",
@@ -250,7 +250,7 @@ departamentos = {
             "Equivalencia": [
                 "📌Es el proceso mediante el cual se hacen equiparables entre sí los estudios realizados en Instituciones del Sistema Educativo Nacional diferentes a las Instituciones adscritas al TecNM.",
                 "📄Requerimientos (documentos en original y copia)",
-                "1️⃣Solicitud de Resolución de Equivalencia de estudios (Anexo XIII), que lo puedes encontrar en página web👉 https://www.tuxtla.tecnm.mx/   en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
+                "1️⃣Solicitud de Resolución de Equivalencia de estudios (Anexo XIII), que lo puedes encontrar en página web👉 <a href='https://www.tuxtla.tecnm.mx/' target='_blank'>https://www.tuxtla.tecnm.mx/</a> en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
                 "2️⃣Copia Certificada de acta de nacimiento (Los extranjeros, deberán presentar la documentación que acredite la calidad migratoria con que se encuentra en territorio nacional de acuerdo con la legislación aplicable).",
                 "3️⃣Antecedentes académicos que acrediten que el interesado concluyó el nivel inmediato anterior a los estudios que se pretendan equiparar, es decir, certificado de nivel medio superior.",
                 "4️⃣Certificado completo o incompleto de los estudios a equiparar.",
@@ -261,39 +261,88 @@ departamentos = {
         }
     }
 }
-# --- FUNCIÓN DE RESPUESTA INTELIGENTE CON DETECCIÓN DE PALABRAS CLAVE ---
+# --- FUNCIÓN DE RESPUESTA INTELIGENTE CON SOPORTE PARA HTML ---
 def responder_usuario(mensaje):
-    mensaje = mensaje.lower()
-    respuestas_encontradas = []
-
+    mensaje = mensaje.lower().strip()
+    
+    print(f"🔍 Mensaje recibido: '{mensaje}'")
+    
+    # PRIMERO: Buscar coincidencia EXACTA de temas
     for dep, datos in departamentos.items():
-        # Coincidencia por palabras clave
-        if any(keyword in mensaje for keyword in datos.get("keywords", [])) or dep in mensaje:
+        for tema, info in datos["temas"].items():
+            tema_lower = tema.lower()
+            if tema_lower in mensaje:
+                print(f"✅ Encontrado tema: {tema} en departamento: {dep}")
+                texto = f"<b>{datos['nombre']}</b><br><br>"
+                texto += f"<b>{tema}</b><br>"
+                for item in info:
+                    texto += f"• {item}<br>"
+                return texto
+    
+    # SEGUNDO: Buscar por palabras clave ESPECÍFICAS
+    palabras_clave_especificas = {
+        "toefl": ["toefl", "examen toefl"],
+        "cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés"],
+        "examen de colocacion": ["examen de colocación", "colocacion", "ubicación"],
+        "certificaciones": ["certificación", "certificaciones", "convalidación"],
+        "credencial digital": ["credencial", "credencial digital", "credenciales"],
+        "servicio social": ["servicio social", "servicios social"],
+        "constancia": ["constancia", "constancia de estudios"],
+        "kardex": ["kardex", "historial académico"],
+        "residencias": ["residencias", "residencia"],
+        "movilidad": ["movilidad", "movilidad estudiantil"],
+        "traslado": ["traslado", "cambio de escuela"],
+        "Contacto": ["contacto de ingles", "comunicar","numero"],
+        "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio"],
+        "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles"],
+        "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria"],
+        "Equivalencia": ["equivalencia"],
+        "Duración de cursos": ["duración de ingles", "tiempo","duración","duración de cursos de ingles"]
+    }
+    
+    for tema_especifico, palabras in palabras_clave_especificas.items():
+        if any(palabra in mensaje for palabra in palabras):
+            print(f"✅ Encontrado por palabra clave: {tema_especifico}")
+            for dep, datos in departamentos.items():
+                for tema, info in datos["temas"].items():
+                    if tema.lower() == tema_especifico.lower():
+                        texto = f"<b>{datos['nombre']}</b><br><br>"
+                        texto += f"<b>{tema}</b><br>"
+                        for item in info:
+                            texto += f"• {item}<br>"
+                        return texto
+    
+    # TERCERO: Si solo menciona el departamento general
+    departamentos_generales = {
+        "inglés": "ingles",
+        "ingles": "ingles", 
+        "servicios escolares": "servicios escolares",
+        "escolares": "servicios escolares",
+        "división de estudios": "division de estudios profesionales",
+        "estudios profesionales": "division de estudios profesionales",
+        "coordinación": "coordinacion",
+        "coordinacion": "coordinacion"
+    }
+    
+    for palabra_dep, clave_dep in departamentos_generales.items():
+        if palabra_dep in mensaje:
+            datos = departamentos[clave_dep]
             texto = f"<b>{datos['nombre']}</b><br><br>"
-            for tema, info in datos["temas"].items():
-                texto += f"📘 <b>{tema}</b><br>"
-                texto += "<br>".join(info)
-                texto += "<br><br>"
-            respuestas_encontradas.append(texto)
-        else:
-            # Coincidencia por temas
-            for tema, info in datos["temas"].items():
-                if tema.lower() in mensaje:
-                    texto = f"<b>{datos['nombre']}</b><br><br>"
-                    texto += f"📗 <b>{tema}</b><br>"
-                    texto += "<br>".join(info)
-                    respuestas_encontradas.append(texto)
+            texto += "Tengo información sobre estos temas:<br><br>"
+            for tema in datos["temas"].keys():
+                texto += f"• <b>{tema}</b><br>"
+            texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+            return texto
 
-    if respuestas_encontradas:
-        return "<hr>".join(respuestas_encontradas)
-
+    # CUARTO: Respuesta por defecto
     return (
-        "😅 No entiendo muy bien. Puedes preguntar cosas como:<br>"
-        "- Cursos de inglés<br>"
-        "- Examen de colocación<br>"
-        "- Trámite de credencial digital<br>"
-        "- Servicio social<br>"
-        "- Movilidad o equivalencia"
+        "¡Hola! Soy ConejoBot 🐰<br><br>"
+        "Puedo ayudarte con información específica sobre:<br><br>"
+        "📘 <b>INGLÉS:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
+        "📗 <b>SERVICIOS ESCOLARES:</b> credencial digital, constancias, boletas, kardex<br>"
+        "📙 <b>DIVISIÓN DE ESTUDIOS:</b> servicio social, residencias<br>"
+        "📕 <b>COORDINACIÓN:</b> traslados, movilidad estudiantil, convalidación<br><br>"
+        "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
 @app.route("/")
