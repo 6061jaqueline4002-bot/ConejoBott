@@ -295,7 +295,6 @@ def responder_usuario(mensaje):
         "- Servicio social<br>"
         "- Movilidad o equivalencia"
     )
-
 # --- RUTAS FLASK ---
 @app.route("/")
 def home():
