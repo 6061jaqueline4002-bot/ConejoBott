@@ -29,9 +29,10 @@ app = Flask(__name__)
 
 # --- BASE DE CONOCIMIENTO ACTUALIZADA ---
 
-departamentos = {
+respuestas = {
     "ingles": {
         "nombre": "📘 Departamento de Inglés",
+        "keywords": ["inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
         "temas": {
             "Cursos de inglés": [
                 "🔹Percatarse de los flayers de convocatorias sobre los cursos publicadas en páginas oficiales del ITTG. Se indican 2 fechas que corresponden al PRE-REGISTRO y REGISTRO (INSCRIPCIÓN).",
@@ -83,6 +84,7 @@ departamentos = {
 
     "Servicios escolares": {
         "nombre": "📗 Servicios Escolares",
+        "keywords": ["servicios", "escolares", "credencial", "constancia", "boleta", "kardex", "liberación", "acom", "extraescolares"],
         "temas": {
             "Credencial digital": [
                 "🔸Ingresa a 👉 [http://credenciales.tuxtla.tecnm.mx/](http://credenciales.tuxtla.tecnm.mx/)  ",
@@ -112,7 +114,7 @@ departamentos = {
                 "6️⃣Esperar de 3 a 5 días hábiles para obtener la constancia."
             ],
             "Boleta oficial": [
-                "Solicita tu boleta al correo 👉 ventanilla_escolares@tuxtla.tecnm.mx solicitando tu boleta oficial con sello y firma de la institución.",
+                "📧Solicita tu boleta al correo 👉 ventanilla_escolares@tuxtla.tecnm.mx solicitando tu boleta oficial con sello y firma de la institución.",
                 "Tiempo estimado de entrega: 3 a 5 días hábiles."
             ],
             "Kardex": [
@@ -134,7 +136,7 @@ departamentos = {
                 "7️⃣Esperar de 3 a 5 días hábiles para obtener la constancia."
             ],
             "Actividades Complementarias (ACOM)": [
-                "Las Actividades Complementarias (ACOM) son requisito para titulación.",
+                "📚Las Actividades Complementarias (ACOM) es un requisito para titulación.",
                 "1️⃣Para liberar las actividades complementarias (ACOM's) es necesario tener 5 créditos.",
                 "2️⃣Tienes 3 créditos asegurados al cursar la materia Tutoría 1 y 2, y Extraescolares (OJO algunos créditos valen 0.5).",
                 "3️⃣Para obtener los dos créditos restantes puedes participar en actividades referentes al Aniversario de la Carrera de Industrial.",
@@ -151,6 +153,7 @@ departamentos = {
 
     "Division de estudios profesionales": {
         "nombre": "📙 División de Estudios Profesionales",
+        "keywords": ["división", "division", "servicio social", "residencia", "residencias"],
         "temas": {
             "servicio social": [
                 "1️⃣Para comenzar el proceso identifica si el periodo de servicio comprenderá el periodo escolar de enero–junio o el de agosto-diciembre. Las fechas serán publicadas en las convocatorias expedidas por el departamento correspondiente.",
@@ -175,6 +178,7 @@ departamentos = {
 
     "coordinacion": {
         "nombre": "📕 Coordinación",
+        "keywords": ["coordinación", "coordinacion", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
             "Traslado": [
                 "1️⃣Antes de iniciar el trámite, identifica el periodo de reinscripción del Instituto receptor. El procedimiento debe comenzar previo a dichas fechas para garantizar la aceptación y registro oportuno.",
@@ -263,33 +267,39 @@ departamentos = {
         }
     }
 }
-
-# --- FUNCIÓN DE RESPUESTA INTELIGENTE ---
-
-def obtener_respuesta(mensaje):
+# --- FUNCIÓN DE RESPUESTA INTELIGENTE CON DETECCIÓN DE PALABRAS CLAVE ---
+def responder_usuario(mensaje):
     mensaje = mensaje.lower()
+    respuestas_encontradas = []
 
     for dep, datos in departamentos.items():
-        if dep in mensaje:
-            respuesta = f"**{datos['nombre']}**\n\n📚 Subtemas disponibles:\n"
-            for tema in datos["temas"].keys():
-                respuesta += f"• {tema.capitalize()}\n"
-            return respuesta
+        # Coincidencia por palabras clave
+        if any(keyword in mensaje for keyword in datos.get("keywords", [])) or dep in mensaje:
+            texto = f"<b>{datos['nombre']}</b><br><br>"
+            for tema, info in datos["temas"].items():
+                texto += f"📘 <b>{tema}</b><br>"
+                texto += "<br>".join(info)
+                texto += "<br><br>"
+            respuestas_encontradas.append(texto)
+        else:
+            # Coincidencia por temas
+            for tema, info in datos["temas"].items():
+                if tema.lower() in mensaje:
+                    texto = f"<b>{datos['nombre']}</b><br><br>"
+                    texto += f"📗 <b>{tema}</b><br>"
+                    texto += "<br>".join(info)
+                    respuestas_encontradas.append(texto)
 
-        for tema, info in datos["temas"].items():
-            if tema in mensaje:
-                respuesta = f"{datos['nombre']}\n\n**{tema.upper()}**\n"
-                for i, punto in enumerate(info, start=1):
-                    respuesta += f"{i}. {punto}\n"
-                return respuesta
+    if respuestas_encontradas:
+        return "<hr>".join(respuestas_encontradas)
 
     return (
-        "😅 No entiendo muy bien. Puedes preguntar cosas como:\n"
-        "- 'Cursos de inglés'\n"
-        "- 'Examen de colocación'\n"
-        "- 'Trámite de credencial digital'\n"
-        "- 'Servicio social'\n"
-        "- 'Movilidad o equivalencia'"
+        "😅 No entiendo muy bien. Puedes preguntar cosas como:<br>"
+        "- Cursos de inglés<br>"
+        "- Examen de colocación<br>"
+        "- Trámite de credencial digital<br>"
+        "- Servicio social<br>"
+        "- Movilidad o equivalencia"
     )
 
 # --- RUTAS FLASK ---
@@ -303,6 +313,7 @@ def enviar():
     mensaje_usuario = data.get("mensaje", "")
     respuesta = responder_usuario(mensaje_usuario)
     return jsonify({"respuesta": respuesta})
+
 # ======================================================
 # EJECUCIÓN
 # ======================================================
