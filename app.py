@@ -81,7 +81,7 @@ departamentos = {
         "keywords": ["servicios", "escolares", "credencial", "constancia", "boleta", "kardex", "liberación", "acom", "extraescolares"],
         "temas": {
             "Credencial digital": [
-                "🔸Ingresa a 👉 <a href='http://credenciales.tuxtla.tecnm.mx/' target='_blank'>http://credenciales.tuxtla.tecnm.mx/</a> ",
+                "🔸Ingresa a 👉 http://credenciales.tuxtla.tecnm.mx/ ",
                 "🔸Usa tu correo institucional para generar tu credencial digital.",
                 "🔸Una vez dentro de la sesión verifica que tus datos personales y escolares sean correctos.",
                 "🔸Da click al botón TOMAR FOTOGRAFÍA",
@@ -134,9 +134,9 @@ departamentos = {
                 "1️⃣Para liberar las actividades complementarias (ACOM's) es necesario tener 5 créditos.",
                 "2️⃣Tienes 3 créditos asegurados al cursar la materia Tutoría 1 y 2, y Extraescolares (OJO algunos créditos valen 0.5).",
                 "3️⃣Para obtener los dos créditos restantes puedes participar en actividades referentes al Aniversario de la Carrera de Industrial.",
-                "4️⃣Cursar 3 de 4 cursos MOOC 👉 (<a href='https://mooc.tecnm.mx/portal/' target='_blank'>https://mooc.tecnm.mx/portal/</a>)  y acreditar la actividad complementaria). ENVIAR al correo:👉 solicitud.extraescolares@tuxtla.tecnm.mx o acudir al Departamento de Extraescolares (Edificio O frente a la chanca de futbol rápido.",
+                "4️⃣Cursar 3 de 4 cursos MOOC 👉 ( https://mooc.tecnm.mx/portal/ )  y acreditar la actividad complementaria). ENVIAR al correo:👉 solicitud.extraescolares@tuxtla.tecnm.mx o acudir al Departamento de Extraescolares (Edificio O frente a la chanca de futbol rápido.",
                 "5️⃣OTRO medio es: llenar la hoja de firmas (En Biblioteca del ITTG lo consiguen) por acudir a Eventos culturales, cívicos o deportivos más acreditar la actividad complementaria.",
-                "6️⃣Otra forma es: si Cursan 2 MOOC (👉 <a href='https://mooc.tecnm.mx/portal/' target='_blank' style='color: #0066cc; text-decoration: underline;'>Plataforma MOOC TECNM</a> ) y el diploma que reciben (si lo aprobaron), lo llevan a desarrollo académico (Edificio EaD, planta alta) para el ACOM 7.",
+                "6️⃣Otra forma es: si Cursan 2 MOOC (👉 https://mooc.tecnm.mx/portal/ ) y el diploma que reciben (si lo aprobaron), lo llevan a desarrollo académico (Edificio EaD, planta alta) para el ACOM 7.",
                 "7️⃣Una vez que se reúne los 5 créditos, reportarán al Departamento de Servicios Escolares.",
                 "NOTA:",
                 "ACOM 3 - Congresos o eventos académicos - Máximos 2 créditos.",
@@ -240,7 +240,7 @@ departamentos = {
                 "📌Trámite para la convalidación de estudios:",
                 "1️⃣El estudiante debe considerar que sólo tiene derecho a convalidar plan de estudios en una sola ocasión, bajo la condición que pueda concluir dicho plan de estudios dentro de los 12 semestres reglamentarios.",
                 "2️⃣El interesado debe acudir a División de estudios profesionales del instituto de origen y entregar:",
-                "🔸La solicitud de convalidación de estudios (formato oficial, anexo V) que lo puedes encontrar en página web👉<a href='https://www.tuxtla.tecnm.mx/' target='_blank'>https://www.tuxtla.tecnm.mx/</a>", en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
+                "🔸La solicitud de convalidación de estudios (formato oficial, anexo V) que lo puedes encontrar en página web👉 https://www.tuxtla.tecnm.mx/ en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
                 "🔸Documentos probatorios (kárdex o certificado parcial con calificaciones). Al menos 30 días hábiles antes de iniciar el siguiente semestre.",
                 "3️⃣Sólo son convalidadas las asignaturas que se encuentren acreditadas.",
                 "4️⃣Para realizar la convalidación en el plan de estudios al que se pretende cambiar y el que cursa actualmente, deben existir asignaturas comunes o similares, el contenido de los programas de estudio debe ser equiparable al menos en un 60 por ciento de las competencias específicas desarrolladas.",
@@ -250,7 +250,7 @@ departamentos = {
             "Equivalencia": [
                 "📌Es el proceso mediante el cual se hacen equiparables entre sí los estudios realizados en Instituciones del Sistema Educativo Nacional diferentes a las Instituciones adscritas al TecNM.",
                 "📄Requerimientos (documentos en original y copia)",
-                "1️⃣Solicitud de Resolución de Equivalencia de estudios (Anexo XIII), que lo puedes encontrar en página web👉 <a href='https://www.tuxtla.tecnm.mx/' target='_blank'>https://www.tuxtla.tecnm.mx/</a> en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
+                "1️⃣Solicitud de Resolución de Equivalencia de estudios (Anexo XIII), que lo puedes encontrar en página web👉 https://www.tuxtla.tecnm.mx/ en el apartado de estudiantes, en la opción de división de estudios y luego dar clic en movilidad estudiantil.",
                 "2️⃣Copia Certificada de acta de nacimiento (Los extranjeros, deberán presentar la documentación que acredite la calidad migratoria con que se encuentra en territorio nacional de acuerdo con la legislación aplicable).",
                 "3️⃣Antecedentes académicos que acrediten que el interesado concluyó el nivel inmediato anterior a los estudios que se pretendan equiparar, es decir, certificado de nivel medio superior.",
                 "4️⃣Certificado completo o incompleto de los estudios a equiparar.",
