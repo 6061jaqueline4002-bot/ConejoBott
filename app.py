@@ -293,16 +293,16 @@ def obtener_respuesta(mensaje):
     )
 
 # --- RUTAS FLASK ---
-
 @app.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/get", methods=["POST"])
-def chatbot_response():
-    user_input = request.form["msg"]
-    respuesta = obtener_respuesta(user_input)
-    return jsonify({"response": respuesta})
+@app.route("/enviar", methods=["POST"])
+def enviar():
+    data = request.get_json()
+    mensaje_usuario = data.get("mensaje", "")
+    respuesta = responder_usuario(mensaje_usuario)
+    return jsonify({"respuesta": respuesta})
 # ======================================================
 # EJECUCIÓN
 # ======================================================
