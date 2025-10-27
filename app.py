@@ -232,7 +232,7 @@ departamentos = {
                 "🔸Si la movilidad fue en IES externas al TecNM, se asienta como AC (acreditada) o NA (no acreditada).",
                 "🔸Si la movilidad fue dentro del TecNM, se asienta la calificación numérica obtenida."
             ],
-            "Convalidacion": [
+            "Convalidación": [
                 "📌La convalidación está caracterizada por los siguientes aspectos:",
                 "✅Permite al estudiante cambiar de un plan de estudio a otro dentro de las Instituciones adscritas al TecNM.",
                 "✅Permite cursar una segunda carrera a nivel licenciatura, una vez que el egresado se ha titulado o ha aprobado su acto profesional de la primera carrera cursada.",
@@ -284,7 +284,7 @@ def responder_usuario(mensaje):
         "toefl": ["toefl", "examen toefl"],
         "cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés"],
         "examen de colocacion": ["examen de colocación", "colocacion", "ubicación"],
-        "certificaciones": ["certificación", "certificaciones", "convalidación"],
+        "certificaciones": ["certificación", "certificaciones", "convalidación de inglés"],
         "credencial digital": ["credencial", "credencial digital", "credenciales"],
         "servicio social": ["servicio social", "servicios social"],
         "constancia": ["constancia", "constancia de estudios"],
@@ -297,6 +297,7 @@ def responder_usuario(mensaje):
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria"],
         "Equivalencia": ["equivalencia"],
+        "Convalidación": ["convalidación","convalidación de materias"],
         "Duración de cursos": ["duración de ingles", "tiempo","duración","duración de cursos de ingles"]
     }
     
