@@ -187,7 +187,7 @@ departamentos = {
                 "🔟Las constancias de calificaciones son enviadas al departamento de servicios escolares para que ellos coloquen la calificación final en el kardex (como se menciona en el paso 8).",
                 "1️⃣1️⃣El proceso finalizará cuando recibas la carta de liberación del servicio social y a su vez visualices en tu kardex, la calificación obtenida en tu servicio social."
             ],
-            "Residencias": [
+            "Residencia Profesional": [
                 "1️⃣Antes de iniciar el trámite, asegúrate de cumplir con:",
                 "✅Tener liberado el servicio social.",
                 "✅Haber acreditado las 5 actividades complementarias (ACOM’s).",
@@ -375,13 +375,15 @@ def responder_usuario(mensaje):
         "residencias": ["residencias", "residencia"],
         "movilidad": ["movilidad", "movilidad estudiantil"],
         "traslado": ["traslado", "cambio de escuela"],
-        "Contacto": ["contacto de inglés", "comunicar","número"],
+        "Contacto": ["contacto de inglés", "comunicar","número","numero"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria"],
         "Equivalencia": ["equivalencia"],
-        "Convalidación": ["convalidación","convalidación de materias"],
-        "Duración de cursos": ["duración de ingles", "tiempo","duración","duración de cursos de ingles"]
+        "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia"],
+        "Titulación": ["titulacion","titulación","Titulación"],
+        "Convalidación": ["convalidación","convalidación de materias","convalidacion"],
+        "Duración de cursos": ["duración de inglés", "tiempo","duración","duración de cursos de inglés"]
     }
     
     for tema_especifico, palabras in palabras_clave_especificas.items():
