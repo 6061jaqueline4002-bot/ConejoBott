@@ -94,9 +94,9 @@ departamentos = {
                 "⏳Cursos superintensivos: 120 horas por semestre."
             ],
             "Contacto": [
-                "Puedes acudir directamente al Departamento de Inglés del ITTG.",
-                "Horario de atención: lunes a viernes de 9:00 a 16:00 hrs.",
-                "Correo de contacto: ingles@ittg.edu.mx"
+                "🏢Puedes acudir directamente al Departamento de Inglés del ITTG, Edificio G.",
+                "📞Teléfono: 961 615 0461 ext. 327",
+                "📧Correo de contacto: leng_tgutierrez@tecnm.mx "
             ]
         }
     },
@@ -188,10 +188,68 @@ departamentos = {
                 "1️⃣1️⃣El proceso finalizará cuando recibas la carta de liberación del servicio social y a su vez visualices en tu kardex, la calificación obtenida en tu servicio social."
             ],
             "Residencias": [
-                "Consulta los requisitos en la División de Estudios Profesionales.",
-                "Debes entregar: carta de presentación, plan de trabajo y reportes parciales.",
-                "Duración: 640 horas."
-            ]
+                "1️⃣Antes de iniciar el trámite, asegúrate de cumplir con:",
+                "✅Tener liberado el servicio social.",
+                "✅Haber acreditado las 5 actividades complementarias (ACOM’s).",
+                "✅Tener al menos el 80% de los créditos aprobados del plan de estudios.",
+                "✅No contar con asignaturas en “curso especial”.",
+                "2️⃣Elegir un proyecto de residencia, puede ser mediente los siguientes rubros:",
+                "🏫Banco de proyectos del Instituto.",
+                "🤓Propuesta propia, presentada por el estudiante.",
+                "🏢Proyecto dentro de la empresa donde ya trabajas.",
+                "Nota:La División de Estudios Profesionales, a través del coordinador de carrera, te asesora para que el proyecto sea adecuado a tu perfil profesional.",
+                "3️⃣Desarrolla un anteproyecto de residencia profesional, donde definas:",
+                "🔸Nombre del proyecto",
+                "🔸Objetivos",
+                "🔸Justificación",
+                "🔸Actividades y cronograma",
+                "🔸Lugar donde se realizará",
+                "El asesor interno evalúa la viabilidad del anteproyecto.",
+                "4️⃣Tramitar las cartas oficiales",
+                "🔸Carta de presentación y agradecimiento, emitida por el Instituto y dirigida a la empresa u organismo.",
+                "🔸La empresa deberá responder con una Carta de aceptación del residente.",
+                "5️⃣Solicitud formal de residencia",
+                "🔸Ingresa al portal de estudiantes 👉 https://estudiantes.tuxtla.tecnm.mx/ y llena la solicitud de residencia profesional.",
+                "🔸Adjunta los documentos requeridos (anteproyecto, cartas, comprobantes, etc.).",
+                "6️⃣Asignación de asesores",
+                "🔸Asesor interno: profesor del Instituto que guía y evalúa tu proyecto.",
+                "🔸Asesor externo: designado por la empresa o dependencia. Ambos supervisan el desarrollo y la solución de problemas del proyecto.",
+                "7️⃣Reinscripción al Instituto",
+                "✅Debes reinscribirte oficialmente durante el periodo correspondiente:",
+                "🔸Solo a Residencia Profesional si es de tiempo completo.",
+                "🔸O junto con materias adicionales, sin descuidar tu residencia.",
+                "8️⃣Desarrollo del proyecto",
+                "🔸Duración mínima de 4 meses y máxima de 6 meses, con un total de 500 horas acumuladas.",
+                "🔸Cumple con el horario establecido por la empresa.",
+                "🔸Mantén comunicación constante con ambos asesores.",
+                "9️⃣Elaboración del informe final",
+                "🔸Al concluir el proyecto, elabora el informe técnico con los resultados obtenidos.",
+                "🔸Debe ser revisado y aprobado por los asesores interno y externo.",
+                "🔟Se acredita mediante la realización del proyecto en alguno de los siguientes ámbitos",
+                "🔸Sector social o productivo",
+                "🔸Innovación y desarrollo tecnológico",
+                "🔸Investigación",
+                "🔸Diseño y/o construcción de equipo",
+                "🔸Proyectos académicos autorizados",
+                "🔸Educación dual o proyectos integradores",
+                "💯Los asesores entregan las evaluaciones finales para acreditar la residencia (valor de 10 créditos)."
+            ],
+            "Titulación": [
+                "1️⃣Para iniciar con el proceso de titulación es importante contar con la documentación correcta:",
+                "✅Original y copia de solicitud de titulación",
+                "✅Copia de certificado de licenciatura",
+                "✅Copia de constancia de servicio social",
+                "✅Copia de constancia de terminación de inglés ",
+                "✅Entregar todos los documentos anteriores en una carpeta tamaño carta color beige.",
+                "2️⃣Una vez que reúnas tus documentos, acude a entregarlos a la oficina de coordinación de apoyo a la titulación ubicada en el departamento de la división de estudios en el edificio A-B.",
+                "3️⃣Es requisito obligatorio que para este punto cuentes con el inglés liberado, el servicio social concluido y con el certificado de terminación de estudios.",
+                "4️⃣Posterior a la entrega de tus documentos, el departamento de coordinación de apoyo a la titulación solicitara la titulación al departamento correspondiente a tu carrera. ",
+                "5️⃣Y este departamento posteriormente enviara tu información a la academia de tu carrera para que ellos se encarguen de evaluar el proyecto con el cual te titularas.",
+                "6️⃣Luego de que la academia evalúe tu propuesta, te enviaran un documento vía correo institucional correspondiente a la aprobación de tu proyecto en conjunto del asesor que evaluara los avances de tu proyecto.",
+                "7️⃣Si el proyecto de titulación será mediante la elaboración de una tesis, se te asignaran dos asesores y al finalizar tu proyecto deberás defenderla según la fecha y hora asignadas por el departamento de coordinación de apoyo a la titulación.",
+                "8️⃣Una vez que el proyecto haya concluido y haya sido calificado o presentado, se expedirá un oficio de liberación de proyecto que deberá ser entregado al mismo departamento de apoyo a la titulación para que este otorgue un sello y finalice la parte académica del proceso."
+                "9️⃣La siguiente parte del proceso deberá finalizarse en el departamento de servicios escolares para llevar a cabo la parte administrativa bajo las indicaciones pertinentes de la o el encargado."
+            ]            
         }
     },
 
@@ -317,7 +375,7 @@ def responder_usuario(mensaje):
         "residencias": ["residencias", "residencia"],
         "movilidad": ["movilidad", "movilidad estudiantil"],
         "traslado": ["traslado", "cambio de escuela"],
-        "Contacto": ["contacto de ingles", "comunicar","numero"],
+        "Contacto": ["contacto de inglés", "comunicar","número"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria"],
@@ -378,6 +436,13 @@ def home():
     guardar_contador(usuarios_activos)
     registrar_usuario()
     return render_template("index.html")
+
+@app.route("/enviar", methods=["POST"])
+def enviar():
+    data = request.get_json()
+    mensaje_usuario = data.get("mensaje", "")
+    respuesta = responder_usuario(mensaje_usuario)
+    return jsonify({"respuesta": respuesta})
 
 @app.route("/admin/usuarios")
 def admin_usuarios():
