@@ -1,6 +1,31 @@
 # -*- coding: utf-8 -*-
 import os
 from flask import Flask, render_template, request, jsonify
+from datetime import datetime
+
+DATA_FOLDER = "data"
+os.makedirs(DATA_FOLDER, exist_ok=True)
+CONTADOR_FILE = os.path.join(DATA_FOLDER, "contador_usuarios.txt")
+REGISTRO_FILE = os.path.join(DATA_FOLDER, "registro_usuarios.txt")
+
+def obtener_contador():
+    if os.path.exists(CONTADOR_FILE):
+        with open(CONTADOR_FILE, "r") as f:
+            return int(f.read().strip() or 0)
+    return 0
+
+def guardar_contador(valor):
+    with open(CONTADOR_FILE, "w") as f:
+        f.write(str(valor))
+
+def registrar_usuario():
+    global usuarios_activos
+    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    with open(REGISTRO_FILE, "a") as f:
+        f.write(f"Usuario #{usuarios_activos} - Conexión: {ahora}\n")
+
+# Contador global de usuarios
+usuarios_activos = obtener_contador()
 
 app = Flask(__name__)
 app.jinja_env.autoescape = False  # Permite HTML en las respuestas
@@ -348,14 +373,37 @@ def responder_usuario(mensaje):
 # --- RUTAS FLASK ---
 @app.route("/")
 def home():
+    global usuarios_activos
+    usuarios_activos += 1
+    guardar_contador(usuarios_activos)
+    registrar_usuario()
     return render_template("index.html")
 
-@app.route("/enviar", methods=["POST"])
-def enviar():
-    data = request.get_json()
-    mensaje_usuario = data.get("mensaje", "")
-    respuesta = responder_usuario(mensaje_usuario)
-    return jsonify({"respuesta": respuesta})
+@app.route("/admin/usuarios")
+def admin_usuarios():
+    global usuarios_activos
+    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    registros = ""
+    if os.path.exists(REGISTRO_FILE):
+        with open(REGISTRO_FILE, "r") as f:
+            registros = f.read().replace("\n", "<br>")
+
+    return f"""
+    <html>
+    <head><title>Panel de Control 🪪</title></head>
+    <body style='font-family: Segoe UI; background:#002E5D; color:white; padding:30px;'>
+        <h1>👤 Panel de administración - ConejoBot</h1>
+        <p><b>Usuarios totales:</b> {usuarios_activos}</p>
+        <p><b>Última actualización:</b> {ahora}</p>
+        <hr>
+        <h2>📋 Historial de conexiones:</h2>
+        <div style="background:#013366; padding:10px; border-radius:10px; font-size:14px;">
+            {registros if registros else "Aún no hay conexiones registradas."}
+        </div>
+    </body>
+    </html>
+    """
 
 # ======================================================
 # EJECUCIÓN
