@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 from datetime import datetime
 
 DATA_FOLDER = "data"
@@ -254,7 +254,7 @@ departamentos = {
     },
 
     "Coordinación II": {
-        "nombre": "📕 Coordinación",
+        "nombre": "📕 Coordinación II",
         "keywords": ["coordinación", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
             "Traslado de instituto": [
@@ -426,7 +426,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Division de estudios" in mensaje or "estudios profesionales" in mensaje:
+    elif "División de estudios" in mensaje or "estudios profesionales" in mensaje:
         datos = departamentos["División de estudios profesionales"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
@@ -445,6 +445,10 @@ def responder_usuario(mensaje):
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
+@app.route("/usuarios")
+def redirect_usuarios():
+    return redirect("/admin/usuarios")
+    
 @app.route("/")
 def home():
     global usuarios_activos
