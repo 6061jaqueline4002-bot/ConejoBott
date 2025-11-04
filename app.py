@@ -411,7 +411,7 @@ def responder_usuario(mensaje):
     }
     
     for palabra_dep, clave_dep in departamentos_generales.items():
-    if palabra_dep.lower() in mensaje:
+        if palabra_dep.lower() in mensaje:
             datos = departamentos[clave_dep]
             texto = f"<b>{datos['nombre']}</b><br><br>"
             texto += "Tengo información sobre estos temas:<br><br>"
