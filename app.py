@@ -39,7 +39,7 @@ Puedo darte información sobre los siguientes departamentos:
 📘 Departamento de Inglés  
 📗 Servicios Escolares  
 📙 División de Estudios Profesionales  
-📕 Coordinación
+📕 Coordinación II
 
 Solo escribe algo como:  
 - “Información sobre el servicio social”  
@@ -253,7 +253,7 @@ departamentos = {
         }
     },
 
-    "Coordinacion II": {
+    "Coordinación II": {
         "nombre": "📕 Coordinación",
         "keywords": ["coordinación", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
@@ -400,7 +400,7 @@ def responder_usuario(mensaje):
     
     # TERCERO: Búsqueda directa por departamento
     if "Coordinación" in mensaje or "coordinación" in mensaje:
-        datos = departamentos["Coordinación"]
+        datos = departamentos["Coordinación II"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
@@ -408,8 +408,8 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Ingles" in mensaje or "inglés" in mensaje:
-        datos = departamentos["Ingles"]
+    elif "Inglés" in mensaje or "inglés" in mensaje:
+        datos = departamentos["Inglés"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
@@ -426,8 +426,8 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Division" in mensaje or "estudios profesionales" in mensaje:
-        datos = departamentos["division de estudios profesionales"]
+    elif "Division de estudios" in mensaje or "estudios profesionales" in mensaje:
+        datos = departamentos["División de estudios profesionales"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
@@ -441,7 +441,7 @@ def responder_usuario(mensaje):
         "📘 <b>Inglés:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
         "📗 <b>Servicios escolares:</b> credencial digital, constancias, boletas, kardex<br>"
         "📙 <b>División de estudios:</b> servicio social, residencias<br>"
-        "📕 <b>Coordinación:</b> traslados, movilidad estudiantil, convalidación<br><br>"
+        "📕 <b>Coordinación II:</b> traslados, movilidad estudiantil, convalidación<br><br>"
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
