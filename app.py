@@ -407,11 +407,11 @@ def responder_usuario(mensaje):
         "División de estudios profesionales": "division de estudios profesionales",
         "estudios profesionales": "division de estudios profesionales",
         "Coordinación II": "coordinacion",
-        "Coordinacion II": "coordinacion"
+        "Coordinación": "coordinacion"
     }
     
     for palabra_dep, clave_dep in departamentos_generales.items():
-        if palabra_dep in mensaje:
+    if palabra_dep.lower() in mensaje:
             datos = departamentos[clave_dep]
             texto = f"<b>{datos['nombre']}</b><br><br>"
             texto += "Tengo información sobre estos temas:<br><br>"
@@ -424,10 +424,10 @@ def responder_usuario(mensaje):
     return (
         "¡Hola! Soy ConejoBot 🐰<br><br>"
         "Puedo ayudarte con información específica sobre:<br><br>"
-        "📘 <b>INGLÉS:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
-        "📗 <b>SERVICIOS ESCOLARES:</b> credencial digital, constancias, boletas, kardex<br>"
-        "📙 <b>DIVISIÓN DE ESTUDIOS:</b> servicio social, residencias<br>"
-        "📕 <b>COORDINACIÓN:</b> traslados, movilidad estudiantil, convalidación<br><br>"
+        "📘 <b>Inglés:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
+        "📗 <b>Servicios escolares:</b> credencial digital, constancias, boletas, kardex<br>"
+        "📙 <b>División de estudios:</b> servicio social, residencias<br>"
+        "📕 <b>Coordinación:</b> traslados, movilidad estudiantil, convalidación<br><br>"
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
