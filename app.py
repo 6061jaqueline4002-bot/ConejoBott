@@ -39,7 +39,7 @@ Puedo darte información sobre los siguientes departamentos:
 📘 Departamento de Inglés  
 📗 Servicios Escolares  
 📙 División de Estudios Profesionales  
-📕 Coordinación II
+📕 Coordinación Ing.Ind.
 
 Solo escribe algo como:  
 - “Información sobre el servicio social”  
@@ -253,8 +253,8 @@ departamentos = {
         }
     },
 
-    "Coordinación II": {
-        "nombre": "📕 Coordinación II",
+    "Coordinación Ing.Ind.": {
+        "nombre": "📕 Coordinación Ing.Ind.",
         "keywords": ["coordinación", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
             "Traslado de instituto": [
@@ -400,7 +400,7 @@ def responder_usuario(mensaje):
     
     # TERCERO: Búsqueda directa por departamento
     if "Coordinación" in mensaje or "coordinación" in mensaje:
-        datos = departamentos["Coordinación II"]
+        datos = departamentos["Coordinación Ing.Ind."]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
@@ -441,7 +441,7 @@ def responder_usuario(mensaje):
         "📘 <b>Inglés:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
         "📗 <b>Servicios escolares:</b> credencial digital, constancias, boletas, kardex<br>"
         "📙 <b>División de estudios:</b> servicio social, residencias<br>"
-        "📕 <b>Coordinación II:</b> traslados, movilidad estudiantil, convalidación<br><br>"
+        "📕 <b>Coordinación Ing.Ind.:</b> traslados, movilidad estudiantil, convalidación<br><br>"
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
