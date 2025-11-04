@@ -365,7 +365,7 @@ def responder_usuario(mensaje):
     # SEGUNDO: Buscar por palabras clave ESPECÍFICAS
     palabras_clave_especificas = {
         "TOEFL": ["toefl", "examen toefl","toefl","examen toefl","certificado toefl","puntaje toefl","tofel","toef","toffel","toffle","toefel","toefle"],
-        "Cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado"],
+        "Cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","curso de ingles"],
         "Examen de colocación": ["examen de colocación", "colocacion", "ubicación","prueba colocación","colocación inglés","nivelación inglés","colocasion"],
         "Certificaciones": ["certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
         "Credencial digital": ["credencial", "credencial digital", "credenciales","credencial electrónica","identificación digital"],
@@ -374,15 +374,15 @@ def responder_usuario(mensaje):
         "Kardex": ["kardex", "historial académico","récord académico","boleta general"],
         "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
         "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
-        "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel"],
+        "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
         "Contactos de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien","contacto"],
-        "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones"],
+        "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones","boleta"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
         "Equivalencia": ["equivalencia","revalidación","convalidación","equivalencia de estudios"],
-        "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional"],
+        "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional","residencia","residencias"],
         "Titulación": ["titulacion","titulación","Titulación","egreso","titulo","Titulo","título"],
-        "Convalidación de materias": ["convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias"],
+        "Convalidación de materias": ["convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias","convalidar materias","convalidar"],
         "Duración de cursos": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo curso","cuánto dura","horas curso"]
     }
     
