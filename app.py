@@ -49,7 +49,7 @@ Solo escribe algo como:
 # --- BASE DE CONOCIMIENTO ACTUALIZADA ---
 
 departamentos = {
-    "ingles": {
+    "Inglés": {
         "nombre": "📘 Departamento de Inglés",
         "keywords": ["inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
         "temas": {
@@ -89,11 +89,11 @@ departamentos = {
                 "2️⃣Haber cursado previamente los niveles correspondientes de inglés.",
                 "3️⃣Realizar el registro y el pago correspondiente."
             ],
-            "Duracion de cursos": [
+            "Duración de cursos": [
                 "⏳Cursos básicos e intermedios: 45 horas cada uno.",
                 "⏳Cursos superintensivos: 120 horas por semestre."
             ],
-            "Contacto": [
+            "Contactos de inglés": [
                 "🏢Puedes acudir directamente al Departamento de Inglés del ITTG, Edificio G.",
                 "📞Teléfono: 961 615 0461 ext. 327",
                 "📧Correo de contacto: leng_tgutierrez@tecnm.mx "
@@ -170,7 +170,7 @@ departamentos = {
         }
     },
 
-    "Division de estudios profesionales": {
+    "División de estudios profesionales": {
         "nombre": "📙 División de Estudios Profesionales",
         "keywords": ["división", "division", "servicio social", "residencia", "residencias"],
         "temas": {
@@ -253,11 +253,11 @@ departamentos = {
         }
     },
 
-    "Coordinacion": {
+    "Coordinacion II": {
         "nombre": "📕 Coordinación",
-        "keywords": ["coordinación", "coordinacion", "traslado", "movilidad", "convalidación", "equivalencia"],        
+        "keywords": ["coordinación", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
-            "Traslado": [
+            "Traslado de instituto": [
                 "1️⃣Antes de iniciar el trámite, identifica el periodo de reinscripción del Instituto receptor. El procedimiento debe comenzar previo a dichas fechas para garantizar la aceptación y registro oportuno.",
                 "2️⃣Acude a la División de Estudios Profesionales del Instituto de origen y entrega:",
                 "🔸Solicitud de Traslado (formato oficial, Anexo II), debidamente llenada y firmada.",
@@ -315,7 +315,7 @@ departamentos = {
                 "🔸Si la movilidad fue en IES externas al TecNM, se asienta como AC (acreditada) o NA (no acreditada).",
                 "🔸Si la movilidad fue dentro del TecNM, se asienta la calificación numérica obtenida."
             ],
-            "Convalidación": [
+            "Convalidación de materias": [
                 "📌La convalidación está caracterizada por los siguientes aspectos:",
                 "✅Permite al estudiante cambiar de un plan de estudio a otro dentro de las Instituciones adscritas al TecNM.",
                 "✅Permite cursar una segunda carrera a nivel licenciatura, una vez que el egresado se ha titulado o ha aprobado su acto profesional de la primera carrera cursada.",
@@ -364,26 +364,26 @@ def responder_usuario(mensaje):
     
     # SEGUNDO: Buscar por palabras clave ESPECÍFICAS
     palabras_clave_especificas = {
-        "toefl": ["toefl", "examen toefl"],
-        "cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés"],
-        "examen de colocacion": ["examen de colocación", "colocacion", "ubicación"],
-        "certificaciones": ["certificación", "certificaciones", "convalidación de inglés"],
-        "credencial digital": ["credencial", "credencial digital", "credenciales"],
-        "servicio social": ["servicio social", "servicios social"],
-        "constancia": ["constancia", "constancia de estudios"],
-        "kardex": ["kardex", "historial académico"],
-        "residencias": ["residencias", "residencia"],
-        "movilidad": ["movilidad", "movilidad estudiantil"],
-        "traslado": ["traslado", "cambio de escuela"],
-        "Contacto": ["contacto de inglés", "comunicar","número","numero"],
-        "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio"],
-        "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles"],
-        "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria"],
-        "Equivalencia": ["equivalencia"],
-        "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia"],
-        "Titulación": ["titulacion","titulación","Titulación"],
-        "Convalidación": ["convalidación","convalidación de materias","convalidacion"],
-        "Duración de cursos": ["duración de inglés", "tiempo","duración","duración de cursos de inglés"]
+        "TOEFL": ["toefl", "examen toefl","toefl","examen toefl","certificado toefl","puntaje toefl","tofel","toef","toffel","toffle","toefel","toefle"],
+        "Cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado"],
+        "Examen de colocación": ["examen de colocación", "colocacion", "ubicación","prueba colocación","colocación inglés","nivelación inglés","colocasion"],
+        "Certificaciones": ["certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
+        "Credencial digital": ["credencial", "credencial digital", "credenciales","credencial electrónica","identificación digital"],
+        "Servicio social": ["servicio social", "servicios social","horas servicio social","liberación servicio social"],
+        "Constancia": ["constancia", "constancia de estudios","comprobante","documento oficial"],
+        "Kardex": ["kardex", "historial académico","récord académico","boleta general"],
+        "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
+        "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
+        "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel"],
+        "Contactos de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien"],
+        "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones"],
+        "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
+        "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
+        "Equivalencia": ["equivalencia","revalidación","convalidación","equivalencia de estudios"],
+        "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional"],
+        "Titulación": ["titulacion","titulación","Titulación","egreso"],
+        "Convalidación de materias": ["convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias"],
+        "Duración de cursos": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo curso","cuánto dura","horas curso"]
     }
     
     for tema_especifico, palabras in palabras_clave_especificas.items():
@@ -400,14 +400,14 @@ def responder_usuario(mensaje):
     
     # TERCERO: Si solo menciona el departamento general
     departamentos_generales = {
-        "inglés": "ingles",
+        "Inglés": "ingles",
         "ingles": "ingles", 
-        "servicios escolares": "servicios escolares",
+        "Servicios escolares": "servicios escolares",
         "escolares": "servicios escolares",
-        "división de estudios": "division de estudios profesionales",
+        "División de estudios profesionales": "division de estudios profesionales",
         "estudios profesionales": "division de estudios profesionales",
-        "coordinación": "coordinacion",
-        "coordinacion": "coordinacion"
+        "Coordinación II": "coordinacion",
+        "Coordinacion II": "coordinacion"
     }
     
     for palabra_dep, clave_dep in departamentos_generales.items():
