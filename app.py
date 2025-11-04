@@ -435,7 +435,14 @@ def responder_usuario(mensaje):
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
-
+@app.route("/")
+def home():
+    global usuarios_activos
+    usuarios_activos += 1
+    guardar_contador(usuarios_activos)
+    registrar_usuario()
+    return render_template("index.html")
+    
 @app.route("/enviar", methods=["POST"])
 def enviar():
     data = request.get_json()
