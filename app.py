@@ -375,7 +375,7 @@ def responder_usuario(mensaje):
         "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
         "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
         "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel"],
-        "Contactos de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien"],
+        "Contactos de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien","contacto"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
@@ -398,32 +398,42 @@ def responder_usuario(mensaje):
                             texto += f"• {item}<br>"
                         return texto
     
-    # TERCERO: Si solo menciona el departamento general
-    departamentos_generales = {
-        "Inglés": "Inglés",
-        "ingles": "ingles", 
-        "Servicios escolares": "servicios escolares",
-        "escolares": "servicios escolares",
-        "División de estudios profesionales": "division de estudios profesionales",
-        "estudios profesionales": "division de estudios profesionales",
-        "Coordinación II": "coordinacion",
-        "Coordinación": "Coordinación"
-    }
-    
-    for palabra_dep, clave_dep in departamentos_generales.items():
-        if palabra_dep in mensaje:
-            # Verificar que la clave existe en el diccionario departamentos
-            if clave_dep in departamentos:
-                datos = departamentos[clave_dep]
-                texto = f"<b>{datos['nombre']}</b><br><br>"
-                texto += "Tengo información sobre estos temas:<br><br>"
-                for tema in datos["temas"].keys():
-                    texto += f"• <b>{tema}</b><br>"
-                texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
-                return texto
-            else:
-                print(f"❌ Clave no encontrada: {clave_dep}")
-                
+    # TERCERO: Búsqueda directa por departamento
+    if "Coordinación" in mensaje or "coordinación" in mensaje:
+        datos = departamentos["Coordinación"]
+        texto = f"<b>{datos['nombre']}</b><br><br>"
+        texto += "Tengo información sobre estos temas:<br><br>"
+        for tema in datos["temas"].keys():
+            texto += f"• <b>{tema}</b><br>"
+        texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+        return texto
+        
+    elif "Ingles" in mensaje or "inglés" in mensaje:
+        datos = departamentos["Ingles"]
+        texto = f"<b>{datos['nombre']}</b><br><br>"
+        texto += "Tengo información sobre estos temas:<br><br>"
+        for tema in datos["temas"].keys():
+            texto += f"• <b>{tema}</b><br>"
+        texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+        return texto
+        
+    elif "Servicios escolares" in mensaje or "escolares" in mensaje:
+        datos = departamentos["Servicios escolares"]
+        texto = f"<b>{datos['nombre']}</b><br><br>"
+        texto += "Tengo información sobre estos temas:<br><br>"
+        for tema in datos["temas"].keys():
+            texto += f"• <b>{tema}</b><br>"
+        texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+        return texto
+        
+    elif "Division" in mensaje or "estudios profesionales" in mensaje:
+        datos = departamentos["division de estudios profesionales"]
+        texto = f"<b>{datos['nombre']}</b><br><br>"
+        texto += "Tengo información sobre estos temas:<br><br>"
+        for tema in datos["temas"].keys():
+            texto += f"• <b>{tema}</b><br>"
+        texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+        return texto
     # CUARTO: Respuesta por defecto
     return (
         "¡Hola! Soy ConejoBot 🐰<br><br>"
