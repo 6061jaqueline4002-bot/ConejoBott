@@ -247,7 +247,7 @@ departamentos = {
                 "5️⃣Y este departamento posteriormente enviara tu información a la academia de tu carrera para que ellos se encarguen de evaluar el proyecto con el cual te titularas.",
                 "6️⃣Luego de que la academia evalúe tu propuesta, te enviaran un documento vía correo institucional correspondiente a la aprobación de tu proyecto en conjunto del asesor que evaluara los avances de tu proyecto.",
                 "7️⃣Si el proyecto de titulación será mediante la elaboración de una tesis, se te asignaran dos asesores y al finalizar tu proyecto deberás defenderla según la fecha y hora asignadas por el departamento de coordinación de apoyo a la titulación.",
-                "8️⃣Una vez que el proyecto haya concluido y haya sido calificado o presentado, se expedirá un oficio de liberación de proyecto que deberá ser entregado al mismo departamento de apoyo a la titulación para que este otorgue un sello y finalice la parte académica del proceso."
+                "8️⃣Una vez que el proyecto haya concluido y haya sido calificado o presentado, se expedirá un oficio de liberación de proyecto que deberá ser entregado al mismo departamento de apoyo a la titulación para que este otorgue un sello y finalice la parte académica del proceso.",
                 "9️⃣La siguiente parte del proceso deberá finalizarse en el departamento de servicios escolares para llevar a cabo la parte administrativa bajo las indicaciones pertinentes de la o el encargado."
             ]            
         }
@@ -381,7 +381,7 @@ def responder_usuario(mensaje):
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
         "Equivalencia": ["equivalencia","revalidación","convalidación","equivalencia de estudios"],
         "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional"],
-        "Titulación": ["titulacion","titulación","Titulación","egreso"],
+        "Titulación": ["titulacion","titulación","Titulación","egreso","titulo","Titulo","título"],
         "Convalidación de materias": ["convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias"],
         "Duración de cursos": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo curso","cuánto dura","horas curso"]
     }
