@@ -400,25 +400,30 @@ def responder_usuario(mensaje):
     
     # TERCERO: Si solo menciona el departamento general
     departamentos_generales = {
-        "Inglés": "ingles",
+        "Inglés": "Inglés",
         "ingles": "ingles", 
         "Servicios escolares": "servicios escolares",
         "escolares": "servicios escolares",
         "División de estudios profesionales": "division de estudios profesionales",
         "estudios profesionales": "division de estudios profesionales",
         "Coordinación II": "coordinacion",
-        "Coordinación": "coordinacion"
+        "Coordinación": "Coordinación"
     }
     
     for palabra_dep, clave_dep in departamentos_generales.items():
-        if palabra_dep.lower() in mensaje:
-            datos = departamentos[clave_dep]
-            texto = f"<b>{datos['nombre']}</b><br><br>"
-            texto += "Tengo información sobre estos temas:<br><br>"
-            for tema in datos["temas"].keys():
-                texto += f"• <b>{tema}</b><br>"
-            texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
-            return texto
+        if palabra_dep in mensaje:
+            # Verificar que la clave existe en el diccionario departamentos
+            if clave_dep in departamentos:
+                datos = departamentos[clave_dep]
+                texto = f"<b>{datos['nombre']}</b><br><br>"
+                texto += "Tengo información sobre estos temas:<br><br>"
+                for tema in datos["temas"].keys():
+                    texto += f"• <b>{tema}</b><br>"
+                texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+                return texto
+            else:
+                print(f"❌ Clave no encontrada: {clave_dep}")
+                
     # CUARTO: Respuesta por defecto
     return (
         "¡Hola! Soy ConejoBot 🐰<br><br>"
@@ -430,13 +435,6 @@ def responder_usuario(mensaje):
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
-@app.route("/")
-def home():
-    global usuarios_activos
-    usuarios_activos += 1
-    guardar_contador(usuarios_activos)
-    registrar_usuario()
-    return render_template("index.html")
 
 @app.route("/enviar", methods=["POST"])
 def enviar():
