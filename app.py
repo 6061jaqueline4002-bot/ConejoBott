@@ -419,7 +419,6 @@ def responder_usuario(mensaje):
                 texto += f"• <b>{tema}</b><br>"
             texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
             return texto
-
     # CUARTO: Respuesta por defecto
     return (
         "¡Hola! Soy ConejoBot 🐰<br><br>"
