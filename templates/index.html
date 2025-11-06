@@ -15,18 +15,19 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 10px;
         }
 
         .chat-container {
-            width: 400px;
-            max-width: 90%;
+            width: 420px;
+            max-width: 95%;
             background: #ffffff;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
-            height: 90vh;
+            height: 95vh;
         }
 
         .chat-header {
@@ -34,7 +35,7 @@
             color: white;
             padding: 15px;
             text-align: center;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: bold;
             position: relative;
         }
@@ -52,10 +53,36 @@
         }
 
         .user-count {
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 5px;
             color: #dfefff;
             opacity: 0.9;
+        }
+
+        .quick-actions {
+            background: #e8f4ff;
+            padding: 10px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .quick-btn {
+            background: #004B8D;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .quick-btn:hover {
+            background: #003366;
+            transform: translateY(-2px);
         }
 
         .chat-box {
@@ -70,10 +97,11 @@
 
         .bot-message, .user-message {
             margin: 8px 0;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 15px;
-            max-width: 80%;
+            max-width: 85%;
             animation: pop 0.3s ease;
+            line-height: 1.4;
         }
 
         @keyframes pop {
@@ -86,6 +114,7 @@
             color: #004B8D;
             align-self: flex-start;
             box-shadow: 0 0 8px rgba(0, 75, 141, 0.2);
+            border: 1px solid #bbdefb;
         }
 
         .user-message {
@@ -98,23 +127,26 @@
         .chat-form {
             display: flex;
             border-top: 1px solid #ddd;
+            background: white;
         }
 
         .chat-form input {
             flex: 1;
             border: none;
-            padding: 12px;
-            font-size: 15px;
+            padding: 15px;
+            font-size: 14px;
             outline: none;
+            background: transparent;
         }
 
         .chat-form button {
             background: #004B8D;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 15px 20px;
             cursor: pointer;
             transition: background 0.3s;
+            font-weight: bold;
         }
 
         .chat-form button:hover {
@@ -139,19 +171,35 @@
             50% { opacity: 1; }
         }
 
-        .floating-emoji {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            font-size: 24px;
-            opacity: 0.7;
-            animation: floatUp 5s infinite ease-in-out;
+        .department-list {
+            margin: 10px 0;
+            padding: 0;
+            list-style: none;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(-15px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.7; }
+        .department-list li {
+            margin: 5px 0;
+            padding: 5px 0;
+            border-bottom: 1px dashed #bbdefb;
+        }
+
+        /* Mejorar scrollbar */
+        .chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-box::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: #004B8D;
+            border-radius: 3px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb:hover {
+            background: #003366;
         }
     </style>
 </head>
@@ -161,23 +209,32 @@
         <div class="chat-header">
             🐰 ConejoBot — Asistente Virtual ITTG
             <div class="user-count" id="user-count">Usuarios activos: 0</div>
-            <div class="floating-emoji">💬</div>
+        </div>
+
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="sendQuickMessage('Inglés')">Inglés</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Servicios escolares')">Servicios Escolares</button>
+            <button class="quick-btn" onclick="sendQuickMessage('División de estudios profesionales')">Estudios Profesionales</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Coordinación')">Coordinación</button>
+            <button class="quick-btn" onclick="sendQuickMessage('¿Cuándo empezar servicio social?')">Servicio Social</button>
         </div>
 
         <div class="chat-box" id="chat-box">
             <div class="bot-message">
-                ¡Hola! Soy <b>ConejoBot</b> 🐇, tu asistente virtual del <b>Instituto Tecnológico de Tuxtla Gutiérrez</b>.<br>
+                ¡Hola! Soy <b>ConejoBot</b> 🐇, tu asistente virtual del <b>Instituto Tecnológico de Tuxtla Gutiérrez</b>.<br><br>
                 Puedo ayudarte con información sobre:
-                <ul>
-                    <li>📘 Departamento de Inglés</li>
-                    <li>📗 Servicios Escolares</li>
-                    <li>📙 División de Estudios Profesionales</li>
-                    <li>📕 Coordinación Ing.Ind.</li>
+                <ul class="department-list">
+                    <li>📘 <b>Departamento de Inglés</b> 
+                    <li>📗 <b>Servicios Escolares</b> 
+                    <li>📙 <b>División de Estudios Profesionales</b> 
+                    <li>📕 <b>Coordinación Ing. Industrial</b>
                 </ul>
+                <br>Selecciona un departamento arriba o escribe tu pregunta.
+            </div>
         </div>
 
         <form class="chat-form" id="chat-form">
-            <input type="text" id="user-input" placeholder="Escribe algo..." autocomplete="off" required>
+            <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off" required>
             <button type="submit">Enviar</button>
         </form>
     </div>
@@ -187,6 +244,14 @@
         const input = document.getElementById("user-input");
         const chatBox = document.getElementById("chat-box");
         const userCount = document.getElementById("user-count");
+
+        // Hacer focus automático en el input
+        input.focus();
+
+        function sendQuickMessage(text) {
+            input.value = text;
+            form.dispatchEvent(new Event('submit', { cancelable: true }));
+        }
 
         // Mostrar mensaje del usuario
         function addUserMessage(text) {
@@ -201,33 +266,29 @@
         function showTypingIndicator() {
             const typing = document.createElement("div");
             typing.classList.add("bot-message", "typing");
-            typing.innerHTML = "ConejoBot_ITTG está escribiendo<span class='dot'>.</span><span class='dot'>.</span><span class='dot'>.</span>";
+            typing.innerHTML = "ConejoBot está escribiendo<span class='dot'>.</span><span class='dot'>.</span><span class='dot'>.</span>";
             chatBox.appendChild(typing);
             chatBox.scrollTop = chatBox.scrollHeight;
             return typing;
         }
 
-        // Mostrar respuesta del bot con animación
-        function typeBotMessage(text) {
+        // Mostrar respuesta del bot
+        function addBotMessage(text) {
             const message = document.createElement("div");
             message.classList.add("bot-message");
+            
+            // Convertir saltos de línea en <br> y formato básico
+            const formattedText = text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+                .replace(/\*(.*?)\*/g, '<i>$1</i>');
+            
+            message.innerHTML = formattedText;
             chatBox.appendChild(message);
-            let index = 0;
-            const speed = 20;
-            const interval = setInterval(() => {
-                message.innerHTML = text.substring(0, index++);
-                chatBox.scrollTop = chatBox.scrollHeight;
-                if (index > text.length) clearInterval(interval);
-            }, speed);
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Actualizar contador de usuarios
-        async function updateUserCount() {
-            const res = await fetch("/usuarios");
-            const data = await res.json();
-            userCount.textContent = `Usuarios activos: ${data.usuarios}`;
-        }
-
+        
         // Enviar mensaje
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -236,24 +297,35 @@
 
             addUserMessage(userText);
             input.value = "";
+            input.focus(); // Mantener focus en el input
 
             const typingIndicator = showTypingIndicator();
 
-            const response = await fetch("/enviar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mensaje: userText })
-            });
+            try {
+                const response = await fetch("/enviar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mensaje: userText })
+                });
 
-            const data = await response.json();
-            chatBox.removeChild(typingIndicator);
-            typeBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
-            updateUserCount();
+                const data = await response.json();
+                chatBox.removeChild(typingIndicator);
+                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
+                updateUserCount();
+            } catch (error) {
+                chatBox.removeChild(typingIndicator);
+                addBotMessage("Error de conexión. Intenta nuevamente.");
+            }
+        });
+
+        // Enviar con Enter
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                form.dispatchEvent(new Event('submit', { cancelable: true }));
+            }
         });
 
         updateUserCount();
     </script>
 </body>
 </html>
-
-
