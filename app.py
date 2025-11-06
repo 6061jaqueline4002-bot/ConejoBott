@@ -251,7 +251,7 @@ departamentos = {
     },
 
     "Coordinación Ing.Industrial": {
-        "nombre": "📕 Coordinación Ing.Industrial.",
+        "nombre": "📕 Coordinación Ing.Industrial",
         "keywords": ["coordinacion", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
             "Traslado de instituto": [
@@ -341,7 +341,6 @@ departamentos = {
         }
     }
 }
-# --- FUNCIÓN DE RESPUESTA INTELIGENTE CON SOPORTE PARA HTML ---
 def responder_usuario(mensaje):
     mensaje = mensaje.lower().strip()
     
@@ -396,8 +395,8 @@ def responder_usuario(mensaje):
                         return texto
     
     # TERCERO: Búsqueda directa por departamento
-    if "Coordinación" in mensaje or "coordinación" in mensaje:
-        datos = departamentos["Coordinación Ing.Ind."]
+    if "coordinación" in mensaje or "coordinación" in mensaje:
+        datos = departamentos["Coordinación Ing.Industrial"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
@@ -441,7 +440,7 @@ def responder_usuario(mensaje):
         "📕 <b>Coordinación Ing.Industrial:</b> traslados, movilidad estudiantil, convalidación<br><br>"
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
-# --- RUTAS FLASK ---
+#  RUTAS FLASK 
 @app.route("/usuarios")
 def redirect_usuarios():
     return redirect("/admin/usuarios")
