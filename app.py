@@ -441,7 +441,7 @@ def responder_usuario(mensaje):
         "📘 <b>Inglés:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
         "📗 <b>Servicios escolares:</b> credencial digital, constancias, boletas, kardex<br>"
         "📙 <b>División de estudios:</b> servicio social, residencias<br>"
-        "📕 <b>Coordinación Ing.Ind.:</b> traslados, movilidad estudiantil, convalidación<br><br>"
+        "📕 <b>Coordinación Ing.Industrial:</b> traslados, movilidad estudiantil, convalidación<br><br>"
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 # --- RUTAS FLASK ---
