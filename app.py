@@ -29,10 +29,7 @@ usuarios_activos = obtener_contador()
 
 app = Flask(__name__)
 app.jinja_env.autoescape = False  # Permite HTML en las respuestas
-# ======================================================
-# INFORMACIÓN COMPLETA DEL CHATBOT CONEJOBOT_ITTG
-# ======================================================
-
+# INFORMACIÓN COMPLETA DEL CHATBOT
 introduccion = """
 ¡Hola! Soy 🐰 ConejoBot, tu asistente virtual del Instituto Tecnológico de Tuxtla Gutiérrez. 
 Puedo darte información sobre los siguientes departamentos:
@@ -46,7 +43,7 @@ Solo escribe algo como:
 - “Requisitos del TOEFL”  
 - “Cómo tramito mi credencial”  
 """
-# --- BASE DE CONOCIMIENTO ACTUALIZADA ---
+# BASE DE CONOCIMIENTO ACTUALIZADA 
 
 departamentos = {
     "Inglés": {
@@ -464,6 +461,64 @@ def enviar():
     respuesta = responder_usuario(mensaje_usuario)
     return jsonify({"respuesta": respuesta})
 
+@app.route("/admin/estadisticas")
+def admin_estadisticas():
+    global usuarios_activos
+    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    
+    # Leer historial
+    historial = []
+    if os.path.exists(REGISTRO_FILE):
+        with open(REGISTRO_FILE, "r") as f:
+            historial = f.readlines()
+    
+    return f"""
+    <html>
+    <head><title>Estadísticas ConejoBot</title>
+    <style>
+        body {{ font-family: Arial; background: #002E5D; color: white; padding: 20px; }}
+        .stats {{ background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0; }}
+        .historial {{ background: #013366; padding: 15px; border-radius: 10px; max-height: 400px; overflow-y: auto; }}
+        .live {{ color: #4CAF50; font-weight: bold; }}
+    </style>
+    </head>
+    <body>
+        <h1>📊 Estadísticas ConejoBot (Privado)</h1>
+        
+        <div class="stats">
+            <h2>👥 Usuarios totales: {usuarios_activos}</h2>
+            <p>🕐 Última actualización: {ahora}</p>
+            <p class="live">● EN VIVO - Chat funcionando</p>
+        </div>
+        
+        <div class="historial">
+            <h3>📋 Historial de conexiones ({len(historial)} registros):</h3>
+            {"<br>".join(historial[-50:]) if historial else "Aún no hay conexiones registradas."}
+        </div>
+        
+        <p><small>Esta página es solo para administradores</small></p>
+        <button onclick="location.reload()">🔄 Actualizar</button>
+    </body>
+    </html>
+    """
+
+@app.route("/admin/api/stats")
+def admin_api_stats():
+    global usuarios_activos
+    
+    historial = []
+    if os.path.exists(REGISTRO_FILE):
+        with open(REGISTRO_FILE, "r") as f:
+            historial = [line.strip() for line in f.readlines()]
+    
+    return jsonify({
+        "usuarios_totales": usuarios_activos,
+        "total_conexiones": len(historial),
+        "ultima_actualizacion": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+        "estado": "online"
+    })
+
+
 @app.route("/admin/usuarios")
 def admin_usuarios():
     global usuarios_activos
@@ -489,9 +544,6 @@ def admin_usuarios():
     </body>
     </html>
     """
-
-# ======================================================
 # EJECUCIÓN
-# ======================================================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
