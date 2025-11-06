@@ -18,12 +18,24 @@
             padding: 10px;
         }
 
+        .chat-container {
+            width: 420px;
+            max-width: 95%;
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            height: 95vh;
+        }
+
         .chat-header {
             background: #004B8D;
             color: white;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             position: relative;
         }
@@ -31,7 +43,7 @@
         .chat-header::after {
             content: "🐇";
             position: absolute;
-            right: 15px;
+            right: 20px;
             animation: hop 2s infinite ease-in-out;
         }
 
@@ -40,16 +52,9 @@
             50% { transform: translateY(-5px); }
         }
 
-        .user-count {
-            font-size: 12px;
-            margin-top: 5px;
-            color: #dfefff;
-            opacity: 0.9;
-        }
-
         .quick-actions {
             background: #e8f4ff;
-            padding: 10px 15px;
+            padding: 12px 15px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -60,7 +65,7 @@
             background: #004B8D;
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 15px;
             font-size: 12px;
             cursor: pointer;
@@ -193,7 +198,8 @@
 </head>
 
 <body>
-    <div class="chat-header">
+    <div class="chat-container">
+        <div class="chat-header">
             🐰 ConejoBot — Asistente Virtual ITTG
         </div>
 
@@ -201,7 +207,7 @@
             <button class="quick-btn" onclick="sendQuickMessage('Inglés')">Inglés</button>
             <button class="quick-btn" onclick="sendQuickMessage('Servicios escolares')">Servicios Escolares</button>
             <button class="quick-btn" onclick="sendQuickMessage('División de estudios profesionales')">Estudios Profesionales</button>
-            <button class="quick-btn" onclick="sendQuickMessage('Coordinación')">Coordinación ing. Industrial</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Coordinación')">Coordinación</button>
         </div>
 
         <div class="chat-box" id="chat-box">
@@ -209,10 +215,10 @@
                 ¡Hola! Soy <b>ConejoBot</b> 🐇, tu asistente virtual del <b>Instituto Tecnológico de Tuxtla Gutiérrez</b>.<br><br>
                 Puedo ayudarte con información sobre:
                 <ul class="department-list">
-                    <li>📘 <b>Departamento de Inglés</b> 
-                    <li>📗 <b>Servicios Escolares</b> 
-                    <li>📙 <b>División de Estudios Profesionales</b> 
-                    <li>📕 <b>Coordinación Ing. Industrial</b>
+                    <li>📘 <b>Departamento de Inglés</b>
+                    <li>📗 <b>Servicios Escolares</b>
+                    <li>📙 <b>División de Estudios Profesionales</b>
+                    <li>📕 <b>Coordinación Ing. Industrial</b> 
                 </ul>
                 <br>Selecciona un departamento arriba o escribe tu pregunta.
             </div>
@@ -228,7 +234,6 @@
         const form = document.getElementById("chat-form");
         const input = document.getElementById("user-input");
         const chatBox = document.getElementById("chat-box");
-        const userCount = document.getElementById("user-count");
 
         // Hacer focus automático en el input
         input.focus();
@@ -273,7 +278,6 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        
         // Enviar mensaje
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -296,7 +300,6 @@
                 const data = await response.json();
                 chatBox.removeChild(typingIndicator);
                 addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
-                updateUserCount();
             } catch (error) {
                 chatBox.removeChild(typingIndicator);
                 addBotMessage("Error de conexión. Intenta nuevamente.");
@@ -309,9 +312,6 @@
                 form.dispatchEvent(new Event('submit', { cancelable: true }));
             }
         });
-
-        updateUserCount();
     </script>
 </body>
 </html>
-
