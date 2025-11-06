@@ -39,7 +39,7 @@ Puedo darte información sobre los siguientes departamentos:
 📘 Departamento de Inglés  
 📗 Servicios Escolares  
 📙 División de Estudios Profesionales  
-📕 Coordinación Ing.Ind.
+📕 Coordinación Ing.Industrial
 
 Solo escribe algo como:  
 - “Información sobre el servicio social”  
@@ -72,7 +72,7 @@ departamentos = {
                 "✅Efectuar el pago indicado en la convocatoria. 💵💳",
                 "Nota: La aplicación del examen de ubicación se realiza únicamente al inicio de cada semestre 🗓️."
             ],
-            "Certificaciones": [
+            "Certificaciones de lengua extrajera": [
                 "Para solicitar la convalidación de un certificado de inglés, es necesario entregar:",
                 "✔️Solicitud de liberación.",
                 "✔️Número de control.",
@@ -89,11 +89,11 @@ departamentos = {
                 "2️⃣Haber cursado previamente los niveles correspondientes de inglés.",
                 "3️⃣Realizar el registro y el pago correspondiente."
             ],
-            "Duración de cursos": [
+            "Duración de cursos de inglés": [
                 "⏳Cursos básicos e intermedios: 45 horas cada uno.",
                 "⏳Cursos superintensivos: 120 horas por semestre."
             ],
-            "Contactos de inglés": [
+            "CContactos del departamento de inglés": [
                 "🏢Puedes acudir directamente al Departamento de Inglés del ITTG, Edificio G.",
                 "📞Teléfono: 961 615 0461 ext. 327",
                 "📧Correo de contacto: leng_tgutierrez@tecnm.mx "
@@ -253,9 +253,9 @@ departamentos = {
         }
     },
 
-    "Coordinación Ing.Ind.": {
-        "nombre": "📕 Coordinación Ing.Ind.",
-        "keywords": ["coordinación", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
+    "Coordinación Ing.Industrial": {
+        "nombre": "📕 Coordinación Ing.Industrial.",
+        "keywords": ["coordinacion", "coordinación", "traslado", "movilidad", "convalidación", "equivalencia"],        
         "temas": {
             "Traslado de instituto": [
                 "1️⃣Antes de iniciar el trámite, identifica el periodo de reinscripción del Instituto receptor. El procedimiento debe comenzar previo a dichas fechas para garantizar la aceptación y registro oportuno.",
@@ -364,18 +364,18 @@ def responder_usuario(mensaje):
     
     # SEGUNDO: Buscar por palabras clave ESPECÍFICAS
     palabras_clave_especificas = {
-        "TOEFL": ["toefl", "examen toefl","toefl","examen toefl","certificado toefl","puntaje toefl","tofel","toef","toffel","toffle","toefel","toefle"],
-        "Cursos de inglés": ["curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","curso de ingles"],
-        "Examen de colocación": ["examen de colocación", "colocacion", "ubicación","prueba colocación","colocación inglés","nivelación inglés","colocasion"],
-        "Certificaciones": ["certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
+        "TOEFL": ["TOEFL", "examen toefl","toefl","examen toefl","certificado toefl","puntaje toefl","tofel","toef","toffel","toffle","toefel","toefle"],
+        "Cursos de inglés": ["curso","inscribirme","niveles","clases de inglés","clases de ingles","curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","información sobre los cursos de inglés"],
+        "Examen de colocación": ["examen de colocación", "colocacion", "ubicación","prueba colocación","colocación inglés","nivelación inglés","colocasion","examen","exámen","examén"],
+        "Certificaciones de lengua extrajera": ["certificar","CERTIFICAR","certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
         "Credencial digital": ["credencial", "credencial digital", "credenciales","credencial electrónica","identificación digital"],
         "Servicio social": ["servicio social", "servicios social","horas servicio social","liberación servicio social"],
         "Constancia": ["constancia", "constancia de estudios","comprobante","documento oficial"],
-        "Kardex": ["kardex", "historial académico","récord académico","boleta general"],
+        "Kardex": ["kardex", "historial académico","récord académico","boleta general","kárdex","Kárdex","Kardex",],
         "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
         "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
         "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
-        "Contactos de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien","contacto"],
+        "Contactos del departamento de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien","contacto"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones","boleta"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
@@ -383,7 +383,7 @@ def responder_usuario(mensaje):
         "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional","residencia","residencias"],
         "Titulación": ["titulacion","titulación","Titulación","egreso","titulo","Titulo","título"],
         "Convalidación de materias": ["convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias","convalidar materias","convalidar"],
-        "Duración de cursos": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo curso","cuánto dura","horas curso"]
+        "Duración de cursos de inglés": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo curso","cuánto dura","horas curso"]
     }
     
     for tema_especifico, palabras in palabras_clave_especificas.items():
