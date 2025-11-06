@@ -173,7 +173,26 @@
         .department-list li {
             margin: 5px 0;
             padding: 5px 0;
-            border-bottom: 1px dashed #bbdefb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .department-btn {
+            background: #004B8D;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .department-btn:hover {
+            background: #003366;
+            transform: translateY(-2px);
         }
 
         /* Mejorar scrollbar */
@@ -203,19 +222,25 @@
             🐰 ConejoBot — Asistente Virtual ITTG
         </div>
 
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="sendQuickMessage('Inglés')">Inglés</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Servicios escolares')">Servicios Escolares</button>
+            <button class="quick-btn" onclick="sendQuickMessage('División de estudios profesionales')">Estudios Profesionales</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Coordinación Ing.Industrial')">Coordinación Ing.Industrial</button>
+        </div>
+
         <div class="chat-box" id="chat-box">
             <div class="bot-message">
-            <div class="quick-actions">    
                 ¡Hola! Soy <b>ConejoBot</b> 🐇, tu asistente virtual del <b>Instituto Tecnológico de Tuxtla Gutiérrez</b>.<br><br>
                 Puedo ayudarte con información sobre:
                 <ul class="department-list">
-                    <li>📘 <button class="quick-btn" onclick="sendQuickMessage('📘 Departamento de Inglés')">Inglés</button>
-                    <li>📗 <button class="quick-btn" onclick="sendQuickMessage('📗 Servicios escolares')">Servicios Escolares</button>
-                    <li>📙 <button class="quick-btn" onclick="sendQuickMessage('📙 División de estudios profesionales')">Estudios Profesionales</button>
-                    <li>📕 <button class="quick-btn" onclick="sendQuickMessage('📕 Coordinación ing. Industrial')">Coordinación</button> 
+                    <li>📘 <button class="department-btn" onclick="sendQuickMessage('Inglés')">Departamento de Inglés</button></li>
+                    <li>📗 <button class="department-btn" onclick="sendQuickMessage('Servicios escolares')">Servicios Escolares</button></li>
+                    <li>📙 <button class="department-btn" onclick="sendQuickMessage('División de estudios profesionales')">División de Estudios Profesionales</button></li>
+                    <li>📕 <button class="department-btn" onclick="sendQuickMessage('Coordinación Ing.Industrial')">Coordinación Ing.Industrial</button></li>
                 </ul>
                 <br>Selecciona un departamento arriba o escribe tu pregunta.
-                <br>Nota:El chatbot funciona por medio de palabras claves que describan tu duda.
+                <br><small><i>Nota: El chatbot funciona por medio de palabras claves que describan tu duda.</i></small>
             </div>
         </div>
 
@@ -234,8 +259,31 @@
         input.focus();
 
         function sendQuickMessage(text) {
-            input.value = text;
-            form.dispatchEvent(new Event('submit', { cancelable: true }));
+            // Agregar mensaje del usuario al chat
+            addUserMessage(text);
+            
+            // Mostrar indicador de escritura
+            const typingIndicator = showTypingIndicator();
+
+            // Enviar al backend
+            fetch("/enviar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mensaje: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatBox.removeChild(typingIndicator);
+                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
+            })
+            .catch(error => {
+                chatBox.removeChild(typingIndicator);
+                addBotMessage("Error de conexión. Intenta nuevamente.");
+            });
+
+            // Limpiar input y mantener focus
+            input.value = "";
+            input.focus();
         }
 
         // Mostrar mensaje del usuario
@@ -273,7 +321,7 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Enviar mensaje
+        // Enviar mensaje desde el input
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const userText = input.value.trim();
@@ -310,4 +358,3 @@
     </script>
 </body>
 </html>
-
