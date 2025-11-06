@@ -18,18 +18,6 @@
             padding: 10px;
         }
 
-        .chat-container {
-            width: 420px;
-            max-width: 95%;
-            background: #ffffff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            height: 95vh;
-        }
-
         .chat-header {
             background: #004B8D;
             color: white;
@@ -205,18 +193,15 @@
 </head>
 
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
+    <div class="chat-header">
             🐰 ConejoBot — Asistente Virtual ITTG
-            <div class="user-count" id="user-count">Usuarios activos: 0</div>
         </div>
 
         <div class="quick-actions">
             <button class="quick-btn" onclick="sendQuickMessage('Inglés')">Inglés</button>
             <button class="quick-btn" onclick="sendQuickMessage('Servicios escolares')">Servicios Escolares</button>
             <button class="quick-btn" onclick="sendQuickMessage('División de estudios profesionales')">Estudios Profesionales</button>
-            <button class="quick-btn" onclick="sendQuickMessage('Coordinación')">Coordinación</button>
-            <button class="quick-btn" onclick="sendQuickMessage('¿Cuándo empezar servicio social?')">Servicio Social</button>
+            <button class="quick-btn" onclick="sendQuickMessage('Coordinación')">Coordinación ing. Industrial</button>
         </div>
 
         <div class="chat-box" id="chat-box">
@@ -329,3 +314,4 @@
     </script>
 </body>
 </html>
+
