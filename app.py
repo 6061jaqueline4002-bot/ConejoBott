@@ -9,26 +9,104 @@ CONTADOR_FILE = os.path.join(DATA_FOLDER, "contador_usuarios.txt")
 REGISTRO_FILE = os.path.join(DATA_FOLDER, "registro_usuarios.txt")
 
 def obtener_contador():
-    if os.path.exists(CONTADOR_FILE):
-        with open(CONTADOR_FILE, "r") as f:
-            return int(f.read().strip() or 0)
-    return 0
+    #Carga el contador desde archivo de forma segura
+    try:
+        if os.path.exists(CONTADOR_FILE):
+            with open(CONTADOR_FILE, "r", encoding='utf-8') as f:
+                contenido = f.read().strip()
+                if contenido and contenido.isdigit():
+                    return int(contenido)
+        return 0
+    except Exception as e:
+        print(f"❌ Error leyendo contador: {e}")
+        return 0
 
 def guardar_contador(valor):
-    with open(CONTADOR_FILE, "w") as f:
-        f.write(str(valor))
+    """Guarda el contador en archivo de forma segura"""
+    try:
+        with open(CONTADOR_FILE, "w", encoding='utf-8') as f:
+            f.write(str(valor))
+        # Forzar escritura inmediata
+        os.fsync(f.fileno())
+        print(f"✅ Contador guardado: {valor}")
+    except Exception as e:
+        print(f"❌ Error guardando contador: {e}")
 
 def registrar_usuario():
+    """Registra cada conexión en el historial"""
     global usuarios_activos
-    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    with open(REGISTRO_FILE, "a") as f:
-        f.write(f"Usuario #{usuarios_activos} - Conexión: {ahora}\n")
+    try:
+        ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        with open(REGISTRO_FILE, "a", encoding='utf-8') as f:
+            f.write(f"Usuario #{usuarios_activos} - Conexión: {ahora}\n")
+        # Forzar escritura inmediata
+        os.fsync(f.fileno())
+        print(f"✅ Usuario registrado: #{usuarios_activos}")
+    except Exception as e:
+        print(f"❌ Error registrando usuario: {e}")
 
-# Contador global de usuarios
+# Funciones para las calificaciones (prueba)
+def cargar_calificaciones():
+    """Carga las calificaciones desde el archivo JSON"""
+    try:
+        if os.path.exists(CALIFICACIONES_FILE):
+            with open(CALIFICACIONES_FILE, "r", encoding='utf-8') as f:
+                return json.load(f)
+        # Estructura inicial si no existe el archivo
+        return {
+            "total_calificaciones": 0,
+            "promedio": 0,
+            "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+            "calificaciones": []
+        }
+    except Exception as e:
+        print(f"❌ Error cargando calificaciones: {e}")
+        return {
+            "total_calificaciones": 0,
+            "promedio": 0,
+            "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+            "calificaciones": []
+        }
+
+def guardar_calificacion(estrellas, comentario=""):
+    """Guarda una nueva calificación"""
+    try:
+        calificaciones = cargar_calificaciones()
+        
+        nueva_calificacion = {
+            "estrellas": estrellas,
+            "comentario": comentario,
+            "fecha": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            "id": calificaciones["total_calificaciones"] + 1
+        }
+        
+        # Actualizar estadísticas
+        calificaciones["total_calificaciones"] += 1
+        calificaciones["distribucion"][str(estrellas)] += 1
+        calificaciones["calificaciones"].append(nueva_calificacion)
+        
+        # Calcular nuevo promedio
+        total_puntos = sum(int(estrellas) * count for estrellas, count in calificaciones["distribucion"].items())
+        calificaciones["promedio"] = round(total_puntos / calificaciones["total_calificaciones"], 1) if calificaciones["total_calificaciones"] > 0 else 0
+        
+        # Guardar en archivo
+        with open(CALIFICACIONES_FILE, "w", encoding='utf-8') as f:
+            json.dump(calificaciones, f, indent=2, ensure_ascii=False)
+        os.fsync(f.fileno())
+        
+        print(f"✅ Calificación guardada: {estrellas} estrellas")
+        return True
+    except Exception as e:
+        print(f"❌ Error guardando calificación: {e}")
+        return False
+
+# Contador global de usuarios - SE CARGA AL INICIAR
 usuarios_activos = obtener_contador()
+print(f"🚀 Servidor iniciado. Usuarios actuales: {usuarios_activos}")
 
 app = Flask(__name__)
-app.jinja_env.autoescape = False  # Permite HTML en las respuestas
+app.jinja_env.autoescape = False
+
 # INFORMACIÓN COMPLETA DEL CHATBOT
 introduccion = """
 ¡Hola! Soy 🐰 ConejoBot, tu asistente virtual del Instituto Tecnológico de Tuxtla Gutiérrez. 
@@ -361,9 +439,9 @@ def responder_usuario(mensaje):
     # SEGUNDO: Buscar por palabras clave ESPECÍFICAS
     palabras_clave_especificas = {
         "TOEFL": ["TOEFL", "examen toefl","toefl","examen toefl","certificado toefl","puntaje toefl","tofel","toef","toffel","toffle","toefel","toefle"],
-        "Cursos de inglés": ["curso","inscribirme","niveles","clases de inglés","clases de ingles","curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","información sobre los cursos de inglés"],
+        "Cursos de inglés": ["inscribirme a los cursos","Cursos de inglés","curso","inscribirme","niveles","clases de inglés","clases de ingles","curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","información sobre los cursos de inglés"],
         "Examen de colocación": ["examen de colocación", "colocacion", "ubicación","prueba colocación","colocación inglés","nivelación inglés","colocasion","examen","exámen","examén"],
-        "Certificaciones de lengua extrajera": ["certificar","CERTIFICAR","certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
+        "Certificaciones de lengua extrajera": ["certificarme","certificar","CERTIFICAR","certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
         "Credencial digital": ["credencial", "credencial digital", "credenciales","credencial electrónica","identificación digital"],
         "Servicio social": ["servicio social", "servicios social","horas servicio social","liberación servicio social"],
         "Constancia": ["constancia", "constancia de estudios","comprobante","documento oficial"],
@@ -371,15 +449,15 @@ def responder_usuario(mensaje):
         "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
         "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
         "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
-        "Contactos del departamento de inglés": ["contacto de inglés", "comunicar","número","numero","información","comunicarse","hablar con alguien","contacto"],
+        "Contactos del departamento de inglés": ["contacto de inglés", "comunicar","número","numero","información de los cursos","comunicarse","hablar con alguien","contacto"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones","boleta"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
         "Equivalencia": ["equivalencia","revalidación","convalidación","equivalencia de estudios"],
         "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional","residencia","residencias"],
         "Titulación": ["titulacion","titulación","Titulación","egreso","titulo","Titulo","título"],
-        "Convalidación de materias": ["convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias","convalidar materias","convalidar"],
-        "Duración de cursos de inglés": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo curso","cuánto dura","horas curso"]
+        "Convalidación de materias": ["cambio de carrera","Cambio de carrera","convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias","convalidar materias","convalidar"],
+        "Duración de cursos de inglés": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo de los cursos","cuánto dura","horas curso"]
     }
     
     for tema_especifico, palabras in palabras_clave_especificas.items():
@@ -460,16 +538,152 @@ def enviar():
     respuesta = responder_usuario(mensaje_usuario)
     return jsonify({"respuesta": respuesta})
 
+# Ruta para las calificaciones
+@app.route("/calificar", methods=["POST"])
+def calificar():
+    data = request.get_json()
+    estrellas = data.get("estrellas", 0)
+    comentario = data.get("comentario", "")
+    
+    if 1 <= estrellas <= 5:
+        if guardar_calificacion(estrellas, comentario):
+            return jsonify({"success": True, "message": "¡Gracias por tu calificación! 🌟"})
+        else:
+            return jsonify({"success": False, "message": "Error al guardar calificación"})
+    else:
+        return jsonify({"success": False, "message": "Calificación inválida"})
+
+#estadisticas de las calificaciones
+@app.route("/admin/calificaciones")
+def admin_calificaciones():
+    calificaciones = cargar_calificaciones()
+    
+    # Generar gráfico de barras simple en HTML
+    barras_html = ""
+    for i in range(5, 0, -1):
+        count = calificaciones["distribucion"][str(i)]
+        porcentaje = (count / calificaciones["total_calificaciones"] * 100) if calificaciones["total_calificaciones"] > 0 else 0
+        barras_html += f"""
+        <div style="display: flex; align-items: center; margin: 5px 0;">
+            <span style="width: 30px;">{i}⭐</span>
+            <div style="flex: 1; background: #013366; margin: 0 10px; border-radius: 5px;">
+                <div style="background: #FFD700; width: {porcentaje}%; height: 20px; border-radius: 5px;"></div>
+            </div>
+            <span style="width: 60px;">{count} ({porcentaje:.1f}%)</span>
+        </div>
+        """
+    
+    # Lista de calificaciones recientes
+    calificaciones_recientes = ""
+    for calif in reversed(calificaciones["calificaciones"][-10:]):
+        estrellas_html = "⭐" * calif["estrellas"]
+        comentario = calif["comentario"] if calif["comentario"] else "<i>Sin comentario</i>"
+        calificaciones_recientes += f"""
+        <div style="background: #013366; padding: 10px; margin: 5px 0; border-radius: 5px;">
+            <div><b>{estrellas_html}</b> - {calif['fecha']}</div>
+            <div>💬 {comentario}</div>
+        </div>
+        """
+    
+    return f"""
+    <html>
+    <head><title>Calificaciones ConejoBot</title>
+    <style>
+        body {{ font-family: Arial; background: #002E5D; color: white; padding: 20px; }}
+        .stats {{ background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0; }}
+        .historial {{ background: #013366; padding: 15px; border-radius: 10px; max-height: 400px; overflow-y: auto; }}
+        .promedio {{ font-size: 2em; color: #FFD700; font-weight: bold; }}
+    </style>
+    </head>
+    <body>
+        <h1>⭐ Calificaciones del Servicio</h1>
+        
+        <div class="stats">
+            <h2>📊 Resumen de Calificaciones</h2>
+            <div class="promedio">{calificaciones["promedio"]}/5.0</div>
+            <p>Basado en {calificaciones["total_calificaciones"]} calificaciones</p>
+            
+            <h3>Distribución:</h3>
+            {barras_html if calificaciones["total_calificaciones"] > 0 else "<p>No hay calificaciones aún</p>"}
+        </div>
+        
+        <div class="historial">
+            <h3>📝 Calificaciones Recientes:</h3>
+            {calificaciones_recientes if calificaciones["total_calificaciones"] > 0 else "<p>No hay calificaciones recientes</p>"}
+        </div>
+        
+        <p><a href="/admin/estadisticas" style="color: #4CAF50;">← Volver a estadísticas</a></p>
+    </body>
+    </html>
+    """
+
+# NUEVA RUTA PARA REINICIAR CONTADOR (solo para emergencias)
+@app.route("/admin/reset_contador")
+def reset_contador():
+    global usuarios_activos
+    usuarios_activos = 0
+    guardar_contador(0)
+    return "✅ Contador reiniciado a 0"
+
+# RUTA PARA VER ESTADO DE ARCHIVOS
+@app.route("/admin/estado")
+def admin_estado():
+    global usuarios_activos
+    
+    estado_archivos = {
+        "contador_existe": os.path.exists(CONTADOR_FILE),
+        "registro_existe": os.path.exists(REGISTRO_FILE),
+        "carpeta_data_existe": os.path.exists(DATA_FOLDER),
+        "usuarios_activos": usuarios_activos
+    }
+    
+    contenido_contador = ""
+    if os.path.exists(CONTADOR_FILE):
+        with open(CONTADOR_FILE, "r", encoding='utf-8') as f:
+            contenido_contador = f.read()
+    
+    return f"""
+    <html>
+    <head><title>Estado del Sistema</title></head>
+    <body style='font-family: Arial; background: #002E5D; color: white; padding: 20px;'>
+        <h1>🔧 Estado del Sistema ConejoBot</h1>
+        
+        <div style='background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0;'>
+            <h2>📁 Estado de Archivos:</h2>
+            <p><b>Archivo contador:</b> {estado_archivos['contador_existe']} | <b>Archivo registro:</b> {estado_archivos['registro_existe']}</p>
+            <p><b>Carpeta data:</b> {estado_archivos['carpeta_data_existe']}</p>
+            <p><b>Contenido contador:</b> '{contenido_contador}'</p>
+            <p><b>Usuarios en memoria:</b> {usuarios_activos}</p>
+        </div>
+        
+        <div style='background: #013366; padding: 15px; border-radius: 10px;'>
+            <h3>🔗 Enlaces útiles:</h3>
+            <p><a href="/admin/estadisticas" style="color: #4CAF50;">📊 Ver Estadísticas</a></p>
+            <p><a href="/admin/usuarios" style="color: #4CAF50;">👥 Panel de Usuarios</a></p>
+            <p><a href="/admin/reset_contador" style="color: #FF6B6B;" onclick="return confirm('¿Seguro que quieres reiniciar el contador?')">🔄 Reiniciar Contador</a></p>
+        </div>
+    </body>
+    </html>
+    """
+
 @app.route("/admin/estadisticas")
 def admin_estadisticas():
     global usuarios_activos
     ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     
-    # Leer historial
+    # Leer historial actualizado
     historial = []
     if os.path.exists(REGISTRO_FILE):
-        with open(REGISTRO_FILE, "r") as f:
+        with open(REGISTRO_FILE, "r", encoding='utf-8') as f:
             historial = f.readlines()
+    
+    #ACTUALIZAR CONTADOR DESDE ARCHIVO POR SI ACASO
+    usuarios_actualizados = obtener_contador()
+    if usuarios_actualizados != usuarios_activos:
+        usuarios_activos = usuarios_actualizados
+        print(f"🔄 Contador actualizado: {usuarios_activos}")
+    
+    calificaciones = cargar_calificaciones()
     
     return f"""
     <html>
@@ -479,6 +693,9 @@ def admin_estadisticas():
         .stats {{ background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0; }}
         .historial {{ background: #013366; padding: 15px; border-radius: 10px; max-height: 400px; overflow-y: auto; }}
         .live {{ color: #4CAF50; font-weight: bold; }}
+        a {{ color: #4CAF50; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+        .rating-stats {{ background: #2d5a2d; padding: 10px; border-radius: 5px; margin: 10px 0; }}
     </style>
     </head>
     <body>
@@ -487,6 +704,13 @@ def admin_estadisticas():
         <div class="stats">
             <h2>👥 Usuarios totales: {usuarios_activos}</h2>
             <p>🕐 Última actualización: {ahora}</p>
+            
+            <div class="rating-stats">
+                <h3>⭐ Calificaciones: {calificaciones["promedio"]}/5.0</h3>
+                <p>Total: {calificaciones["total_calificaciones"]} calificaciones</p>
+                <p><a href="/admin/calificaciones">📈 Ver reporte detallado</a></p>
+            </div>
+            
             <p class="live">● EN VIVO - Chat funcionando</p>
         </div>
         
@@ -497,6 +721,7 @@ def admin_estadisticas():
         
         <p><small>Esta página es solo para administradores</small></p>
         <button onclick="location.reload()">🔄 Actualizar</button>
+        <p><a href="/admin/estado">🔧 Ver estado del sistema</a></p>
     </body>
     </html>
     """
