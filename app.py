@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
-import os
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
+from database import (
+    registrar_usuario,
+    obtener_usuarios,
+    guardar_calificacion,
+    cargar_calificaciones,
+    obtener_historial
+)
 
 DATA_FOLDER = "data"
 os.makedirs(DATA_FOLDER, exist_ok=True)
@@ -519,18 +525,11 @@ def responder_usuario(mensaje):
         "💡 <i>Ejemplos: 'cursos de inglés', 'credencial digital', 'servicio social'</i>"
     )
 #  RUTAS FLASK 
-@app.route("/usuarios")
-def redirect_usuarios():
-    return redirect("/admin/usuarios")
-    
 @app.route("/")
 def home():
-    global usuarios_activos
-    usuarios_activos += 1
-    guardar_contador(usuarios_activos)
-    registrar_usuario()
+    registrar_usuario()  # registra conexión de usuario
     return render_template("index.html")
-    
+
 @app.route("/enviar", methods=["POST"])
 def enviar():
     data = request.get_json()
@@ -538,236 +537,36 @@ def enviar():
     respuesta = responder_usuario(mensaje_usuario)
     return jsonify({"respuesta": respuesta})
 
-# Ruta para las calificaciones
 @app.route("/calificar", methods=["POST"])
 def calificar():
     data = request.get_json()
-    estrellas = data.get("estrellas", 0)
+    estrellas = int(data.get("estrellas", 0))
     comentario = data.get("comentario", "")
-    
-    if 1 <= estrellas <= 5:
-        if guardar_calificacion(estrellas, comentario):
-            return jsonify({"success": True, "message": "¡Gracias por tu calificación! 🌟"})
-        else:
-            return jsonify({"success": False, "message": "Error al guardar calificación"})
-    else:
-        return jsonify({"success": False, "message": "Calificación inválida"})
+    if estrellas < 1 or estrellas > 5:
+        return jsonify({"message": "Calificación no válida"}), 400
 
-#estadisticas de las calificaciones
-@app.route("/admin/calificaciones")
-def admin_calificaciones():
-    calificaciones = cargar_calificaciones()
-    
-    # Generar gráfico de barras simple en HTML
-    barras_html = ""
-    for i in range(5, 0, -1):
-        count = calificaciones["distribucion"][str(i)]
-        porcentaje = (count / calificaciones["total_calificaciones"] * 100) if calificaciones["total_calificaciones"] > 0 else 0
-        barras_html += f"""
-        <div style="display: flex; align-items: center; margin: 5px 0;">
-            <span style="width: 30px;">{i}⭐</span>
-            <div style="flex: 1; background: #013366; margin: 0 10px; border-radius: 5px;">
-                <div style="background: #FFD700; width: {porcentaje}%; height: 20px; border-radius: 5px;"></div>
-            </div>
-            <span style="width: 60px;">{count} ({porcentaje:.1f}%)</span>
-        </div>
-        """
-    
-    # Lista de calificaciones recientes
-    calificaciones_recientes = ""
-    for calif in reversed(calificaciones["calificaciones"][-10:]):
-        estrellas_html = "⭐" * calif["estrellas"]
-        comentario = calif["comentario"] if calif["comentario"] else "<i>Sin comentario</i>"
-        calificaciones_recientes += f"""
-        <div style="background: #013366; padding: 10px; margin: 5px 0; border-radius: 5px;">
-            <div><b>{estrellas_html}</b> - {calif['fecha']}</div>
-            <div>💬 {comentario}</div>
-        </div>
-        """
-    
-    return f"""
-    <html>
-    <head><title>Calificaciones ConejoBot</title>
-    <style>
-        body {{ font-family: Arial; background: #002E5D; color: white; padding: 20px; }}
-        .stats {{ background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0; }}
-        .historial {{ background: #013366; padding: 15px; border-radius: 10px; max-height: 400px; overflow-y: auto; }}
-        .promedio {{ font-size: 2em; color: #FFD700; font-weight: bold; }}
-    </style>
-    </head>
-    <body>
-        <h1>⭐ Calificaciones del Servicio</h1>
-        
-        <div class="stats">
-            <h2>📊 Resumen de Calificaciones</h2>
-            <div class="promedio">{calificaciones["promedio"]}/5.0</div>
-            <p>Basado en {calificaciones["total_calificaciones"]} calificaciones</p>
-            
-            <h3>Distribución:</h3>
-            {barras_html if calificaciones["total_calificaciones"] > 0 else "<p>No hay calificaciones aún</p>"}
-        </div>
-        
-        <div class="historial">
-            <h3>📝 Calificaciones Recientes:</h3>
-            {calificaciones_recientes if calificaciones["total_calificaciones"] > 0 else "<p>No hay calificaciones recientes</p>"}
-        </div>
-        
-        <p><a href="/admin/estadisticas" style="color: #4CAF50;">← Volver a estadísticas</a></p>
-    </body>
-    </html>
-    """
+    guardar_calificacion(estrellas, comentario)
+    return jsonify({"message": "¡Gracias por tu calificación! ❤️"})
 
-# NUEVA RUTA PARA REINICIAR CONTADOR (solo para emergencias)
-@app.route("/admin/reset_contador")
-def reset_contador():
-    global usuarios_activos
-    usuarios_activos = 0
-    guardar_contador(0)
-    return "✅ Contador reiniciado a 0"
-
-# RUTA PARA VER ESTADO DE ARCHIVOS
-@app.route("/admin/estado")
-def admin_estado():
-    global usuarios_activos
-    
-    estado_archivos = {
-        "contador_existe": os.path.exists(CONTADOR_FILE),
-        "registro_existe": os.path.exists(REGISTRO_FILE),
-        "carpeta_data_existe": os.path.exists(DATA_FOLDER),
-        "usuarios_activos": usuarios_activos
-    }
-    
-    contenido_contador = ""
-    if os.path.exists(CONTADOR_FILE):
-        with open(CONTADOR_FILE, "r", encoding='utf-8') as f:
-            contenido_contador = f.read()
-    
-    return f"""
-    <html>
-    <head><title>Estado del Sistema</title></head>
-    <body style='font-family: Arial; background: #002E5D; color: white; padding: 20px;'>
-        <h1>🔧 Estado del Sistema ConejoBot</h1>
-        
-        <div style='background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0;'>
-            <h2>📁 Estado de Archivos:</h2>
-            <p><b>Archivo contador:</b> {estado_archivos['contador_existe']} | <b>Archivo registro:</b> {estado_archivos['registro_existe']}</p>
-            <p><b>Carpeta data:</b> {estado_archivos['carpeta_data_existe']}</p>
-            <p><b>Contenido contador:</b> '{contenido_contador}'</p>
-            <p><b>Usuarios en memoria:</b> {usuarios_activos}</p>
-        </div>
-        
-        <div style='background: #013366; padding: 15px; border-radius: 10px;'>
-            <h3>🔗 Enlaces útiles:</h3>
-            <p><a href="/admin/estadisticas" style="color: #4CAF50;">📊 Ver Estadísticas</a></p>
-            <p><a href="/admin/usuarios" style="color: #4CAF50;">👥 Panel de Usuarios</a></p>
-            <p><a href="/admin/reset_contador" style="color: #FF6B6B;" onclick="return confirm('¿Seguro que quieres reiniciar el contador?')">🔄 Reiniciar Contador</a></p>
-        </div>
-    </body>
-    </html>
-    """
 
 @app.route("/admin/estadisticas")
 def admin_estadisticas():
-    global usuarios_activos
-    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    
-    # Leer historial actualizado
-    historial = []
-    if os.path.exists(REGISTRO_FILE):
-        with open(REGISTRO_FILE, "r", encoding='utf-8') as f:
-            historial = f.readlines()
-    
-    #ACTUALIZAR CONTADOR DESDE ARCHIVO POR SI ACASO
-    usuarios_actualizados = obtener_contador()
-    if usuarios_actualizados != usuarios_activos:
-        usuarios_activos = usuarios_actualizados
-        print(f"🔄 Contador actualizado: {usuarios_activos}")
-    
-    calificaciones = cargar_calificaciones()
-    
-    return f"""
-    <html>
-    <head><title>Estadísticas ConejoBot</title>
-    <style>
-        body {{ font-family: Arial; background: #002E5D; color: white; padding: 20px; }}
-        .stats {{ background: #004B8D; padding: 20px; border-radius: 10px; margin: 10px 0; }}
-        .historial {{ background: #013366; padding: 15px; border-radius: 10px; max-height: 400px; overflow-y: auto; }}
-        .live {{ color: #4CAF50; font-weight: bold; }}
-        a {{ color: #4CAF50; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .rating-stats {{ background: #2d5a2d; padding: 10px; border-radius: 5px; margin: 10px 0; }}
-    </style>
-    </head>
-    <body>
-        <h1>📊 Estadísticas ConejoBot (Privado)</h1>
-        
-        <div class="stats">
-            <h2>👥 Usuarios totales: {usuarios_activos}</h2>
-            <p>🕐 Última actualización: {ahora}</p>
-            
-            <div class="rating-stats">
-                <h3>⭐ Calificaciones: {calificaciones["promedio"]}/5.0</h3>
-                <p>Total: {calificaciones["total_calificaciones"]} calificaciones</p>
-                <p><a href="/admin/calificaciones">📈 Ver reporte detallado</a></p>
-            </div>
-            
-            <p class="live">● EN VIVO - Chat funcionando</p>
-        </div>
-        
-        <div class="historial">
-            <h3>📋 Historial de conexiones ({len(historial)} registros):</h3>
-            {"<br>".join(historial[-50:]) if historial else "Aún no hay conexiones registradas."}
-        </div>
-        
-        <p><small>Esta página es solo para administradores</small></p>
-        <button onclick="location.reload()">🔄 Actualizar</button>
-        <p><a href="/admin/estado">🔧 Ver estado del sistema</a></p>
-    </body>
-    </html>
-    """
+    usuarios = obtener_usuarios()
+    historial = obtener_historial()
+    calif_data = cargar_calificaciones()
 
-@app.route("/admin/api/stats")
-def admin_api_stats():
-    global usuarios_activos
-    
-    historial = []
-    if os.path.exists(REGISTRO_FILE):
-        with open(REGISTRO_FILE, "r") as f:
-            historial = [line.strip() for line in f.readlines()]
-    
-    return jsonify({
-        "usuarios_totales": usuarios_activos,
-        "total_conexiones": len(historial),
-        "ultima_actualizacion": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "estado": "online"
-    })
+    return render_template(
+        "admin_estadisticas.html",
+        usuarios=usuarios,
+        historial=historial,
+        promedio=calif_data["promedio"],
+        total_calificaciones=calif_data["total_calificaciones"],
+        distribucion=calif_data["distribucion"],
+        calificaciones=calif_data["calificaciones"],
+        fecha=datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    )
 
-
-@app.route("/admin/usuarios")
-def admin_usuarios():
-    global usuarios_activos
-    ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    registros = ""
-    if os.path.exists(REGISTRO_FILE):
-        with open(REGISTRO_FILE, "r") as f:
-            registros = f.read().replace("\n", "<br>")
-
-    return f"""
-    <html>
-    <head><title>Panel de Control 🪪</title></head>
-    <body style='font-family: Segoe UI; background:#002E5D; color:white; padding:30px;'>
-        <h1>👤 Panel de administración - ConejoBot</h1>
-        <p><b>Usuarios totales:</b> {usuarios_activos}</p>
-        <p><b>Última actualización:</b> {ahora}</p>
-        <hr>
-        <h2>📋 Historial de conexiones:</h2>
-        <div style="background:#013366; padding:10px; border-radius:10px; font-size:14px;">
-            {registros if registros else "Aún no hay conexiones registradas."}
-        </div>
-    </body>
-    </html>
-    """
 # EJECUCIÓN
 if __name__ == "__main__":
+    app.run(debug=True)
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
