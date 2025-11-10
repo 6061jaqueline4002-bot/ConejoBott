@@ -137,3 +137,37 @@ body {
     font-size: 12px;
     resize: vertical;
  }
+
+/* Estilos para el sistema de calificación */
+.rating-section {
+    margin-top: 10px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stars-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.star {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 24px;
+}
+
+.star:hover {
+    transform: scale(1.2);
+}
