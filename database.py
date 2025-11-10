@@ -1,29 +1,64 @@
-from flask_sqlalchemy import SQLAlchemy
+import json, os
 from datetime import datetime
-import os
 
-db = SQLAlchemy()
+DATA_FILE = "database.json"
 
-class Usuario(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    fecha_conexion = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    ip = db.Column(db.String(50))
-    user_agent = db.Column(db.String(200))
+def inicializar_bd():
+    if not os.path.exists(DATA_FILE):
+        data = {
+            "usuarios_totales": 0,
+            "historial": [],
+            "calificaciones": []
+        }
+        with open(DATA_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
 
-class Calificacion(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    estrellas = db.Column(db.Integer, nullable=False)
-    comentario = db.Column(db.Text)
-    fecha = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+def leer_bd():
+    inicializar_bd()
+    with open(DATA_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
 
-def init_db(app):
-    # Configurar la base de datos SQLite
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'chatbot.db')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    
-    db.init_app(app)
-    
-    with app.app_context():
-        db.create_all()
+def guardar_bd(data):
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+
+def registrar_usuario():
+    data = leer_bd()
+    data["usuarios_totales"] += 1
+    data["historial"].append(f"Usuario #{data['usuarios_totales']} - Conexión: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    guardar_bd(data)
+
+def obtener_usuarios():
+    data = leer_bd()
+    return data["usuarios_totales"]
+
+def guardar_calificacion(estrellas, comentario):
+    data = leer_bd()
+    data["calificaciones"].append({
+        "estrellas": estrellas,
+        "comentario": comentario,
+        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
+    guardar_bd(data)
+    return True
+
+def cargar_calificaciones():
+    data = leer_bd()
+    califs = data.get("calificaciones", [])
+    total = len(califs)
+    promedio = round(sum(c["estrellas"] for c in califs) / total, 1) if total > 0 else 0
+
+    distribucion = {str(i): 0 for i in range(1, 6)}
+    for c in califs:
+        distribucion[str(c["estrellas"])] += 1
+
+    return {
+        "promedio": promedio,
+        "total_calificaciones": total,
+        "distribucion": distribucion,
+        "calificaciones": califs
+    }
+
+def obtener_historial():
+    data = leer_bd()
+    return data.get("historial", [])
