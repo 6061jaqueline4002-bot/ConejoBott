@@ -168,7 +168,7 @@ departamentos = {
                 "⏳Cursos básicos e intermedios: 45 horas cada uno.",
                 "⏳Cursos superintensivos: 120 horas por semestre."
             ],
-            "CContactos del departamento de inglés": [
+            "Contactos del departamento de inglés": [
                 "🏢Puedes acudir directamente al Departamento de Inglés del ITTG, Edificio G.",
                 "📞Teléfono: 961 615 0461 ext. 327",
                 "📧Correo de contacto: leng_tgutierrez@tecnm.mx "
@@ -439,7 +439,7 @@ def responder_usuario(mensaje):
     # SEGUNDO: Buscar por palabras clave ESPECÍFICAS
     palabras_clave_especificas = {
         "TOEFL": ["TOEFL", "examen toefl","toefl","examen toefl","certificado toefl","puntaje toefl","tofel","toef","toffel","toffle","toefel","toefle"],
-        "Cursos de inglés": ["inscribirme a los cursos","Cursos de inglés","curso","inscribirme","niveles","clases de inglés","clases de ingles","curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","información sobre los cursos de inglés"],
+        "Cursos de inglés": ["inscribirme a los cursos","Cursos de inglés","curso","inscribirme","niveles","clases de inglés","clases de ingles","curso de inglés", "cursos de inglés", "clases de inglés","clases inglés","aprender inglés","inglés básico","inglés intermedio","inglés avanzado","información sobre los cursos de inglés","A1","B1","A2","B1.1"],
         "Examen de colocación": ["examen de colocación", "colocacion", "ubicación","prueba colocación","colocación inglés","nivelación inglés","colocasion","examen","exámen","examén"],
         "Certificaciones de lengua extrajera": ["certificarme","certificar","CERTIFICAR","certificación", "certificaciones", "convalidación de inglés","certificado","acreditación","reconocimiento oficial"],
         "Credencial digital": ["credencial", "credencial digital", "credenciales","credencial electrónica","identificación digital"],
@@ -448,14 +448,14 @@ def responder_usuario(mensaje):
         "Kardex": ["kardex", "historial académico","récord académico","boleta general","kárdex","Kárdex","Kardex",],
         "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
         "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
-        "Traslado de instituto": ["traslado", "cambio de escuela","cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
+        "Traslado de instituto": ["traslado", "cambio de escuela","Cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
         "Contactos del departamento de inglés": ["contacto de inglés", "comunicar","número","numero","información de los cursos","comunicarse","hablar con alguien","contacto"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones","boleta"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
         "Actividades Complementarias (ACOM)": ["ACOM", "ACOM'S","acom","actividad complementaria","horas complementarias","actividades extracurriculares"],
         "Equivalencia": ["equivalencia","revalidación","convalidación","equivalencia de estudios"],
         "Residencia Profesional": ["Residencia","residencia profecional","tramite de residencia","práctica profesional","estadía profesional","residencia","residencias"],
-        "Titulación": ["titulacion","titulación","Titulación","egreso","titulo","Titulo","título"],
+        "Titulación": ["titulacion","titulación","Titulación","egreso","titulo","Titulo","título","titularme"],
         "Convalidación de materias": ["cambio de carrera","Cambio de carrera","convalidación","convalidación de materias","convalidacion","revalidación materias","equivalencia materias","convalidar materias","convalidar"],
         "Duración de cursos de inglés": ["duración de inglés", "tiempo","duración","duración de cursos de inglés","tiempo de los cursos","cuánto dura","horas curso"]
     }
