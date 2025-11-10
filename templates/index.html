@@ -284,7 +284,6 @@
                 <br><small><i>Nota: El chatbot funciona por medio de palabras claves que describan tu duda.</i></small>
             </div>
             
-            <!-- La sección de calificación se insertará dinámicamente aquí -->
         </div>
         
         <form class="chat-form" id="chat-form">
@@ -326,7 +325,7 @@
                 
                 // Contar interacciones y mostrar calificación después de 3
                 interacciones++;
-                if (interacciones >= 3 && !calificacionMostrada) {
+                if (interacciones >= 4 && !calificacionMostrada) {
                     mostrarSistemaCalificacion();
                 }
             })
@@ -375,7 +374,7 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
         
-        // SISTEMA DE CALIFICACIÓN - Se muestra después de 3 interacciones
+        // SISTEMA DE CALIFICACIÓN -
         function mostrarSistemaCalificacion() {
             if (calificacionMostrada) return;
             
@@ -421,7 +420,7 @@
             }
         });
 
-        // Enviar calificación al servidor - VERSIÓN CORREGIDA
+        // Enviar calificación al servidor 
         function enviarCalificacion() {
             if (calificacionSeleccionada === 0) {
                 alert('Por favor selecciona una calificación');
@@ -439,7 +438,7 @@
                         mensaje = "😔 Lamentamos que tu experiencia no haya sido buena. Trabajaremos para mejorar.";
                         break;
                     case 2:
-                        mensaje = "🙁 Gracias por tu feedback. Tomaremos en cuenta tus comentarios.";
+                        mensaje = "🙁 Gracias por tu comentario. Tomaremos en cuenta tus comentarios.";
                         break;
                     case 3:
                         mensaje = "😊 ¡Gracias por tu calificación! Seguiremos mejorando.";
@@ -519,3 +518,4 @@
     </script>
 </body>
 </html>
+
