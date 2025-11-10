@@ -264,6 +264,11 @@
         const input = document.getElementById("user-input");
         const chatBox = document.getElementById("chat-box");
 
+        // Variables para el sistema de calificación
+        let calificacionSeleccionada = 0;
+        let interacciones = 0;
+        let calificacionEnviada = false;
+
         // Hacer focus automático en el input
         input.focus();
 
@@ -284,8 +289,12 @@
             .then(data => {
                 chatBox.removeChild(typingIndicator);
                 addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
-                // MOSTRAR CALIFICACIÓN DESPUÉS DE LA PRIMERA INTERACCIÓN
-                mostrarSistemaCalificacion();
+                
+                // Contar interacciones y mostrar calificación después de 3
+                interacciones++;
+                if (interacciones >= 3 && !calificacionEnviada) {
+                    setTimeout(mostrarSistemaCalificacion, 1000);
+                }
             })
             .catch(error => {
                 chatBox.removeChild(typingIndicator);
@@ -332,19 +341,12 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
         
-        // SISTEMA DE CALIFICACIÓN MEJORADO
-        let calificacionSeleccionada = 0;
-        let calificacionMostrada = false;
-
-        // Mostrar sistema de calificación (solo una vez por sesión)
+        // SISTEMA DE CALIFICACIÓN
         function mostrarSistemaCalificacion() {
-            if (calificacionMostrada) return; // Evitar mostrar múltiples veces
-            
             const ratingSection = document.getElementById('rating-section');
             if (ratingSection.style.display === 'none') {
                 ratingSection.style.display = 'block';
                 chatBox.scrollTop = chatBox.scrollHeight;
-                calificacionMostrada = true;
             }
         }
 
@@ -384,8 +386,9 @@
             })
             .then(response => response.json())
             .then(data => {
-                addBotMessage(data.message);
+                addBotMessage(data.message || "¡Gracias por tu calificación!");
                 document.getElementById('rating-section').style.display = 'none';
+                calificacionEnviada = true;
                 
                 // Resetear para posible nueva calificación
                 calificacionSeleccionada = 0;
@@ -399,99 +402,8 @@
             });
         }
 
-        // Enviar mensaje desde el input
+        // Enviar mensaje desde el input (SINGLE EVENT LISTENER)
         form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const userText = input.value.trim();
-            if (!userText) return;
-
-            addUserMessage(userText);
-            input.value = "";
-            input.focus(); // Mantener focus en el input
-
-            const typingIndicator = showTypingIndicator();
-
-            try {
-                const response = await fetch("/enviar", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ mensaje: userText })
-                });
-
-                const data = await response.json();
-                chatBox.removeChild(typingIndicator);
-                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
-                // 🟥 MOSTRAR CALIFICACIÓN DESPUÉS DE LA PRIMERA INTERACCIÓN
-                mostrarSistemaCalificacion();
-            } catch (error) {
-                chatBox.removeChild(typingIndicator);
-                addBotMessage("Error de conexión. Intenta nuevamente.");
-            }
-        });
-
-        // Enviar con Enter
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                form.dispatchEvent(new Event('submit', { cancelable: true }));
-            }
-        });
-        // SISTEMA DE CALIFICACIÓN
-        let calificacionSeleccionada = 0;
-        let interacciones = 0;
-
-        // Mostrar sistema de calificación después de ciertas interacciones
-        function mostrarSistemaCalificacion() {
-            const ratingSection = document.getElementById('rating-section');
-            ratingSection.style.display = 'block';
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        // Manejar clic en estrellas
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('star')) {
-                calificacionSeleccionada = parseInt(e.target.dataset.rating);
-                
-                // Reset todas las estrellas
-                document.querySelectorAll('.star').forEach(star => {
-                    star.style.opacity = '0.5';
-                });
-                
-                // Resaltar estrellas seleccionadas
-                for (let i = 0; i < calificacionSeleccionada; i++) {
-                    document.querySelectorAll('.star')[i].style.opacity = '1';
-                }
-            }
-        });
-
-        // Enviar calificación al servidor
-        function enviarCalificacion() {
-            if (calificacionSeleccionada === 0) {
-                alert('Por favor selecciona una calificación');
-                return;
-            }
-            
-            const comentario = document.getElementById('rating-comment').value;
-            
-            fetch("/calificar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    estrellas: calificacionSeleccionada, 
-                    comentario: comentario 
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                addBotMessage(data.message);
-                document.getElementById('rating-section').style.display = 'none';
-            })
-            .catch(error => {
-                addBotMessage("Error al enviar calificación");
-            });
-        }
-
-        // 🟥 MODIFICAR EL EVENT LISTENER EXISTENTE para contar interacciones
-        const formOriginal = form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const userText = input.value.trim();
             if (!userText) return;
@@ -511,11 +423,11 @@
 
                 const data = await response.json();
                 chatBox.removeChild(typingIndicator);
-                addBotMessage(data.respuesta);
+                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
                 
-                // 🟥 CONTAR INTERACCIONES Y MOSTRAR CALIFICACIÓN DESPUÉS DE 3
+                // Contar interacciones y mostrar calificación después de 3
                 interacciones++;
-                if (interacciones === 3) {
+                if (interacciones >= 3 && !calificacionEnviada) {
                     setTimeout(mostrarSistemaCalificacion, 1000);
                 }
             } catch (error) {
@@ -523,9 +435,13 @@
                 addBotMessage("Error de conexión. Intenta nuevamente.");
             }
         });
+
+        // Enviar con Enter
+        input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                form.dispatchEvent(new Event('submit', { cancelable: true }));
+            }
+        });
     </script>
 </body>
 </html>
-
-
-
