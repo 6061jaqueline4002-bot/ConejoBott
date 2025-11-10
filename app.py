@@ -738,7 +738,7 @@ def admin_api_stats():
     return jsonify({
         "usuarios_totales": usuarios_activos,
         "total_conexiones": len(historial),
-        "ultima_actualizacion": datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        "ultima_actualizacion": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "estado": "online"
     })
 
@@ -746,7 +746,7 @@ def admin_api_stats():
 @app.route("/admin/usuarios")
 def admin_usuarios():
     global usuarios_activos
-    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     registros = ""
     if os.path.exists(REGISTRO_FILE):
