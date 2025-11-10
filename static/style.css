@@ -109,3 +109,31 @@ body {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* ESTILOS PARA SISTEMA DE CALIFICACIÓN */
+.stars-container {
+    text-align: center; 
+    font-size: 24px;
+    margin: 10px 0;
+}
+        
+.star {
+    cursor: pointer; 
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    margin: 0 2px;
+}
+        
+.star:hover {
+    transform: scale(1.2);
+}
+        
+ #rating-comment {
+    width: 100%; 
+    padding: 8px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    margin: 5px 0; 
+    font-family: Arial; 
+    font-size: 12px;
+    resize: vertical;
+ }
