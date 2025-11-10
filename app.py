@@ -36,7 +36,7 @@ def registrar_usuario():
     """Registra cada conexión en el historial"""
     global usuarios_activos
     try:
-        ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(REGISTRO_FILE, "a", encoding='utf-8') as f:
             f.write(f"Usuario #{usuarios_activos} - Conexión: {ahora}\n")
         # Forzar escritura inmediata
@@ -76,7 +76,7 @@ def guardar_calificacion(estrellas, comentario=""):
         nueva_calificacion = {
             "estrellas": estrellas,
             "comentario": comentario,
-            "fecha": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "id": calificaciones["total_calificaciones"] + 1
         }
         
@@ -669,7 +669,7 @@ def admin_estado():
 @app.route("/admin/estadisticas")
 def admin_estadisticas():
     global usuarios_activos
-    ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     
     # Leer historial actualizado
     historial = []
@@ -738,7 +738,7 @@ def admin_api_stats():
     return jsonify({
         "usuarios_totales": usuarios_activos,
         "total_conexiones": len(historial),
-        "ultima_actualizacion": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "ultima_actualizacion": datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         "estado": "online"
     })
 
