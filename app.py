@@ -669,7 +669,7 @@ def admin_estado():
 @app.route("/admin/estadisticas")
 def admin_estadisticas():
     global usuarios_activos
-    ahora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     # Leer historial actualizado
     historial = []
@@ -738,7 +738,7 @@ def admin_api_stats():
     return jsonify({
         "usuarios_totales": usuarios_activos,
         "total_conexiones": len(historial),
-        "ultima_actualizacion": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+        "ultima_actualizacion": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "estado": "online"
     })
 
