@@ -235,8 +235,24 @@
                 <br>Selecciona un departamento arriba o escribe tu pregunta.
                 <br><small><i>Nota: El chatbot funciona por medio de palabras claves que describan tu duda.</i></small>
             </div>
+             <div id="rating-section" style="display: none;">
+                <div class="bot-message">
+                    <strong>¿Cómo calificarías el servicio recibido?</strong><br><br>
+                    <div class="stars-container" style="text-align: center; font-size: 24px;">
+                        <span class="star" data-rating="1" style="cursor: pointer; opacity: 0.5;">⭐</span>
+                        <span class="star" data-rating="2" style="cursor: pointer; opacity: 0.5;">⭐</span>
+                        <span class="star" data-rating="3" style="cursor: pointer; opacity: 0.5;">⭐</span>
+                        <span class="star" data-rating="4" style="cursor: pointer; opacity: 0.5;">⭐</span>
+                        <span class="star" data-rating="5" style="cursor: pointer; opacity: 0.5;">⭐</span>
+                    </div>
+                    <br>
+                    <textarea id="rating-comment" placeholder="Comentario opcional..." style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin: 5px 0; font-family: Arial; font-size: 12px;" rows="3"></textarea>
+                    <br>
+                    <button onclick="enviarCalificacion()" style="background: #004B8D; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px;">Enviar Calificación</button>
+                </div>
+            </div>
         </div>
-
+        
         <form class="chat-form" id="chat-form">
             <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off" required>
             <button type="submit">Enviar</button>
@@ -348,7 +364,96 @@
                 form.dispatchEvent(new Event('submit', { cancelable: true }));
             }
         });
+        // SISTEMA DE CALIFICACIÓN
+        let calificacionSeleccionada = 0;
+        let interacciones = 0;
+
+        // Mostrar sistema de calificación después de ciertas interacciones
+        function mostrarSistemaCalificacion() {
+            const ratingSection = document.getElementById('rating-section');
+            ratingSection.style.display = 'block';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Manejar clic en estrellas
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('star')) {
+                calificacionSeleccionada = parseInt(e.target.dataset.rating);
+                
+                // Reset todas las estrellas
+                document.querySelectorAll('.star').forEach(star => {
+                    star.style.opacity = '0.5';
+                });
+                
+                // Resaltar estrellas seleccionadas
+                for (let i = 0; i < calificacionSeleccionada; i++) {
+                    document.querySelectorAll('.star')[i].style.opacity = '1';
+                }
+            }
+        });
+
+        // Enviar calificación al servidor
+        function enviarCalificacion() {
+            if (calificacionSeleccionada === 0) {
+                alert('Por favor selecciona una calificación');
+                return;
+            }
+            
+            const comentario = document.getElementById('rating-comment').value;
+            
+            fetch("/calificar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    estrellas: calificacionSeleccionada, 
+                    comentario: comentario 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addBotMessage(data.message);
+                document.getElementById('rating-section').style.display = 'none';
+            })
+            .catch(error => {
+                addBotMessage("Error al enviar calificación");
+            });
+        }
+
+        // 🟥 MODIFICAR EL EVENT LISTENER EXISTENTE para contar interacciones
+        const formOriginal = form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            addUserMessage(userText);
+            input.value = "";
+            input.focus();
+
+            const typingIndicator = showTypingIndicator();
+
+            try {
+                const response = await fetch("/enviar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mensaje: userText })
+                });
+
+                const data = await response.json();
+                chatBox.removeChild(typingIndicator);
+                addBotMessage(data.respuesta);
+                
+                // 🟥 CONTAR INTERACCIONES Y MOSTRAR CALIFICACIÓN DESPUÉS DE 3
+                interacciones++;
+                if (interacciones === 3) {
+                    setTimeout(mostrarSistemaCalificacion, 1000);
+                }
+            } catch (error) {
+                chatBox.removeChild(typingIndicator);
+                addBotMessage("Error de conexión. Intenta nuevamente.");
+            }
+        });
     </script>
 </body>
 </html>
+
 
