@@ -284,6 +284,8 @@
             .then(data => {
                 chatBox.removeChild(typingIndicator);
                 addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
+                // MOSTRAR CALIFICACIÓN DESPUÉS DE LA PRIMERA INTERACCIÓN
+                mostrarSistemaCalificacion();
             })
             .catch(error => {
                 chatBox.removeChild(typingIndicator);
@@ -329,6 +331,73 @@
             chatBox.appendChild(message);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
+        
+        // SISTEMA DE CALIFICACIÓN MEJORADO
+        let calificacionSeleccionada = 0;
+        let calificacionMostrada = false;
+
+        // Mostrar sistema de calificación (solo una vez por sesión)
+        function mostrarSistemaCalificacion() {
+            if (calificacionMostrada) return; // Evitar mostrar múltiples veces
+            
+            const ratingSection = document.getElementById('rating-section');
+            if (ratingSection.style.display === 'none') {
+                ratingSection.style.display = 'block';
+                chatBox.scrollTop = chatBox.scrollHeight;
+                calificacionMostrada = true;
+            }
+        }
+
+        // Manejar clic en estrellas
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('star')) {
+                calificacionSeleccionada = parseInt(e.target.dataset.rating);
+                
+                // Reset todas las estrellas
+                document.querySelectorAll('.star').forEach(star => {
+                    star.style.opacity = '0.5';
+                });
+                
+                // Resaltar estrellas seleccionadas
+                for (let i = 0; i < calificacionSeleccionada; i++) {
+                    document.querySelectorAll('.star')[i].style.opacity = '1';
+                }
+            }
+        });
+
+        // Enviar calificación al servidor
+        function enviarCalificacion() {
+            if (calificacionSeleccionada === 0) {
+                alert('Por favor selecciona una calificación');
+                return;
+            }
+            
+            const comentario = document.getElementById('rating-comment').value;
+            
+            fetch("/calificar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    estrellas: calificacionSeleccionada, 
+                    comentario: comentario 
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addBotMessage(data.message);
+                document.getElementById('rating-section').style.display = 'none';
+                
+                // Resetear para posible nueva calificación
+                calificacionSeleccionada = 0;
+                document.getElementById('rating-comment').value = '';
+                document.querySelectorAll('.star').forEach(star => {
+                    star.style.opacity = '0.5';
+                });
+            })
+            .catch(error => {
+                addBotMessage("Error al enviar calificación. Intenta nuevamente.");
+            });
+        }
 
         // Enviar mensaje desde el input
         form.addEventListener("submit", async (e) => {
@@ -352,6 +421,8 @@
                 const data = await response.json();
                 chatBox.removeChild(typingIndicator);
                 addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
+                // 🟥 MOSTRAR CALIFICACIÓN DESPUÉS DE LA PRIMERA INTERACCIÓN
+                mostrarSistemaCalificacion();
             } catch (error) {
                 chatBox.removeChild(typingIndicator);
                 addBotMessage("Error de conexión. Intenta nuevamente.");
@@ -455,5 +526,6 @@
     </script>
 </body>
 </html>
+
 
 
