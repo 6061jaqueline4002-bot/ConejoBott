@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, jsonify
+import os
 from datetime import datetime
 from database import (
     registrar_usuario,
