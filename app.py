@@ -52,60 +52,60 @@ def registrar_usuario():
     except Exception as e:
         print(f"❌ Error registrando usuario: {e}")
 
-# Funciones para las calificaciones (prueba)
-def cargar_calificaciones():
-    """Carga las calificaciones desde el archivo JSON"""
-    try:
-        if os.path.exists(CALIFICACIONES_FILE):
-            with open(CALIFICACIONES_FILE, "r", encoding='utf-8') as f:
-                return json.load(f)
-        # Estructura inicial si no existe el archivo
-        return {
-            "total_calificaciones": 0,
-            "promedio": 0,
-            "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-            "calificaciones": []
-        }
-    except Exception as e:
-        print(f"❌ Error cargando calificaciones: {e}")
-        return {
-            "total_calificaciones": 0,
-            "promedio": 0,
-            "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-            "calificaciones": []
-        }
+#  Funciones para las calificaciones (prueba)
+#  def cargar_calificaciones():
+#     """Carga las calificaciones desde el archivo JSON"""
+#     try:
+#         if os.path.exists(CALIFICACIONES_FILE):
+#             with open(CALIFICACIONES_FILE, "r", encoding='utf-8') as f:
+#                 return json.load(f)
+#        # Estructura inicial si no existe el archivo
+#        return {
+#             "total_calificaciones": 0,
+#             "promedio": 0,
+#             "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+#             "calificaciones": []
+#         }
+    # except Exception as e:
+    #     print(f"❌ Error cargando calificaciones: {e}")
+    #     return {
+    #         "total_calificaciones": 0,
+    #         "promedio": 0,
+    #         "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
+    #         "calificaciones": []
+    #     }
 
-def guardar_calificacion(estrellas, comentario=""):
-    """Guarda una nueva calificación"""
-    try:
-        calificaciones = cargar_calificaciones()
+# def guardar_calificacion(estrellas, comentario=""):
+#     """Guarda una nueva calificación"""
+#     try:
+#         calificaciones = cargar_calificaciones()
         
-        nueva_calificacion = {
-            "estrellas": estrellas,
-            "comentario": comentario,
-            "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "id": calificaciones["total_calificaciones"] + 1
-        }
+#         nueva_calificacion = {
+#             "estrellas": estrellas,
+#             "comentario": comentario,
+#             "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#             "id": calificaciones["total_calificaciones"] + 1
+#         }
         
-        # Actualizar estadísticas
-        calificaciones["total_calificaciones"] += 1
-        calificaciones["distribucion"][str(estrellas)] += 1
-        calificaciones["calificaciones"].append(nueva_calificacion)
+#         # Actualizar estadísticas
+#         calificaciones["total_calificaciones"] += 1
+#         calificaciones["distribucion"][str(estrellas)] += 1
+#         calificaciones["calificaciones"].append(nueva_calificacion)
         
-        # Calcular nuevo promedio
-        total_puntos = sum(int(estrellas) * count for estrellas, count in calificaciones["distribucion"].items())
-        calificaciones["promedio"] = round(total_puntos / calificaciones["total_calificaciones"], 1) if calificaciones["total_calificaciones"] > 0 else 0
+#         # Calcular nuevo promedio
+#         total_puntos = sum(int(estrellas) * count for estrellas, count in calificaciones["distribucion"].items())
+#         calificaciones["promedio"] = round(total_puntos / calificaciones["total_calificaciones"], 1) if calificaciones["total_calificaciones"] > 0 else 0
         
-        # Guardar en archivo
-        with open(CALIFICACIONES_FILE, "w", encoding='utf-8') as f:
-            json.dump(calificaciones, f, indent=2, ensure_ascii=False)
-        os.fsync(f.fileno())
+#         # Guardar en archivo
+#         with open(CALIFICACIONES_FILE, "w", encoding='utf-8') as f:
+#             json.dump(calificaciones, f, indent=2, ensure_ascii=False)
+#         os.fsync(f.fileno())
         
-        print(f"✅ Calificación guardada: {estrellas} estrellas")
-        return True
-    except Exception as e:
-        print(f"❌ Error guardando calificación: {e}")
-        return False
+#         print(f"✅ Calificación guardada: {estrellas} estrellas")
+#         return True
+#     except Exception as e:
+#         print(f"❌ Error guardando calificación: {e}")
+#         return False
 
 # Contador global de usuarios - SE CARGA AL INICIAR
 usuarios_activos = obtener_contador()
