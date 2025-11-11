@@ -3,30 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estadísticas del Chatbot</title>
+    <title>📊 Estadísticas ConejoBot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f9fc;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        .card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
+        body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 2em; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 1.5em; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { color: #1d3557; }
+        h2 { color: #457b9d; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 8px 12px; border-bottom: 1px solid #ddd; }
+        th { background: #e9ecef; text-align: left; }
     </style>
 </head>
 <body>
     <h1>📊 Panel de Estadísticas del Chatbot</h1>
+
     <div class="card">
-        <p>Aquí se mostrarán los datos de uso del chatbot, número de usuarios y calificaciones.</p>
+        <h2>👥 Usuarios Totales</h2>
+        <p><strong>{{ usuarios }}</strong> usuarios registrados</p>
     </div>
+
+    <div class="card">
+        <h2>⭐ Calificaciones</h2>
+        <p>Promedio: <strong>{{ calificaciones.promedio }}/5.0</strong></p>
+        <p>Total de calificaciones: {{ calificaciones.total_calificaciones }}</p>
+        <ul>
+            {% for estrellas, cantidad in calificaciones.distribucion.items() %}
+                <li>{{ estrellas }} ⭐ — {{ cantidad }} votos</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🕓 Historial de Conexiones</h2>
+        {% if historial %}
+        <table>
+            <thead>
+                <tr><th>#</th><th>Registro</th></tr>
+            </thead>
+            <tbody>
+                {% for item in historial %}
+                <tr><td>{{ loop.index }}</td><td>{{ item }}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No hay registros todavía.</p>
+        {% endif %}
+    </div>
+
 </body>
 </html>
