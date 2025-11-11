@@ -496,7 +496,7 @@ def calificar():
         guardar_calificacion(estrellas, comentario)
         return jsonify({"mensaje": "✅ Calificación guardada correctamente"})
     except Exception as e:
-        print(f"❌ Error en /enviar: {e}")
+        print(f"❌ Error en /calificar: {e}")
         return jsonify({"error": str(e)}), 500
 
 
