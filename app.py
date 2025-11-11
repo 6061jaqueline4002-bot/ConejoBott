@@ -9,14 +9,17 @@ from database import (
     cargar_calificaciones,
     obtener_historial
 )
-
+# CONFIGURACIÓN DE RUTAS DE ARCHIVOS
 DATA_FOLDER = "data"
 os.makedirs(DATA_FOLDER, exist_ok=True)
+
 CONTADOR_FILE = os.path.join(DATA_FOLDER, "contador_usuarios.txt")
 REGISTRO_FILE = os.path.join(DATA_FOLDER, "registro_usuarios.txt")
 
+# FUNCIONES DE USUARIOS (contador e historial)
+
 def obtener_contador():
-    #Carga el contador desde archivo de forma segura
+    """Carga el contador desde archivo de forma segura"""
     try:
         if os.path.exists(CONTADOR_FILE):
             with open(CONTADOR_FILE, "r", encoding='utf-8') as f:
@@ -28,86 +31,31 @@ def obtener_contador():
         print(f"❌ Error leyendo contador: {e}")
         return 0
 
+
 def guardar_contador(valor):
     """Guarda el contador en archivo de forma segura"""
     try:
         with open(CONTADOR_FILE, "w", encoding='utf-8') as f:
             f.write(str(valor))
-        # Forzar escritura inmediata
-        os.fsync(f.fileno())
+            f.flush()
+            os.fsync(f.fileno())
         print(f"✅ Contador guardado: {valor}")
     except Exception as e:
         print(f"❌ Error guardando contador: {e}")
 
-def registrar_usuario():
+
+def registrar_usuario_local():
     """Registra cada conexión en el historial"""
     global usuarios_activos
     try:
         ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(REGISTRO_FILE, "a", encoding='utf-8') as f:
             f.write(f"Usuario #{usuarios_activos} - Conexión: {ahora}\n")
-        # Forzar escritura inmediata
-        os.fsync(f.fileno())
+            f.flush()
+            os.fsync(f.fileno())
         print(f"✅ Usuario registrado: #{usuarios_activos}")
     except Exception as e:
         print(f"❌ Error registrando usuario: {e}")
-
-#  Funciones para las calificaciones (prueba)
-#  def cargar_calificaciones():
-#     """Carga las calificaciones desde el archivo JSON"""
-#     try:
-#         if os.path.exists(CALIFICACIONES_FILE):
-#             with open(CALIFICACIONES_FILE, "r", encoding='utf-8') as f:
-#                 return json.load(f)
-#        # Estructura inicial si no existe el archivo
-#        return {
-#             "total_calificaciones": 0,
-#             "promedio": 0,
-#             "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-#             "calificaciones": []
-#         }
-    # except Exception as e:
-    #     print(f"❌ Error cargando calificaciones: {e}")
-    #     return {
-    #         "total_calificaciones": 0,
-    #         "promedio": 0,
-    #         "distribucion": {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0},
-    #         "calificaciones": []
-    #     }
-
-# def guardar_calificacion(estrellas, comentario=""):
-#     """Guarda una nueva calificación"""
-#     try:
-#         calificaciones = cargar_calificaciones()
-        
-#         nueva_calificacion = {
-#             "estrellas": estrellas,
-#             "comentario": comentario,
-#             "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-#             "id": calificaciones["total_calificaciones"] + 1
-#         }
-        
-#         # Actualizar estadísticas
-#         calificaciones["total_calificaciones"] += 1
-#         calificaciones["distribucion"][str(estrellas)] += 1
-#         calificaciones["calificaciones"].append(nueva_calificacion)
-        
-#         # Calcular nuevo promedio
-#         total_puntos = sum(int(estrellas) * count for estrellas, count in calificaciones["distribucion"].items())
-#         calificaciones["promedio"] = round(total_puntos / calificaciones["total_calificaciones"], 1) if calificaciones["total_calificaciones"] > 0 else 0
-        
-#         # Guardar en archivo
-#         with open(CALIFICACIONES_FILE, "w", encoding='utf-8') as f:
-#             json.dump(calificaciones, f, indent=2, ensure_ascii=False)
-#         os.fsync(f.fileno())
-        
-#         print(f"✅ Calificación guardada: {estrellas} estrellas")
-#         return True
-#     except Exception as e:
-#         print(f"❌ Error guardando calificación: {e}")
-#         return False
-
-# Contador global de usuarios - SE CARGA AL INICIAR
 usuarios_activos = obtener_contador()
 print(f"🚀 Servidor iniciado. Usuarios actuales: {usuarios_activos}")
 
@@ -527,45 +475,38 @@ def responder_usuario(mensaje):
     )
 #  RUTAS FLASK 
 @app.route("/")
-def home():
-    registrar_usuario()  # registra conexión de usuario
+def index():
+    registrar_usuario()  # registra en database.json
     return render_template("index.html")
 
 @app.route("/enviar", methods=["POST"])
 def enviar():
-    data = request.get_json()
-    mensaje_usuario = data.get("mensaje", "")
-    respuesta = responder_usuario(mensaje_usuario)
-    return jsonify({"respuesta": respuesta})
-
-@app.route("/calificar", methods=["POST"])
-def calificar():
-    data = request.get_json()
-    estrellas = int(data.get("estrellas", 0))
-    comentario = data.get("comentario", "")
-    if estrellas < 1 or estrellas > 5:
-        return jsonify({"message": "Calificación no válida"}), 400
-
-    guardar_calificacion(estrellas, comentario)
-    return jsonify({"message": "¡Gracias por tu calificación! ❤️"})
+    try:
+        estrellas = int(request.form.get("estrellas", 0))
+        comentario = request.form.get("comentario", "")
+        if estrellas < 1 or estrellas > 5:
+            return jsonify({"error": "Valor de estrellas inválido"}), 400
+        guardar_calificacion(estrellas, comentario)
+        return jsonify({"mensaje": "✅ Calificación guardada correctamente"})
+    except Exception as e:
+        print(f"❌ Error en /enviar: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/admin/estadisticas")
 def admin_estadisticas():
-    usuarios = obtener_usuarios()
-    historial = obtener_historial()
-    calif_data = cargar_calificaciones()
+    """Muestra estadísticas de calificaciones"""
+    calificaciones = cargar_calificaciones()
+    print("🧩 Tipo:", type(calificaciones))
+    print("🔹 Contenido:", calificaciones)
+    return render_template("admin_estadisticas.html", calificaciones=calificaciones)
 
-    return render_template(
-        "admin_estadisticas.html",
-        usuarios=usuarios,
-        historial=historial,
-        promedio=calif_data["promedio"],
-        total_calificaciones=calif_data["total_calificaciones"],
-        distribucion=calif_data["distribucion"],
-        calificaciones=calif_data["calificaciones"],
-        fecha=datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    )
+
+@app.route("/admin/historial")
+def admin_historial():
+    historial = obtener_historial()
+    return render_template("admin_historial.html", historial=historial)
+
 
 # EJECUCIÓN
 if __name__ == "__main__":
