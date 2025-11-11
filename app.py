@@ -478,6 +478,13 @@ def responder_usuario(mensaje):
 def index():
     registrar_usuario()  # registra en database.json
     return render_template("index.html")
+    
+@app.route("/enviar", methods=["POST"])
+def enviar():
+    data = request.get_json()
+    mensaje = data.get("mensaje", "")
+    respuesta = responder_usuario(mensaje)
+    return jsonify({"respuesta": respuesta})
 
 @app.route("/enviar", methods=["POST"])
 def enviar():
