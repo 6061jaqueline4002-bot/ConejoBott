@@ -486,7 +486,7 @@ def enviar():
     respuesta = responder_usuario(mensaje)
     return jsonify({"respuesta": respuesta})
 
-@app.route("/enviar", methods=["POST"])
+@app.route("/calificar", methods=["POST"])
 def enviar():
     try:
         estrellas = int(request.form.get("estrellas", 0))
