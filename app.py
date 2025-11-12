@@ -499,7 +499,6 @@ def enviar():
 def calificar():
     try:
         estrellas = int(request.form.get("estrellas", 0))
-        comentario = request.form.get("comentario", "")
         
         print(f"⭐ Recibiendo calificación: {estrellas} estrellas, comentario: '{comentario}'")
         
@@ -507,7 +506,7 @@ def calificar():
             return jsonify({"error": "La calificación debe ser entre 1 y 5 estrellas"}), 400
         
         # Guardar en la base de datos JSON
-        if guardar_calificacion(estrellas, comentario):
+        if guardar_calificacion(estrellas):
             return jsonify({
                 "mensaje": "✅ Calificación guardada correctamente",
                 "estrellas": estrellas
