@@ -446,7 +446,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Servicios escolares" in mensaje or "escolares","Servicios" in mensaje:
+    elif "Servicios escolares" in mensaje or "escolares" in mensaje:
         datos = departamentos["Servicios escolares"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
@@ -455,7 +455,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "División de estudios" in mensaje or "estudios profesionales","división","División" in mensaje:
+    elif "División de estudios" in mensaje or "estudios profesionales" in mensaje:
         datos = departamentos["División de estudios profesionales"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
