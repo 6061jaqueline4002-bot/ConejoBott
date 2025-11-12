@@ -45,7 +45,7 @@ def registrar_usuario_local():
     """Registra cada conexión en el historial"""
     global usuarios_activos
     try:
-        ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        ahora = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
         with open(REGISTRO_FILE, "a", encoding='utf-8') as f:
             f.write(f"Usuario #{usuarios_activos} - Conexión: {ahora}\n")
             f.flush()
