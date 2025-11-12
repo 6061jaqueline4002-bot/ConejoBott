@@ -420,12 +420,12 @@
 
         function enviarCalificacion() {
     if (calificacionSeleccionada === 0) {
-        alert('Por favor selecciona una calificación');
+        addBotMessage("❌ Por favor selecciona una calificación con las estrellas.");
         return;
     }
+    console.log("⭐ Enviando calificación:", calificacionSeleccionada);        
 
-
-    // CORREGIDO: Usar FormData en lugar de URLSearchParams
+    // Enviar calif. al backend Flask
     const formData = new FormData();
     formData.append('estrellas', calificacionSeleccionada);
 
@@ -434,19 +434,18 @@
         body: formData  // ← FormData se envía automáticamente con el content-type correcto
     })
     .then(response => {
+        console.log("📡 Respuesta del servidor:", response.status);
         if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
+            // Si hay error, obtener el mensaje de error
+            return response.json().then(errorData => {
+                throw new Error(errorData.error || `Error HTTP: ${response.status}`);
+            });
         }
         return response.json();
     })
     .then(data => {
-        console.log("✅ Servidor respondió:", data);
-
-        if (data.error) {
-            addBotMessage("❌ Error: " + data.error);
-            return;
-        }
-
+        console.log("✅ Calificación guardada:", data);
+        
         let mensaje = "";
         switch(calificacionSeleccionada) {
             case 1: mensaje = "😔 Lamentamos que tu experiencia no haya sido buena."; break;
@@ -456,13 +455,17 @@
             case 5: mensaje = "🤩 ¡Increíble! Nos encanta saber eso."; break;
         }
 
-        addBotMessage(mensaje);
+        // Ocultar la sección de calificación
         const ratingSection = document.querySelector('.rating-section');
-        if (ratingSection) ratingSection.style.display = 'none';
+        if (ratingSection) {
+            ratingSection.style.display = 'none';
+        }
+        
+        calificacionMostrada = true;
     })
     .catch(error => {
-        console.error("❌ Error al enviar calificación:", error);
-        addBotMessage("⚠️ Error al guardar tu calificación: " + error.message);
+        console.error("❌ Error completo:", error);
+        addBotMessage("⚠️ No se pudo guardar tu calificación. Intenta nuevamente.");
     });
 }
         // Enviar mensaje desde el input
@@ -508,6 +511,7 @@
     </script>
 </body>
 </html>
+
 
 
 
