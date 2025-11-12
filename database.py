@@ -65,7 +65,7 @@ def obtener_historial():
     data = leer_bd()
     return data.get("historial_conexiones", [])
 
-def guardar_calificacion(estrellas, comentario=""):
+def guardar_calificacion(estrellas):
     """Guarda una nueva calificación"""
     if estrellas < 1 or estrellas > 5:
         return False
@@ -74,7 +74,6 @@ def guardar_calificacion(estrellas, comentario=""):
     
     nueva_calificacion = {
         "estrellas": estrellas,
-        "comentario": comentario,
         "fecha": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "timestamp": datetime.now().isoformat()
     }
