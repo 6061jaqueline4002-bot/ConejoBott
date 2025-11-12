@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta  # ← Asegúrate de importar timedelta
 
 DATA_FILE = "database.json"
 
@@ -35,16 +35,16 @@ def guardar_bd(data):
     except Exception as e:
         print(f"❌ Error guardando BD: {e}")
         return False
-        
+
 def obtener_hora_mexico():
     """Obtiene la hora actual en zona horaria de México (UTC-6)"""
     hora_utc = datetime.utcnow()
     # Ajustar a horario de México Central (UTC-6)
-    hora_mexico = hora_utc - timedelta(hours=6)
+    hora_mexico = hora_utc - timedelta(hours=6)  # ← Ahora timedelta está importado
     return hora_mexico
 
 def registrar_usuario():
-    """Registra un nuevo usuario en el historial"""
+    """Registra un nuevo usuario en el historial con hora local de México"""
     data = leer_bd()
     usuario_id = data["usuarios_totales"] + 1
     
@@ -53,7 +53,7 @@ def registrar_usuario():
     
     nueva_conexion = {
         "id": usuario_id,
-        "fecha": datetime.now().strftime('%d-%m-%Y %H:%M:%S'),
+        "fecha": hora_mexico.strftime('%Y-%m-%d %H:%M:%S'),
         "timestamp": hora_mexico.isoformat()
     }
     
@@ -76,18 +76,18 @@ def obtener_historial():
     return data.get("historial_conexiones", [])
 
 def guardar_calificacion(estrellas):
-    """Guarda una nueva calificación"""
+    """Guarda una nueva calificación con hora local de México"""
     if estrellas < 1 or estrellas > 5:
         return False
         
     data = leer_bd()
-
+    
     # Obtener hora local de México
     hora_mexico = obtener_hora_mexico()
-
+    
     nueva_calificacion = {
         "estrellas": estrellas,
-        "fecha": datetime.now().strftime('%d-%m-%Y %H:%M:%S'),
+        "fecha": hora_mexico.strftime('%Y-%m-%d %H:%M:%S'),
         "timestamp": hora_mexico.isoformat()
     }
     
