@@ -1,6 +1,5 @@
 import json
 import os
-import pytz
 from datetime import datetime
 
 DATA_FILE = "database.json"
@@ -36,22 +35,21 @@ def guardar_bd(data):
     except Exception as e:
         print(f"❌ Error guardando BD: {e}")
         return False
+        
+def obtener_hora_mexico():
+    """Obtiene la hora actual en zona horaria de México (UTC-6)"""
+    hora_utc = datetime.utcnow()
+    # Ajustar a horario de México Central (UTC-6)
+    hora_mexico = hora_utc - timedelta(hours=6)
+    return hora_mexico
 
 def registrar_usuario():
     """Registra un nuevo usuario en el historial"""
     data = leer_bd()
     usuario_id = data["usuarios_totales"] + 1
     
-    try:
-        # Intentar usar pytz para hora exacta de México
-        timezone_mexico = pytz.timezone('America/Mexico_City')
-        hora_local = datetime.now(timezone_mexico)
-    except:
-        # Fallback: restar 6 horas a UTC (para horario estándar de México)
-        hora_local = datetime.utcnow()
-        # Ajustar a horario de México (UTC-6)
-        from datetime import timedelta
-        hora_local = hora_local - timedelta(hours=6)
+    # Obtener hora local de México
+    hora_mexico = obtener_hora_mexico()
     
     nueva_conexion = {
         "id": usuario_id,
@@ -63,7 +61,7 @@ def registrar_usuario():
     data["historial_conexiones"].append(nueva_conexion)
     
     if guardar_bd(data):
-        print(f"✅ Usuario #{usuario_id} registrado")
+         print(f"✅ Usuario #{usuario_id} registrado a las {hora_mexico.strftime('%H:%M:%S')}")
         return usuario_id
     return None
 
@@ -83,17 +81,20 @@ def guardar_calificacion(estrellas):
         return False
         
     data = leer_bd()
-    
+
+    # Obtener hora local de México
+    hora_mexico = obtener_hora_mexico()
+
     nueva_calificacion = {
         "estrellas": estrellas,
         "fecha": datetime.now().strftime('%d-%m-%Y %H:%M:%S'),
-        "timestamp": datetime.now().isoformat()
+        "timestamp": hora_mexico.isoformat()
     }
     
     data["calificaciones"].append(nueva_calificacion)
     
     if guardar_bd(data):
-        print(f"✅ Calificación {estrellas}⭐ guardada")
+        print(f"✅ Calificación {estrellas}⭐ guardada a las {hora_mexico.strftime('%H:%M:%S')}")
         return True
     return False
 
