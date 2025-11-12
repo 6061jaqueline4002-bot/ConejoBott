@@ -390,8 +390,6 @@
                             <span class="star" data-rating="5">⭐</span>
                         </div>
                         <br>
-                        <textarea id="rating-comment" placeholder="Comentario opcional..." rows="3"></textarea>
-                        <br>
                         <button onclick="enviarCalificacion()" class="rating-btn">Enviar Calificación</button>
                     </div>
                 </div>
@@ -426,12 +424,10 @@
         return;
     }
 
-    const comentario = document.getElementById('rating-comment').value;
 
     // CORREGIDO: Usar FormData en lugar de URLSearchParams
     const formData = new FormData();
     formData.append('estrellas', calificacionSeleccionada);
-    formData.append('comentario', comentario);
 
     fetch("/calificar", {
         method: "POST",
@@ -458,10 +454,6 @@
             case 3: mensaje = "😊 ¡Gracias por tu calificación!"; break;
             case 4: mensaje = "😄 ¡Excelente! Nos alegra tu experiencia."; break;
             case 5: mensaje = "🤩 ¡Increíble! Nos encanta saber eso."; break;
-        }
-
-        if (comentario) {
-            mensaje += " Hemos registrado tu comentario.";
         }
 
         addBotMessage(mensaje);
@@ -516,6 +508,7 @@
     </script>
 </body>
 </html>
+
 
 
 
