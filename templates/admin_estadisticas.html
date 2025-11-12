@@ -3,54 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 Estadísticas ConejoBot</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Estadísticas - ConejoBot</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 2em; }
-        .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 1.5em; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        h1 { color: #1d3557; }
-        h2 { color: #457b9d; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 8px 12px; border-bottom: 1px solid #ddd; }
-        th { background: #e9ecef; text-align: left; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { background: #004B8D; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .stat-card { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #004B8D; }
+        .stat-number { font-size: 2em; font-weight: bold; color: #004B8D; }
+        .stars { color: gold; font-size: 1.2em; }
+        .nav { margin: 20px 0; }
+        .btn { background: #004B8D; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px; display: inline-block; }
     </style>
 </head>
 <body>
-    <h1>📊 Panel de Estadísticas del Chatbot</h1>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Panel de Estadísticas del Chatbot</h1>
+        </div>
 
-    <div class="card">
-        <h2>👥 Usuarios Totales</h2>
-        <p><strong>{{ usuarios }}</strong> usuarios registrados</p>
-    </div>
+        <div class="nav">
+            <a href="/admin/estadisticas" class="btn">📈 Estadísticas</a>
+            <a href="/admin/historial" class="btn">📋 Historial</a>
+            <a href="/" class="btn">🐰 Volver al Chat</a>
+        </div>
 
-    <div class="card">
-        <h2>⭐ Calificaciones</h2>
-        <p>Promedio: <strong>{{ calificaciones.promedio }}/5.0</strong></p>
-        <p>Total de calificaciones: {{ calificaciones.total_calificaciones }}</p>
-        <ul>
-            {% for estrellas, cantidad in calificaciones.distribucion.items() %}
-                <li>{{ estrellas }} ⭐ — {{ cantidad }} votos</li>
-            {% endfor %}
-        </ul>
-    </div>
+        <div class="stat-card">
+            <h2>👥 Usuarios Totales</h2>
+            <div class="stat-number">{{ usuarios_totales }} usuarios registrados</div>
+        </div>
 
-    <div class="card">
-        <h2>🕓 Historial de Conexiones</h2>
-        {% if historial %}
-        <table>
-            <thead>
-                <tr><th>#</th><th>Registro</th></tr>
-            </thead>
-            <tbody>
-                {% for item in historial %}
-                <tr><td>{{ loop.index }}</td><td>{{ item }}</td></tr>
+        <div class="stat-card">
+            <h2>⭐ Calificaciones</h2>
+            <p><strong>Promedio: {{ calificaciones.promedio }}/5.0</strong></p>
+            <p>Total de calificaciones: {{ calificaciones.total_calificaciones }}</p>
+            
+            {% if calificaciones.total_calificaciones > 0 %}
+            <div style="margin-top: 15px;">
+                {% for i in range(1, 6) %}
+                <p>
+                    {{ i }} <span class="stars">⭐</span> — 
+                    {{ calificaciones.distribucion[i] }} votos
+                    ({{ (calificaciones.distribucion[i] / calificaciones.total_calificaciones * 100) | round(1) }}%)
+                </p>
                 {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <p>No hay registros todavía.</p>
-        {% endif %}
-    </div>
+            </div>
+            {% else %}
+            <p>📝 Aún no hay calificaciones registradas.</p>
+            {% endif %}
+        </div>
 
+        <hr>
+        
+        <div class="nav">
+            <a href="/admin/estadisticas" class="btn">🔄 Actualizar</a>
+            <a href="/" class="btn">🐰 Ir al Chatbot</a>
+        </div>
+    </div>
 </body>
 </html>
