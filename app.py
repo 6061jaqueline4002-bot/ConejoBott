@@ -3,11 +3,8 @@ from flask import Flask, render_template, request, jsonify
 import os
 from datetime import datetime
 from database import (
-    registrar_usuario,
-    obtener_usuarios,
-    guardar_calificacion,
-    cargar_calificaciones,
-    obtener_historial
+    registrar_usuario, obtener_usuarios_totales, obtener_historial,  
+    guardar_calificacion, cargar_calificaciones
 )
 # CONFIGURACIÓN DE RUTAS DE ARCHIVOS
 DATA_FOLDER = "data"
