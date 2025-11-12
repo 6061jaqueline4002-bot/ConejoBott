@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial - ConejoBot</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header { background: #004B8D; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .historial-item { padding: 10px; border-bottom: 1px solid #eee; }
+        .nav { margin: 20px 0; }
+        .btn { background: #004B8D; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; margin: 5px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Historial de Conexiones</h1>
+            <p>Total de usuarios: {{ usuarios_totales }}</p>
+        </div>
+
+        <div class="nav">
+            <a href="/admin/estadisticas" class="btn">📈 Estadísticas</a>
+            <a href="/admin/historial" class="btn">📋 Historial</a>
+            <a href="/" class="btn">🐰 Volver al Chat</a>
+        </div>
+
+        <h3>Historial de Conexiones ({{ historial|length }} registros)</h3>
+        
+        {% if historial %}
+            {% for conexion in historial|reverse %}
+            <div class="historial-item">
+                <strong>Usuario #{{ conexion.id }}</strong> - 
+                Conexión: {{ conexion.fecha }}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>📝 No hay registros de conexiones todavía.</p>
+        {% endif %}
+
+        <div class="nav">
+            <a href="/admin/historial" class="btn">🔄 Actualizar</a>
+            <a href="/" class="btn">🐰 Ir al Chatbot</a>
+        </div>
+    </div>
+</body>
+</html>
