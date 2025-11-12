@@ -32,11 +32,10 @@ def obtener_usuarios():
     data = leer_bd()
     return data["usuarios_totales"]
 
-def guardar_calificacion(estrellas, comentario):
+def guardar_calificacion(estrellas):
     data = leer_bd()
     data["calificaciones"].append({
         "estrellas": estrellas,
-        "comentario": comentario,
         "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
     guardar_bd(data)
