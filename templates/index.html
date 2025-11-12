@@ -428,36 +428,36 @@
 
     const comentario = document.getElementById('rating-comment').value;
 
-    // Enviar calificación al backend Flask
+    // CORREGIDO: Usar FormData en lugar de URLSearchParams
+    const formData = new FormData();
+    formData.append('estrellas', calificacionSeleccionada);
+    formData.append('comentario', comentario);
+
     fetch("/calificar", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-            estrellas: calificacionSeleccionada,
-            comentario: comentario
-        })
+        body: formData  // ← FormData se envía automáticamente con el content-type correcto
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         console.log("✅ Servidor respondió:", data);
 
+        if (data.error) {
+            addBotMessage("❌ Error: " + data.error);
+            return;
+        }
+
         let mensaje = "";
         switch(calificacionSeleccionada) {
-            case 1:
-                mensaje = "😔 Lamentamos que tu experiencia no haya sido buena. Trabajaremos para mejorar.";
-                break;
-            case 2:
-                mensaje = "🙁 Gracias por tu comentario. Tomaremos en cuenta tus comentarios.";
-                break;
-            case 3:
-                mensaje = "😊 ¡Gracias por tu calificación! Seguiremos mejorando.";
-                break;
-            case 4:
-                mensaje = "😄 ¡Excelente! Nos alegra que hayas tenido una buena experiencia.";
-                break;
-            case 5:
-                mensaje = "🤩 ¡Increíble! Nos encanta saber que te gustó nuestro servicio.";
-                break;
+            case 1: mensaje = "😔 Lamentamos que tu experiencia no haya sido buena."; break;
+            case 2: mensaje = "🙁 Gracias por tu comentario. Mejoraremos."; break;
+            case 3: mensaje = "😊 ¡Gracias por tu calificación!"; break;
+            case 4: mensaje = "😄 ¡Excelente! Nos alegra tu experiencia."; break;
+            case 5: mensaje = "🤩 ¡Increíble! Nos encanta saber eso."; break;
         }
 
         if (comentario) {
@@ -470,7 +470,7 @@
     })
     .catch(error => {
         console.error("❌ Error al enviar calificación:", error);
-        addBotMessage("⚠️ Error al guardar tu calificación.");
+        addBotMessage("⚠️ Error al guardar tu calificación: " + error.message);
     });
 }
         // Enviar mensaje desde el input
@@ -516,5 +516,6 @@
     </script>
 </body>
 </html>
+
 
 
