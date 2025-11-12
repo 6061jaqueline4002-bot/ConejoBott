@@ -500,7 +500,7 @@ def calificar():
     try:
         estrellas = int(request.form.get("estrellas", 0))
         
-        print(f"⭐ Recibiendo calificación: {estrellas} estrellas, comentario: '{comentario}'")
+        print(f"⭐ Recibiendo calificación: {estrellas} estrellas")
         
         if estrellas < 1 or estrellas > 5:
             return jsonify({"error": "La calificación debe ser entre 1 y 5 estrellas"}), 400
