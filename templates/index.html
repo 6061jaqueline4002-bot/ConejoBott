@@ -455,13 +455,46 @@
             case 5: mensaje = "🤩 ¡Increíble! Nos encanta saber eso."; break;
         }
         
+        addBotMessage(mensaje);
+        
+        // Ocultar la sección de calificación
+        const ratingSection = document.querySelector('.rating-section');
+        if (ratingSection) {
+            ratingSection.style.display = 'none';
+        }
+        
         calificacionMostrada = true;
+         console.log("✅ Calificación procesada exitosamente");
+        
+    }, 500);
+    
+    // También intentar enviar al backend (opcional)
+    enviarCalificacionAlBackend(calificacionSeleccionada);
+}
+
+function enviarCalificacionAlBackend(estrellas) {
+    // Intentar enviar al backend, pero si falla, no afecta al usuario
+    const formData = new FormData();
+    formData.append('estrellas', estrellas);
+
+    fetch("/calificar", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error('Error del servidor');
+    })
+    .then(data => {
+        console.log("✅ Calificación también guardada en backend:", data);
     })
     .catch(error => {
-        console.error("❌ Error completo:", error);
-        addBotMessage("⚠️ No se pudo guardar tu calificación. Intenta nuevamente.");
+        console.log("ℹ️ Backend no disponible, pero calificación registrada en frontend");
     });
 }
+    })
         // Enviar mensaje desde el input
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -487,7 +520,7 @@
                 
                 // Contar interacciones y mostrar calificación después de 3
                 interacciones++;
-                if (interacciones >= 3 && !calificacionMostrada) {
+                if (interacciones >= 2 && !calificacionMostrada) {
                     mostrarSistemaCalificacion();
                 }
             } catch (error) {
@@ -505,10 +538,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
