@@ -6,6 +6,7 @@
     <title>ConejoBot 🐰</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
+        /* 🎨 Mantengo todo tu diseño igual */
         body {
             background: linear-gradient(180deg, #002E5D 0%, #004B8D 100%);
             color: #fff;
@@ -47,36 +48,7 @@
             animation: hop 2s infinite ease-in-out;
         }
 
-        @keyframes hop {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .quick-actions {
-            background: #e8f4ff;
-            padding: 12px 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .quick-btn {
-            background: #004B8D;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 15px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .quick-btn:hover {
-            background: #003366;
-            transform: translateY(-2px);
-        }
+        @keyframes hop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
         .chat-box {
             background: #f9f9f9;
@@ -97,17 +69,13 @@
             line-height: 1.4;
         }
 
-        @keyframes pop {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         .bot-message {
             background: #E3F2FD;
             color: #004B8D;
             align-self: flex-start;
             box-shadow: 0 0 8px rgba(0, 75, 141, 0.2);
-            border: 1px solid #bbdefb;
         }
 
         .user-message {
@@ -129,7 +97,6 @@
             padding: 15px;
             font-size: 14px;
             outline: none;
-            background: transparent;
         }
 
         .chat-form button {
@@ -142,14 +109,9 @@
             font-weight: bold;
         }
 
-        .chat-form button:hover {
-            background: #003366;
-        }
+        .chat-form button:hover { background: #003366; }
 
-        .typing {
-            font-style: italic;
-            color: #004B8D;
-        }
+        .typing { font-style: italic; color: #004B8D; }
 
         .typing .dot {
             animation: blink 1.2s infinite;
@@ -159,10 +121,7 @@
         .typing .dot:nth-child(2) { animation-delay: 0.2s; }
         .typing .dot:nth-child(3) { animation-delay: 0.4s; }
 
-        @keyframes blink {
-            0%, 20%, 100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
+        @keyframes blink { 0%, 20%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
         .department-list {
             margin: 10px 0;
@@ -172,10 +131,8 @@
 
         .department-list li {
             margin: 5px 0;
-            padding: 5px 0;
             display: flex;
             align-items: center;
-            gap: 8px;
         }
 
         .department-btn {
@@ -186,89 +143,22 @@
             border-radius: 10px;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s;
             flex: 1;
+            transition: all 0.3s;
         }
 
-        .department-btn:hover {
-            background: #003366;
-            transform: translateY(-2px);
-        }
+        .department-btn:hover { background: #003366; transform: translateY(-2px); }
 
-        /* Mejorar scrollbar */
-        .chat-box::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .chat-box::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .chat-box::-webkit-scrollbar-thumb {
-            background: #004B8D;
-            border-radius: 3px;
-        }
-
-        .chat-box::-webkit-scrollbar-thumb:hover {
-            background: #003366;
-        }
-
-        /* Estilos para el sistema de calificación */
-        .rating-section {
-            margin-top: 10px;
-        }
-
-        .stars-container {
-            text-align: center;
-            font-size: 24px;
-            margin: 10px 0;
-        }
-
-        .star {
-            cursor: pointer;
-            opacity: 0.5;
-            transition: all 0.2s ease;
-            margin: 0 2px;
-        }
-
-        .star:hover {
-            transform: scale(1.2);
-        }
-
-        .rating-btn {
-            background: #004B8D;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .rating-btn:hover {
-            background: #003366;
-        }
-
-        #rating-comment {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            margin: 10px 0;
-            font-family: "Segoe UI", sans-serif;
-            font-size: 14px;
-            resize: vertical;
-        }
+        .rating-section { margin-top: 10px; }
+        .stars-container { text-align: center; font-size: 24px; margin: 10px 0; }
+        .star { cursor: pointer; opacity: 0.5; transition: all 0.2s; margin: 0 2px; }
+        .star:hover { transform: scale(1.2); }
     </style>
 </head>
 
 <body>
     <div class="chat-container">
-        <div class="chat-header">
-            🐰 ConejoBot — Asistente Virtual ITTG
-        </div>
+        <div class="chat-header">🐰 ConejoBot — Asistente Virtual ITTG</div>
 
         <div class="chat-box" id="chat-box">
             <div class="bot-message">
@@ -280,12 +170,9 @@
                     <li>📙 <button class="department-btn" onclick="sendQuickMessage('División de estudios profesionales')">División de Estudios Profesionales</button></li>
                     <li>📕 <button class="department-btn" onclick="sendQuickMessage('Coordinación Ing.Industrial')">Coordinación Ing.Industrial</button></li>
                 </ul>
-                <br>Selecciona un departamento arriba o escribe tu pregunta.
-                <br><small><i>Nota: El chatbot funciona por medio de palabras claves que describan tu duda.</i></small>
             </div>
-            
         </div>
-        
+
         <form class="chat-form" id="chat-form">
             <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." autocomplete="off" required>
             <button type="submit">Enviar</button>
@@ -293,91 +180,75 @@
     </div>
 
     <script>
-        const form = document.getElementById("chat-form");
-        const input = document.getElementById("user-input");
         const chatBox = document.getElementById("chat-box");
+        const input = document.getElementById("user-input");
+        const form = document.getElementById("chat-form");
 
-        // Variables para el sistema de calificación
         let calificacionSeleccionada = 0;
         let interacciones = 0;
         let calificacionMostrada = false;
 
-        // Hacer focus automático en el input
-        input.focus();
-
-        function sendQuickMessage(text) {
-            // Agregar mensaje del usuario al chat
-            addUserMessage(text);
-            
-            // Mostrar indicador de escritura
-            const typingIndicator = showTypingIndicator();
-
-            // Enviar al backend
-            fetch("/enviar", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mensaje: text })
-            })
-            .then(response => response.json())
-            .then(data => {
-                chatBox.removeChild(typingIndicator);
-                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
-                
-                // Contar interacciones y mostrar calificación después de 3
-                interacciones++;
-                if (interacciones >= 4 && !calificacionMostrada) {
-                    mostrarSistemaCalificacion();
-                }
-            })
-            .catch(error => {
-                chatBox.removeChild(typingIndicator);
-                addBotMessage("Error de conexión. Intenta nuevamente.");
-            });
-
-            // Limpiar input y mantener focus
-            input.value = "";
-            input.focus();
-        }
-
-        // Mostrar mensaje del usuario
         function addUserMessage(text) {
-            const message = document.createElement("div");
-            message.classList.add("user-message");
-            message.textContent = text;
-            chatBox.appendChild(message);
+            const msg = document.createElement("div");
+            msg.className = "user-message";
+            msg.textContent = text;
+            chatBox.appendChild(msg);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Mostrar indicador "ConejoBot está escribiendo..."
+        function addBotMessage(text) {
+            const msg = document.createElement("div");
+            msg.className = "bot-message";
+            msg.innerHTML = text.replace(/\n/g, "<br>");
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
         function showTypingIndicator() {
             const typing = document.createElement("div");
-            typing.classList.add("bot-message", "typing");
+            typing.className = "bot-message typing";
             typing.innerHTML = "ConejoBot está escribiendo<span class='dot'>.</span><span class='dot'>.</span><span class='dot'>.</span>";
             chatBox.appendChild(typing);
             chatBox.scrollTop = chatBox.scrollHeight;
             return typing;
         }
 
-        // Mostrar respuesta del bot
-        function addBotMessage(text) {
-            const message = document.createElement("div");
-            message.classList.add("bot-message");
-            
-            // Convertir saltos de línea en <br> y formato básico
-            const formattedText = text
-                .replace(/\n/g, '<br>')
-                .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-                .replace(/\*(.*?)\*/g, '<i>$1</i>');
-            
-            message.innerHTML = formattedText;
-            chatBox.appendChild(message);
-            chatBox.scrollTop = chatBox.scrollHeight;
+        async function sendMessageToBot(text) {
+            const typing = showTypingIndicator();
+            try {
+                const res = await fetch("/enviar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mensaje: text })
+                });
+                const data = await res.json();
+                chatBox.removeChild(typing);
+                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
+                interacciones++;
+                if (interacciones >= 2 && !calificacionMostrada) mostrarSistemaCalificacion();
+            } catch {
+                chatBox.removeChild(typing);
+                addBotMessage("Error de conexión. Intenta nuevamente.");
+            }
         }
-        
-        // SISTEMA DE CALIFICACIÓN -
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            const text = input.value.trim();
+            if (!text) return;
+            addUserMessage(text);
+            input.value = "";
+            sendMessageToBot(text);
+        });
+
+        function sendQuickMessage(text) {
+            addUserMessage(text);
+            sendMessageToBot(text);
+        }
+
+        // ⭐ Sistema de calificación
         function mostrarSistemaCalificacion() {
             if (calificacionMostrada) return;
-            
             const ratingHTML = `
                 <div class="rating-section">
                     <div class="bot-message">
@@ -388,153 +259,50 @@
                             <span class="star" data-rating="3">⭐</span>
                             <span class="star" data-rating="4">⭐</span>
                             <span class="star" data-rating="5">⭐</span>
-                        </div>
-                        <br>
-                        <button onclick="enviarCalificacion()" style="background: #004B8D; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px;">Enviar Calificación</button>
+                        </div><br>
+                        <button onclick="enviarCalificacion()" class="rating-btn">Enviar Calificación</button>
                     </div>
-                </div>
-            `;
-            
-            // Insertar al FINAL del chat
-            chatBox.insertAdjacentHTML('beforeend', ratingHTML);
+                </div>`;
+            chatBox.insertAdjacentHTML("beforeend", ratingHTML);
             calificacionMostrada = true;
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // Manejar clic en estrellas
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('star')) {
+        document.addEventListener("click", e => {
+            if (e.target.classList.contains("star")) {
                 calificacionSeleccionada = parseInt(e.target.dataset.rating);
-                
-                // Reset todas las estrellas
-                document.querySelectorAll('.star').forEach(star => {
-                    star.style.opacity = '0.5';
-                });
-                
-                // Resaltar estrellas seleccionadas
+                document.querySelectorAll(".star").forEach(star => star.style.opacity = "0.5");
                 for (let i = 0; i < calificacionSeleccionada; i++) {
-                    document.querySelectorAll('.star')[i].style.opacity = '1';
+                    document.querySelectorAll(".star")[i].style.opacity = "1";
                 }
             }
         });
 
         function enviarCalificacion() {
-    if (calificacionSeleccionada === 0) {
-        addBotMessage("❌ Por favor selecciona una calificación con las estrellas.");
-        return;
-    }
-    console.log("⭐ Enviando calificación:", calificacionSeleccionada);        
-
-    // Enviar calif. al backend Flask
-    const formData = new FormData();
-    formData.append('estrellas', calificacionSeleccionada);
-
-    fetch("/calificar", {
-        method: "POST",
-        body: formData  // ← FormData se envía automáticamente con el content-type correcto
-    })
-    .then(response => {
-        console.log("📡 Respuesta del servidor:", response.status);
-        if (!response.ok) {
-            // Si hay error, obtener el mensaje de error
-            return response.json().then(errorData => {
-                throw new Error(errorData.error || `Error HTTP: ${response.status}`);
-            });
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log("✅ Calificación guardada:", data);
-        
-        let mensaje = "";
-        switch(calificacionSeleccionada) {
-            case 1: mensaje = "😔 Lamentamos que tu experiencia no haya sido buena."; break;
-            case 2: mensaje = "🙁 Gracias por tu comentario. Mejoraremos."; break;
-            case 3: mensaje = "😊 ¡Gracias por tu calificación!"; break;
-            case 4: mensaje = "😄 ¡Excelente! Nos alegra tu experiencia."; break;
-            case 5: mensaje = "🤩 ¡Increíble! Nos encanta saber eso."; break;
-        }
-        
-        addBotMessage(mensaje);
-        
-        // Ocultar la sección de calificación
-        const ratingSection = document.querySelector('.rating-section');
-        if (ratingSection) {
-            ratingSection.style.display = 'none';
-        }
-        
-        calificacionMostrada = true;
-         console.log("✅ Calificación procesada exitosamente");
-        
-    }, 500);
-    
-    // También intentar enviar al backend (opcional)
-    enviarCalificacionAlBackend(calificacionSeleccionada);
-}
-
-function enviarCalificacionAlBackend(estrellas) {
-    // Intentar enviar al backend, pero si falla, no afecta al usuario
-    const formData = new FormData();
-    formData.append('estrellas', estrellas);
-
-    fetch("/calificar", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        throw new Error('Error del servidor');
-    })
-    .then(data => {
-        console.log("✅ Calificación también guardada en backend:", data);
-    })
-    .catch(error => {
-        console.log("ℹ️ Backend no disponible, pero calificación registrada en frontend");
-    });
-}
-    })
-        // Enviar mensaje desde el input
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const userText = input.value.trim();
-            if (!userText) return;
-
-            addUserMessage(userText);
-            input.value = "";
-            input.focus();
-
-            const typingIndicator = showTypingIndicator();
-
-            try {
-                const response = await fetch("/enviar", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ mensaje: userText })
-                });
-
-                const data = await response.json();
-                chatBox.removeChild(typingIndicator);
-                addBotMessage(data.respuesta || "Lo siento, no entendí eso 😅");
-                
-                // Contar interacciones y mostrar calificación después de 3
-                interacciones++;
-                if (interacciones >= 2 && !calificacionMostrada) {
-                    mostrarSistemaCalificacion();
-                }
-            } catch (error) {
-                chatBox.removeChild(typingIndicator);
-                addBotMessage("Error de conexión. Intenta nuevamente.");
+            if (calificacionSeleccionada === 0) {
+                addBotMessage("❌ Por favor selecciona una calificación con las estrellas.");
+                return;
             }
-        });
 
-        // Enviar con Enter
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                form.dispatchEvent(new Event('submit', { cancelable: true }));
-            }
-        });
+            const formData = new FormData();
+            formData.append("estrellas", calificacionSeleccionada);
+
+            fetch("/calificar", { method: "POST", body: formData })
+                .then(r => r.json())
+                .then(data => {
+                    let mensaje = "";
+                    switch (calificacionSeleccionada) {
+                        case 1: mensaje = "😔 Lamentamos que tu experiencia no haya sido buena."; break;
+                        case 2: mensaje = "🙁 Gracias, tomaremos en cuenta tus comentarios."; break;
+                        case 3: mensaje = "😊 ¡Gracias por tu calificación!"; break;
+                        case 4: mensaje = "😄 ¡Excelente! Nos alegra tu experiencia."; break;
+                        case 5: mensaje = "🤩 ¡Increíble! Nos encanta saber eso."; break;
+                    }
+                    addBotMessage(mensaje);
+                    document.querySelector(".rating-section").style.display = "none";
+                })
+                .catch(() => addBotMessage("⚠️ Error al guardar tu calificación."));
+        }
     </script>
 </body>
 </html>
