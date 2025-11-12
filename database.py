@@ -54,14 +54,14 @@ def registrar_usuario():
     nueva_conexion = {
         "id": usuario_id,
         "fecha": datetime.now().strftime('%d-%m-%Y %H:%M:%S'),
-        "timestamp": datetime.now().isoformat()
+        "timestamp": hora_mexico.isoformat()
     }
     
     data["usuarios_totales"] = usuario_id
     data["historial_conexiones"].append(nueva_conexion)
     
     if guardar_bd(data):
-         print(f"✅ Usuario #{usuario_id} registrado a las {hora_mexico.strftime('%H:%M:%S')}")
+        print(f"✅ Usuario #{usuario_id} registrado a las {hora_mexico.strftime('%H:%M:%S')}")
         return usuario_id
     return None
 
