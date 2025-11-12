@@ -428,7 +428,7 @@ def responder_usuario(mensaje):
                         return texto
     
     # TERCERO: Búsqueda directa por departamento
-    if "coordinación" in mensaje or "coordinación" in mensaje:
+    if "coordinación" in mensaje or "coordinacion" in mensaje:
         datos = departamentos["Coordinación Ing.Industrial"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
@@ -437,7 +437,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Inglés" in mensaje or "inglés" in mensaje:
+    elif "Inglés" in mensaje or "ingles" in mensaje:
         datos = departamentos["Inglés"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
@@ -446,7 +446,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Servicios escolares" in mensaje or "escolares" in mensaje:
+    elif "Servicios escolares" in mensaje or "escolares","Servicios" in mensaje:
         datos = departamentos["Servicios escolares"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
@@ -455,7 +455,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "División de estudios" in mensaje or "estudios profesionales" in mensaje:
+    elif "División de estudios" in mensaje or "estudios profesionales","división","División" in mensaje:
         datos = departamentos["División de estudios profesionales"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
@@ -476,44 +476,94 @@ def responder_usuario(mensaje):
 #  RUTAS FLASK 
 @app.route("/")
 def index():
-    registrar_usuario()  # registra en database.json
+    # Registrar usuario al cargar la página
+    usuario_id = registrar_usuario()
+    print(f"📊 Usuario registrado: #{usuario_id}")
     return render_template("index.html")
-    
+
 @app.route("/enviar", methods=["POST"])
 def enviar():
-    data = request.get_json()
-    mensaje = data.get("mensaje", "")
-    respuesta = responder_usuario(mensaje)
-    return jsonify({"respuesta": respuesta})
+    try:
+        data = request.get_json()
+        mensaje = data.get("mensaje", "").strip()
+        
+        if not mensaje:
+            return jsonify({"respuesta": "Por favor escribe un mensaje."})
+        
+        # Tu lógica de respuesta del chatbot
+        respuesta = responder_usuario(mensaje)
+        return jsonify({"respuesta": respuesta})
+        
+    except Exception as e:
+        print(f"❌ Error en /enviar: {e}")
+        return jsonify({"respuesta": "Error interno del servidor."})
 
 @app.route("/calificar", methods=["POST"])
 def calificar():
     try:
         estrellas = int(request.form.get("estrellas", 0))
+        comentario = request.form.get("comentario", "")
+        
+        print(f"⭐ Recibiendo calificación: {estrellas} estrellas, comentario: '{comentario}'")
+        
         if estrellas < 1 or estrellas > 5:
-            return jsonify({"error": "Valor de estrellas inválido"}), 400
-        guardar_calificacion(estrellas)
-        return jsonify({"mensaje": "✅ Calificación guardada correctamente"})
+            return jsonify({"error": "La calificación debe ser entre 1 y 5 estrellas"}), 400
+        
+        # Guardar en la base de datos JSON
+        if guardar_calificacion(estrellas, comentario):
+            return jsonify({
+                "mensaje": "✅ Calificación guardada correctamente",
+                "estrellas": estrellas
+            })
+        else:
+            return jsonify({"error": "No se pudo guardar la calificación"}), 500
+            
     except Exception as e:
         print(f"❌ Error en /calificar: {e}")
-        return jsonify({"error": str(e)}), 500
-
+        return jsonify({"error": f"Error del servidor: {str(e)}"}), 500
 
 @app.route("/admin/estadisticas")
 def admin_estadisticas():
     """Muestra estadísticas de calificaciones"""
-    calificaciones = cargar_calificaciones()
-    print("🧩 Tipo:", type(calificaciones))
-    print("🔹 Contenido:", calificaciones)
-    return render_template("admin_estadisticas.html", calificaciones=calificaciones)
-
+    try:
+        calificaciones_data = cargar_calificaciones()
+        usuarios_totales = obtener_usuarios_totales()
+        
+        print(f"📊 Estadísticas - Usuarios: {usuarios_totales}, Calificaciones: {calificaciones_data}")
+        
+        return render_template(
+            "admin_estadisticas.html",
+            calificaciones=calificaciones_data,
+            usuarios_totales=usuarios_totales
+        )
+    except Exception as e:
+        print(f"❌ Error en /admin/estadisticas: {e}")
+        return f"Error cargando estadísticas: {e}"
 
 @app.route("/admin/historial")
 def admin_historial():
-    historial = obtener_historial()
-    return render_template("admin_historial.html", historial=historial)
+    """Muestra historial de conexiones"""
+    try:
+        historial = obtener_historial()
+        usuarios_totales = obtener_usuarios_totales()
+        
+        print(f"📋 Historial - Total usuarios: {usuarios_totales}, Registros: {len(historial)}")
+        
+        return render_template(
+            "admin_historial.html",
+            historial=historial,
+            usuarios_totales=usuarios_totales
+        )
+    except Exception as e:
+        print(f"❌ Error en /admin/historial: {e}")
+        return f"Error cargando historial: {e}"
 
 
+# EJECUCIÓN
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    print("🚀 Iniciando ConejoBot...")
+    app.run(host="0.0.0.0", port=port, debug=True)
 # EJECUCIÓN
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
