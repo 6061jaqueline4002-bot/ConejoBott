@@ -1,5 +1,6 @@
 import json
 import os
+import pytz
 from datetime import datetime
 
 DATA_FILE = "database.json"
@@ -41,9 +42,20 @@ def registrar_usuario():
     data = leer_bd()
     usuario_id = data["usuarios_totales"] + 1
     
+    try:
+        # Intentar usar pytz para hora exacta de México
+        timezone_mexico = pytz.timezone('America/Mexico_City')
+        hora_local = datetime.now(timezone_mexico)
+    except:
+        # Fallback: restar 6 horas a UTC (para horario estándar de México)
+        hora_local = datetime.utcnow()
+        # Ajustar a horario de México (UTC-6)
+        from datetime import timedelta
+        hora_local = hora_local - timedelta(hours=6)
+    
     nueva_conexion = {
         "id": usuario_id,
-        "fecha": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "fecha": datetime.now().strftime('%d-%m-%Y %H:%M:%S'),
         "timestamp": datetime.now().isoformat()
     }
     
@@ -74,7 +86,7 @@ def guardar_calificacion(estrellas):
     
     nueva_calificacion = {
         "estrellas": estrellas,
-        "fecha": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "fecha": datetime.now().strftime('%d-%m-%Y %H:%M:%S'),
         "timestamp": datetime.now().isoformat()
     }
     
