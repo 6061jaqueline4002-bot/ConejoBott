@@ -1,5 +1,5 @@
 import json, os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Ubicación del proyecto
 DATA_FILE = os.path.join(BASE_DIR, "database.json")   # JSON seguro en la raíz
