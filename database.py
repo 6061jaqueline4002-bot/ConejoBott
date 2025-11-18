@@ -1,8 +1,8 @@
-import json
-import os
-from datetime import datetime, timedelta  # ← Asegúrate de importar timedelta
+import json, os
+from datetime import datetime
 
-DATA_FILE = "database.json"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Ubicación del proyecto
+DATA_FILE = os.path.join(BASE_DIR, "database.json")   # JSON seguro en la raíz
 
 def inicializar_bd():
     """Inicializa la base de datos JSON si no existe"""
