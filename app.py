@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, jsonify
 import os
+import json
 from datetime import datetime, timedelta
 from database import (
     registrar_usuario, obtener_usuarios_totales, obtener_historial,  
