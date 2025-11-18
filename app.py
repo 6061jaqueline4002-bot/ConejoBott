@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, jsonify
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from database import (
     registrar_usuario, obtener_usuarios_totales, obtener_historial,  
     guardar_calificacion, cargar_calificaciones
