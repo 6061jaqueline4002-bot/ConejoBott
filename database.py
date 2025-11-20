@@ -2,8 +2,9 @@ import json
 from datetime import datetime, timedelta
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Ubicación del proyecto
-DATA_FILE = os.path.join(BASE_DIR, "database.json")   # JSON seguro en la raíz
+PERSISTENT_DIR = "/var/data" # Carpeta persistente de Render
+os.makedirs(PERSISTENT_DIR, exist_ok=True)# Crear directorio si no existe
+DATA_FILE = os.path.join(PERSISTENT_DIR, "database.json")
 
 def inicializar_bd():
     """Inicializa la base de datos JSON si no existe"""
