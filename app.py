@@ -93,7 +93,7 @@ departamentos = {
                 "🔹Ingresar al enlace de REGISTRO Y posterior a esto envía tu comprobante de pago y la referencia antes generada en un solo archivo de PDF.",
                 "🔹Espera a ser contactado por tu docente para ser agregado correctamente a las plataformas (no olvides poner todos tus datos correctamente)."
             ],
-            "Examen de colocacion": [
+            "Examen de colocación": [
                 "Para presentar el examen de ubicación, el estudiante deberá:",
                 "✅Estar atento a las convocatorias publicadas en las redes oficiales del TECNM.",
                 "✅Realizar el registro correspondiente.",
