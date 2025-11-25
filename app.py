@@ -435,7 +435,7 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Inglés" in mensaje or "inglés" in mensaje:
+    elif "Inglés" in mensaje or "ingles" in mensaje:
         datos = departamentos["Inglés"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
