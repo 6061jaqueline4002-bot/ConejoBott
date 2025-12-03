@@ -77,7 +77,7 @@ Solo escribe algo como:
 # Base de conocimiento 
 
 departamentos = {
-    "Inglés": {
+    "Departamento de Inglés": {
         "nombre": "📘 Departamento de Inglés",
         "keywords": ["Inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
         "temas": {
@@ -435,8 +435,8 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Inglés" in mensaje or "ingles" in mensaje:
-        datos = departamentos["Inglés"]
+    elif "Departamento de Inglés" in mensaje or "ingles" in mensaje:
+        datos = departamentos["Departamento de Inglés"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
@@ -465,7 +465,7 @@ def responder_usuario(mensaje):
     return (
         "¡Hola! Soy ConejoBot 🐰<br><br>"
         "Puedo ayudarte con información específica sobre:<br><br>"
-        "📘 <b>Inglés:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
+        "📘 <b>Departamento de Inglés:</b> cursos, examen TOEFL, certificaciones, examen de colocación<br>"
         "📗 <b>Servicios escolares:</b> credencial digital, constancias, boletas, kardex<br>"
         "📙 <b>División de estudios:</b> servicio social, residencias<br>"
         "📕 <b>Coordinación Ing.Industrial:</b> traslados, movilidad estudiantil, convalidación<br><br>"
