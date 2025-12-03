@@ -14,7 +14,7 @@ os.makedirs(DATA_FOLDER, exist_ok=True)
 CONTADOR_FILE = os.path.join(DATA_FOLDER, "contador_usuarios.txt")
 REGISTRO_FILE = os.path.join(DATA_FOLDER, "registro_usuarios.txt")
 
-# FUNCIONES DE USUARIOS (contador e historial)
+# Contador de usuarios activos
 
 def obtener_contador():
     """Carga el contador desde archivo de forma segura"""
@@ -60,7 +60,7 @@ print(f"🚀 Servidor iniciado. Usuarios actuales: {usuarios_activos}")
 app = Flask(__name__)
 app.jinja_env.autoescape = False
 
-# INFORMACIÓN COMPLETA DEL CHATBOT
+# Base de datos
 introduccion = """
 ¡Hola! Soy 🐰 ConejoBot, tu asistente virtual del Instituto Tecnológico de Tuxtla Gutiérrez. 
 Puedo darte información sobre los siguientes departamentos:
@@ -74,12 +74,12 @@ Solo escribe algo como:
 - “Requisitos del TOEFL”  
 - “Cómo tramito mi credencial”  
 """
-# BASE DE CONOCIMIENTO ACTUALIZADA 
+# Base de conocimiento 
 
 departamentos = {
     "Inglés": {
         "nombre": "📘 Departamento de Inglés",
-        "keywords": ["inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
+        "keywords": ["Inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
         "temas": {
             "Cursos de inglés": [
                 "🔹Percatarse de los flayers de convocatorias sobre los cursos publicadas en páginas oficiales del ITTG. Se indican 2 fechas que corresponden al pre-registro y registro 'inscripción'.",
