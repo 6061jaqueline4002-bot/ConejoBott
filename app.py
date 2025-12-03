@@ -79,7 +79,7 @@ Solo escribe algo como:
 departamentos = {
     "Departamento de Inglés": {
         "nombre": "📘 Departamento de Inglés",
-        "keywords": ["Inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
+        "keywords": ["Inglés","Departamento de Inglés", "ingles", "curso", "toefl", "colocación", "certificación", "idiomas", "nivel", "duración", "examen"],
         "temas": {
             "Cursos de inglés": [
                 "🔹Percatarse de los flayers de convocatorias sobre los cursos publicadas en páginas oficiales del ITTG. Se indican 2 fechas que corresponden al pre-registro y registro 'inscripción'.",
