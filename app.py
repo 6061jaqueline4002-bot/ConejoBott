@@ -401,7 +401,7 @@ def responder_usuario(mensaje):
         "Kardex": ["kardex", "historial académico","récord académico","boleta general","kárdex","Kárdex","Kardex",],
         "Residencias": ["residencias", "residencia","residencia profesional","práctica profesional"],
         "Movilidad estudiantil": ["movilidad", "movilidad estudiantil","intercambio"],
-        "Traslado de instituto": ["traslado", "cambio de escuela","Cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
+        "Traslado de instituto": ["traslado", "cambio de escuela","cambio institución","Cambio escuela","transferencia","cambiar de plantel","cambiar de tec","cambiar"],
         "Contactos del departamento de inglés": ["contacto de inglés", "comunicar","número","numero","información de los cursos","comunicarse","hablar con alguien","contacto"],
         "Boleta oficial": ["Tramitar boleta", "boleta oficial","boleta de estudio","calificaciones oficiales","boleta de calificaciones","boleta"],
         "Constancia de liberación de lengua extrajera": ["constancia de liberacion", "liberación de ingles","liberación lengua extranjera","constancia inglés","certificado inglés","liberar inglés"],
