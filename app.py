@@ -435,14 +435,15 @@ def responder_usuario(mensaje):
         texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
         
-    elif "Departamento de Inglés" in mensaje or "ingles" in mensaje:
+    elif "departamento de inglés" in mensaje or "ingles" in mensaje:
         datos = departamentos["Departamento de Inglés"]
         texto = f"<b>{datos['nombre']}</b><br><br>"
         texto += "Tengo información sobre estos temas:<br><br>"
         for tema in datos["temas"].keys():
             texto += f"• <b>{tema}</b><br>"
-        texto += f"<br>Escribe el <b>tema específico</b> que te interesa."
+        texto += "<br>Escribe el <b>tema específico</b> que te interesa."
         return texto
+
         
     elif "Servicios escolares" in mensaje or "escolares" in mensaje:
         datos = departamentos["Servicios escolares"]
